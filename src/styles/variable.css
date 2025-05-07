@@ -1,4 +1,7 @@
 :root {
+  /* Fonts */
+  --font-family: "Inter", sans-serif;
+
   /*shadow*/
   --shadow-regular: 0px 4px 10px 4px #9e9e9e;
   --shadow-medium: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
@@ -9,13 +12,13 @@
   --animation-cubicBezier: 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
 
   /* colors */
-  --color-white: #fafafa;
-  --color-green-light: #0ef387;
-  --color-background: #0c0d0d;
-  --color-dark: #171719;
-  --color-surface: #29292b;
-  --color-grey: #838383;
-  --color-green: #0ebb69;
-  --color-success: #097b45;
-  --color-error: #e74a3b;
+  --white: #fafafa;
+  --green-light: #0ef387;
+  --background: #0c0d0d;
+  --dark: #171719;
+  --surface: #29292b;
+  --grey: #838383;
+  --green: #0ebb69;
+  --success: #097b45;
+  --error: #e74a3b;
 }
