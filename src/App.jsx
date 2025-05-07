@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -26,6 +27,7 @@ function App() {
             element={<TransactionHistoryPage />}
           />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
