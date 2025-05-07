@@ -1,10 +1,26 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
+  userAvatarChange,
+  userAvatarDelete,
+  userCurrent,
+  userInfoUpdate,
   userLogin,
   userLogout,
   userRefresh,
   userRegister,
 } from "../auth/operations";
+import {
+  categoryChangeInfo,
+  categoryDelete,
+  categoryGetAll,
+  categoryPost,
+} from "../category/operations";
+import {
+  transactionsGetByType,
+  transactionPost,
+  transactionDelete,
+  transactionChangeInfo,
+} from "./operations";
 
 const initialState = {
   items: [],
@@ -16,35 +32,97 @@ const initialState = {
   isLoading: false,
 };
 
+const allOperations = [
+  userLogin,
+  userLogout,
+  userRegister,
+  userRefresh,
+  userCurrent,
+  userInfoUpdate,
+  userAvatarChange,
+  userAvatarDelete,
+  categoryPost,
+  categoryGetAll,
+  categoryChangeInfo,
+  categoryDelete,
+  transactionPost,
+  transactionsGetByType,
+  transactionDelete,
+  transactionChangeInfo,
+];
+
+const allOperationsCertainResalt = (resalt) => {
+  switch (resalt) {
+    case "pending":
+      return allOperations.map((el) => el.pending);
+    case "rejected":
+      return allOperations.map((el) => el.rejected);
+    case "fulfilled":
+      return allOperations.map((el) => el.fulfilled);
+    default:
+      console.log("only pending, rejected or fulfilled");
+  }
+};
+
 const slice = createSlice({
   name: "transactionsSlice",
   initialState,
 
   extraReducers: (builder) => {
     builder
-      .addCase(userLogin.fulfilled, (state, action) => {
-        state.incomes = action.payload.user.categories.incomes;
-        state.expenses = action.payload.user.categories.expenses;
-      })
+      .addMatcher(
+        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
+        (state, action) => {
+          state.transactionsTotal.incomes =
+            action.payload.transactionsTotal.incomes;
+          state.transactionsTotal.expences =
+            action.payload.transactionsTotal.expences;
+        }
+      )
       .addCase(userLogout.fulfilled, () => {
         return initialState;
       })
+      .addCase(transactionPost.fulfilled, (state, action) => {
+        state.transactionsTotal[action.payload.type] += action.payload.sum;
+      })
+      .addCase(transactionsGetByType.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(transactionDelete.fulfilled, (state, action) => {
+        state.items = state.items.filter(
+          (item) => item._id == action.payload._id
+        );
+        state.transactionsTotal[action.payload.type] -= action.payload.sum;
+      })
+      .addCase(transactionChangeInfo.fulfilled, (state, action) => {
+        const changedTransaction = action.payload;
+        let indexOfChangedTransaction = state.expenses.findIndex(
+          (item) => item._id == changedTransaction._id
+        );
+        state.transactionsTotal[changedTransaction.type] -=
+          state.items[indexOfChangedTransaction];
+        state.items[indexOfChangedTransaction] = changedTransaction;
+        state.transactionsTotal[changedTransaction.type] +=
+          changedTransaction.sum;
+      })
       .addMatcher(
-        isAnyOf(userLogin.pending, userLogout.pending, userRegister.pending),
+        isAnyOf(...allOperationsCertainResalt("pending")),
         (state) => {
           state.isLoading = true;
         }
       )
       .addMatcher(
-        isAnyOf(
-          userLogin.rejected,
-          userLogout.rejected,
-          userRegister.rejected,
-          userRefresh.rejected
-        ),
+        isAnyOf(...allOperationsCertainResalt("rejected")),
         (state, action) => {
           state.error = action.payload;
           state.isLoading = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(...allOperationsCertainResalt("fulfilled")),
+        (state) => {
+          state.isLoading = false;
+          state.error = null;
         }
       );
   },

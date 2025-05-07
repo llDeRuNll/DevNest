@@ -6,7 +6,7 @@ export const trakerApi = axios.create({
 });
 
 export const setAuthHeader = (token) => {
-  trackerApi.defaults.headers.common.Authorization = `Bearer ${token}`;
+  trakerApi.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 export const userRegister = createAsyncThunk(
@@ -39,6 +39,7 @@ export const userLogout = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       await trakerApi.get("/auth/logout");
+      setAuthHeader("");
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -58,6 +59,58 @@ export const userRefresh = createAsyncThunk(
       const response = await trakerApi.post("/auth/refresh", savedSid);
       setAuthHeader(response.data.accessToken);
       return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const userCurrent = createAsyncThunk(
+  "user/current",
+  async (_, thunkAPI) => {
+    try {
+      const response = await trakerApi.get("/users/current");
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const userInfoUpdate = createAsyncThunk(
+  "user/updateInfo",
+  async (newInfo, thunkAPI) => {
+    try {
+      const response = await trakerApi.patch("/users/info", newInfo);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const userAvatarChange = createAsyncThunk(
+  "user/avatarChange",
+  async (newAvatar, thunkAPI) => {
+    try {
+      const response = await trakerApi.patch("/users/avatar", newAvatar);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const userAvatarDelete = createAsyncThunk(
+  "user/avatarDelete",
+  async (_, thunkAPI) => {
+    const currentAvatar = thunkAPI.getState().auth.user.avatarUrl;
+    const currentAvatarId = currentAvatar.slice(
+      currentAvatar.lastIndexOf("/") + 1,
+      currentAvatar.length - 5
+    );
+    try {
+      await trakerApi.delete("/users/avatar/" + currentAvatarId);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
