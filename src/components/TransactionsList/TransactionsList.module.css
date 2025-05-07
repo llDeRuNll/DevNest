@@ -5,25 +5,11 @@
 	overflow: auto;
 }
 
-.tableWrapper::-webkit-scrollbar {
-	height: 8px;
-	width: 8px;
-}
-
-.tableWrapper::-webkit-scrollbar-thumb {
-	border-radius: 12px;
-	background-color: rgba(250, 250, 250, 0.2);
-}
-
-.tableWrapper::-webkit-scrollbar-track {
-	border-radius: 12px;
-	background-color: rgba(250, 250, 250, 0.2);
-}
-
 td,
 th {
 	text-align: left;
 	white-space: nowrap;
+	vertical-align: middle;
 }
 
 table {
@@ -52,7 +38,7 @@ thead th:last-child {
 td {
 	font-weight: 400;
 	font-size: 14px;
-	color: #fafafa;
+	color: var(--white);
 	padding: 10px 7px;
 	text-align: left;
 	&:first-child {
@@ -87,18 +73,18 @@ tbody tr:last-child td {
 }
 
 .editBtn {
-	background-color: #0ef387;
+	background-color: var(--green-light);
 	transition: background-color 250ms linear;
 	&:hover {
-		background-color: #0ebb69;
+		background-color: var(--green);
 	}
 }
 .deleteBtn {
 	border: 1px solid transparent;
-	background-color: #0c0d0d;
+	background-color: var(--background);
 	transition: border 250ms linear;
 	&:hover {
-		border: 1px solid #0ef387;
+		border: 1px solid var(--green-light);
 	}
 }
 
@@ -110,7 +96,7 @@ tbody tr:last-child td {
 @media screen and (min-width: 768px) {
 	.tableWrapper {
 		max-width: 704px;
-		max-height: 360px;
+		max-height: 375px;
 	}
 	th {
 		font-size: 16px;
@@ -172,10 +158,10 @@ tbody tr:last-child td {
 	}
 	.editBtn {
 		min-width: 118px;
-		color: #0c0d0d;
+		color: var(--background);
 	}
 	.deleteBtn {
 		min-width: 133px;
-		color: #fafafa;
+		color: var(--white);
 	}
 }
