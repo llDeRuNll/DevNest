@@ -1,11 +1,11 @@
 import { GoArrowUpRight } from "react-icons/go";
 import { GoArrowDownLeft } from "react-icons/go";
 import s from "./TransactionsTotalAmount.module.css";
-import { useState } from "react";
+
 const TransactionsTotalAmount = () => {
-  const [totalIncome, setTotalIncome] = useState(632.101);
-  const [totalExpense, setTotalExpense] = useState(632.101);
-  const [currency, setCurrency] = useState("$");
+  const totalIncome = 632.0;
+  const totalExpense = 632.0;
+  const currency = "$";
 
   return (
     <div className={s.mainWrapper}>
@@ -17,7 +17,7 @@ const TransactionsTotalAmount = () => {
           <p className={s.totalText}>Total income</p>
           <span className={s.currencySpan}>
             {currency}
-            {totalIncome}
+            {totalIncome.toFixed(3)}
           </span>
         </div>
       </div>
@@ -29,7 +29,7 @@ const TransactionsTotalAmount = () => {
           <p className={s.totalText}>Total Expense</p>
           <span className={s.currencySpan}>
             {currency}
-            {totalExpense}
+            {totalExpense.toFixed(3)}
           </span>
         </div>
       </div>
