@@ -29,8 +29,8 @@ function App() {
             path="/transactions/history/:transactionsType"
             element={<TransactionHistoryPage />}
           />
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );

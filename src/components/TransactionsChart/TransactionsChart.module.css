@@ -1,0 +1,83 @@
+.expensesWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  border-radius: 30px;
+  width: 100%;
+  height: auto;
+  background-color: #171719;
+  align-self: center;
+  margin: 20px 0;
+  padding-bottom: 40px;
+  padding-left: 21px;
+  padding-right: 21px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    column-gap: 95px;
+    align-items: center;
+    justify-content: center;
+    width: 704px;
+  }
+  @media (min-width: 1280px) {
+    width: 630px;
+  }
+}
+.chartContainer {
+  width: 100%;
+  height: auto;
+}
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.expensesTitle {
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(250, 250, 250, 0.5);
+  align-self: flex-start;
+  padding-top: 28px;
+  padding-left: 20px;
+}
+
+.statisticsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+  margin-top: 40px;
+  padding-right: 21px;
+  max-height: 126px;
+  overflow-y: auto;
+  @media (min-width: 768px) {
+    width: 196px;
+    margin-top: 0px;
+  }
+}
+.statisticsListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.percentage {
+  font-weight: 700;
+  font-size: 24px;
+  color: #fafafa;
+}
+.iconTextWrapper {
+  display: flex;
+  column-gap: 8px;
+}
+.iconOne {
+  color: #0ebb69;
+}
+.iconTwo {
+  color: #0ef387;
+}
+.iconThree {
+  color: #fafafa;
+}
+.iconFour {
+  color: #fafafa33;
+}
