@@ -18,13 +18,6 @@ const slice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addMatcher(
-        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
-        (state, action) => {
-          state.incomes = action.payload.user.categories.incomes;
-          state.expenses = action.payload.user.categories.expenses;
-        }
-      )
       .addCase(userLogout.fulfilled, () => {
         return initialState;
       })
@@ -56,7 +49,14 @@ const slice = createSlice({
         state.expenses = state.expenses.filter(
           (item) => item._id == action.payload
         );
-      });
+      })
+      .addMatcher(
+        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
+        (state, action) => {
+          state.incomes = action.payload.user.categories.incomes;
+          state.expenses = action.payload.user.categories.expenses;
+        }
+      );
   },
 });
 

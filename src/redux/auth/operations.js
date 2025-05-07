@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { SiDaf } from "react-icons/si";
 
 export const trakerApi = axios.create({
   baseURL: "https://expense-tracker.b.goit.study/api/",
@@ -13,7 +14,7 @@ export const userRegister = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
     try {
-      const response = await trakerApi.post("/auth/register", user);
+      const response = await trakerApi.post("/auth/regisster", user);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -49,14 +50,13 @@ export const userLogout = createAsyncThunk(
 export const userRefresh = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    const savedToken = thunkAPI.getState().auth.refreshToken;
-    const savedSid = thunkAPI.getState().auth.sid;
-    if (!savedToken) return thunkAPI.rejectWithValue("No token");
+    const { refreshToken, sid } = thunkAPI.getState().auth;
+    if (!refreshToken) return thunkAPI.rejectWithValue("No token");
 
-    setAuthHeader(savedToken);
+    setAuthHeader(refreshToken);
 
     try {
-      const response = await trakerApi.post("/auth/refresh", savedSid);
+      const response = await trakerApi.post("/auth/refresh", { sid });
       setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (e) {

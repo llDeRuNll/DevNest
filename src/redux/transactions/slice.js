@@ -70,15 +70,6 @@ const slice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addMatcher(
-        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
-        (state, action) => {
-          state.transactionsTotal.incomes =
-            action.payload.transactionsTotal.incomes;
-          state.transactionsTotal.expences =
-            action.payload.transactionsTotal.expences;
-        }
-      )
       .addCase(userLogout.fulfilled, () => {
         return initialState;
       })
@@ -105,6 +96,17 @@ const slice = createSlice({
         state.transactionsTotal[changedTransaction.type] +=
           changedTransaction.sum;
       })
+      .addMatcher(
+        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
+        (state, action) => {
+          if (action.payload.transactionsTotal) {
+            state.transactionsTotal.incomes =
+              action.payload.transactionsTotal.incomes;
+            state.transactionsTotal.expences =
+              action.payload.transactionsTotal.expences;
+          }
+        }
+      )
       .addMatcher(
         isAnyOf(...allOperationsCertainResalt("pending")),
         (state) => {
