@@ -35,7 +35,7 @@
   }
 }
 .totalIconWrapper {
-  background: var(--color-green-light);
+  background: var(--green-light);
   width: 36px;
   height: 36px;
   display: flex;
