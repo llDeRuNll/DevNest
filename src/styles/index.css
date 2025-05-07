@@ -1,12 +1,13 @@
 @import "modern-normalize/modern-normalize.css";
-@import "./styles/variable.css";
+@import "./variable.css";
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin: 0;
 }
 ul,
@@ -30,8 +31,8 @@ a {
   text-decoration: none;
 }
 body {
-  background: var(--color-background);
-  color: var(--color-white);
+  background: var(--background);
+  color: var(--white);
 }
 .container {
   max-width: 335px;

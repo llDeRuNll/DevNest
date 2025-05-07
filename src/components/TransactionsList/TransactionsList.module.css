@@ -1,0 +1,181 @@
+.tableWrapper {
+	max-width: 375px;
+	height: 100%;
+	max-height: 338px;
+	overflow: auto;
+}
+
+.tableWrapper::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+	border-radius: 12px;
+	background-color: rgba(250, 250, 250, 0.2);
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+	border-radius: 12px;
+	background-color: rgba(250, 250, 250, 0.2);
+}
+
+td,
+th {
+	text-align: left;
+	white-space: nowrap;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+thead {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+th {
+	font-weight: 400;
+	font-size: 12px;
+	color: rgba(250, 250, 250, 0.4);
+	padding: 20px 7px;
+}
+
+thead th:first-child {
+	padding-left: 20px;
+}
+thead th:last-child {
+	padding-right: 20px;
+}
+
+td {
+	font-weight: 400;
+	font-size: 14px;
+	color: #fafafa;
+	padding: 10px 7px;
+	text-align: left;
+	&:first-child {
+		padding-left: 20px;
+	}
+}
+
+tbody tr:first-child td {
+	padding-top: 20px;
+}
+
+tbody tr:last-child td {
+	padding-bottom: 20px;
+}
+
+.buttons {
+	display: inline-flex;
+	column-gap: 6px;
+}
+
+.editBtn,
+.deleteBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	span {
+		display: none;
+	}
+}
+
+.editBtn {
+	background-color: #0ef387;
+	transition: background-color 250ms linear;
+	&:hover {
+		background-color: #0ebb69;
+	}
+}
+.deleteBtn {
+	border: 1px solid transparent;
+	background-color: #0c0d0d;
+	transition: border 250ms linear;
+	&:hover {
+		border: 1px solid #0ef387;
+	}
+}
+
+.icon {
+	width: 12px;
+	height: 12px;
+}
+
+@media screen and (min-width: 768px) {
+	.tableWrapper {
+		max-width: 704px;
+		max-height: 360px;
+	}
+	th {
+		font-size: 16px;
+	}
+	thead th:first-child {
+		padding-left: 32px;
+	}
+	thead th:last-child {
+		padding-right: 32px;
+	}
+	td {
+		font-size: 20px;
+		padding: 15px 10px;
+		&:first-child {
+			padding-left: 32px;
+		}
+	}
+	.buttons {
+		column-gap: 8px;
+	}
+	.editBtn,
+	.deleteBtn {
+		width: 44px;
+		height: 44px;
+	}
+	.icon {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.tableWrapper {
+		max-width: 1240px;
+		max-height: 328px;
+	}
+	thead th:first-child {
+		padding-left: 40px;
+	}
+	thead th:last-child {
+		padding-right: 40px;
+	}
+	td {
+		padding: 10px;
+		&:first-child {
+			padding-left: 40px;
+		}
+	}
+	.editBtn,
+	.deleteBtn {
+		font-weight: 400;
+		font-size: 16px;
+		letter-spacing: -0.02em;
+		column-gap: 8px;
+		border-radius: 40px;
+		span {
+			display: block;
+		}
+	}
+	.editBtn {
+		min-width: 118px;
+		color: #0c0d0d;
+	}
+	.deleteBtn {
+		min-width: 133px;
+		color: #fafafa;
+	}
+}
