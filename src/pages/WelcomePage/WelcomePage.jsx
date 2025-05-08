@@ -31,11 +31,7 @@ const WelcomePage = () => {
         </div>
 
         <div className={s.imageSection}>
-          <img
-            srcSet="/imgWelcomePage/Rec1x.png, /imgWelcomePage/Rec1x.png 2x"
-            alt="Happy couple using ExpenseTracker"
-            className={s.mainImg}
-          />
+          <div className={s.mainImg}></div>
           <div className={s.balanceCard}>
             <div className={s.iconCircle}>
               <HiMiniArrowUpRight className={s.arrowIcon} />

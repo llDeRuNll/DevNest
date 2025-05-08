@@ -1,76 +1,61 @@
 .userAvatar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 80px;
-  gap: 20px;
-  text-align: center;
   display: none;
 }
-
-/* Зображення аватарів */
-.usersImg {
-  border: 2px solid #11101c;
-  border-radius: 42px;
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  margin-left: -12px;
-  z-index: 1;
-  position: relative;
-}
-
-/* Блок тексту */
-.countText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-.usersCount {
-  font-weight: 400;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-  color: #fafafa;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.usersNote {
-  font-size: 0.85rem;
-  color: #666;
-  margin: 0;
-  text-align: center;
-}
-
-/* === TABLET (768px): === */
 @media (min-width: 768px) {
   .userAvatar {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .countText {
-    align-items: flex-start;
-    padding-left: 32px;
-  }
-
-  .usersCount {
-    font-size: 28px;
-  }
-
-  .usersNote {
-    font-size: 0.9rem;
+    display: none;
   }
 }
-
-/* === DESKTOP (1024px): === */
-@media (min-width: 1024px) {
+/* === DESKTOP (1280px): === */
+@media (min-width: 1280px) {
   .usersImg {
     width: 56px;
     height: 56px;
+  }
+  .userAvatar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 80px;
+    text-align: center;
+  }
+  /* Зображення аватарів */
+  .usersImg {
+    border: 2px solid #11101c;
+    border-radius: 42px;
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    margin-left: -12px;
+    z-index: 1;
+    position: relative;
+  }
+
+  /* Блок тексту */
+  .countText {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    gap: 4px;
+    width: 210px;
+    height: 84px;
+    padding-left: 20px;
+  }
+
+  .usersCount {
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: #fafafa;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .usersNote {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+    text-align: left;
   }
 }
