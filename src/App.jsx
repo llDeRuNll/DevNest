@@ -1,39 +1,39 @@
-import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import SharedLayout from "./components/SharedLayout/SharedLayout";
-import NotFoundPage from "./routes/NotFoundPage/NotFoundPage";
-const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+import { lazy, Suspense } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import './App.css'
+import SharedLayout from './components/SharedLayout/SharedLayout'
+import NotFoundPage from './routes/NotFoundPage/NotFoundPage'
+const WelcomePage = lazy(() => import('./pages/WelcomePage/WelcomePage'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'))
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'))
 const MainTransactionPage = lazy(() =>
-  import("./pages/MainTransactionsPage/MainTransactionPage")
-);
+	import('./pages/MainTransactionsPage/MainTransactionPage')
+)
 const TransactionHistoryPage = lazy(() =>
-  import("./pages/TransactionsHistoryPage/TransactionHistoryPage")
-);
+	import('./pages/TransactionsHistoryPage/TransactionHistoryPage')
+)
 
 function App() {
-  return (
-    <Suspense>
-      <Routes>
-        <Route element={<SharedLayout />}>
-          <Route index element={<WelcomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/transactions/:transactionType"
-            element={<MainTransactionPage />}
-          />
-          <Route
-            path="/transactions/history/:transactionsType"
-            element={<TransactionHistoryPage />}
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </Suspense>
-  );
+	return (
+		<Suspense>
+			<Routes>
+				<Route element={<SharedLayout />}>
+					<Route index element={<WelcomePage />} />
+					<Route path='/register' element={<RegisterPage />} />
+					<Route path='/login' element={<LoginPage />} />
+					<Route
+						path='/transactions/:transactionType'
+						element={<MainTransactionPage />}
+					/>
+					<Route
+						path='/transactions/history/:transactionsType'
+						element={<TransactionHistoryPage />}
+					/>
+				</Route>
+				<Route path='*' element={<NotFoundPage />} />
+			</Routes>
+		</Suspense>
+	)
 }
 
-export default App;
+export default App
