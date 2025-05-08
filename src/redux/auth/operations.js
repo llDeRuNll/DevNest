@@ -2,19 +2,22 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { SiDaf } from "react-icons/si";
 
-export const trakerApi = axios.create({
+export const trackerApi = axios.create({
   baseURL: "https://expense-tracker.b.goit.study/api/",
 });
 
 export const setAuthHeader = (token) => {
-  trakerApi.defaults.headers.common.Authorization = `Bearer ${token}`;
+  trackerApi.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 export const userRegister = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
     try {
-      const response = await trakerApi.post("/auth/regisster", user);
+      const response = await trackerApi.post("/auth/register", user);
+      thunkAPI.dispatch(
+        userLogin({ email: user.email, password: user.password })
+      );
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -26,7 +29,7 @@ export const userLogin = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const response = await trakerApi.post("/auth/login", credentials);
+      const response = await trackerApi.post("/auth/login", credentials);
       setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (e) {
@@ -39,7 +42,7 @@ export const userLogout = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
     try {
-      await trakerApi.get("/auth/logout");
+      await trackerApi.get("/auth/logout");
       setAuthHeader("");
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -56,7 +59,7 @@ export const userRefresh = createAsyncThunk(
     setAuthHeader(refreshToken);
 
     try {
-      const response = await trakerApi.post("/auth/refresh", { sid });
+      const response = await trackerApi.post("/auth/refresh", { sid });
       setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (e) {
@@ -69,7 +72,7 @@ export const userCurrent = createAsyncThunk(
   "user/current",
   async (_, thunkAPI) => {
     try {
-      const response = await trakerApi.get("/users/current");
+      const response = await trackerApi.get("/users/current");
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -81,7 +84,7 @@ export const userInfoUpdate = createAsyncThunk(
   "user/updateInfo",
   async (newInfo, thunkAPI) => {
     try {
-      const response = await trakerApi.patch("/users/info", newInfo);
+      const response = await trackerApi.patch("/users/info", newInfo);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -93,7 +96,7 @@ export const userAvatarChange = createAsyncThunk(
   "user/avatarChange",
   async (newAvatar, thunkAPI) => {
     try {
-      const response = await trakerApi.patch("/users/avatar", newAvatar);
+      const response = await trackerApi.patch("/users/avatar", newAvatar);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -110,7 +113,7 @@ export const userAvatarDelete = createAsyncThunk(
       currentAvatar.length - 5
     );
     try {
-      await trakerApi.delete("/users/avatar/" + currentAvatarId);
+      await trackerApi.delete("/users/avatar/" + currentAvatarId);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

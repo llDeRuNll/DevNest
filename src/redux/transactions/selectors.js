@@ -5,4 +5,4 @@ export const selectTransactions = (state) => state.transactions.items;
 export const selectTransactionsTotal = (state) =>
   state.transactions.transactionsTotal;
 export const selectError = (state) => state.transactions.error;
-export const selectisLoading = (state) => state.transactions.isLoading;
+export const selectIsLoading = (state) => state.transactions.isLoading;

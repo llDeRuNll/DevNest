@@ -1,5 +1,10 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { userCurrent, userLogin, userLogout } from "../auth/operations";
+import {
+  userCurrent,
+  userLogin,
+  userLogout,
+  userRefresh,
+} from "../auth/operations";
 import {
   categoryChangeInfo,
   categoryDelete,
@@ -19,6 +24,9 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(userLogout.fulfilled, () => {
+        return initialState;
+      })
+      .addCase(userRefresh.rejected, () => {
         return initialState;
       })
       .addCase(categoryPost.fulfilled, (state, action) => {
