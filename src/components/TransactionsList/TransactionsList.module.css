@@ -1,29 +1,18 @@
 .tableWrapper {
-	max-width: 375px;
-	height: 100%;
-	max-height: 338px;
-	overflow: auto;
+	overflow-x: scroll;
+	overflow-y: hidden;
 }
 
-.tableWrapper::-webkit-scrollbar {
-	height: 8px;
-	width: 8px;
-}
-
-.tableWrapper::-webkit-scrollbar-thumb {
-	border-radius: 12px;
-	background-color: rgba(250, 250, 250, 0.2);
-}
-
-.tableWrapper::-webkit-scrollbar-track {
-	border-radius: 12px;
-	background-color: rgba(250, 250, 250, 0.2);
+thead,
+tbody {
+	display: block;
 }
 
 td,
 th {
 	text-align: left;
 	white-space: nowrap;
+	vertical-align: middle;
 }
 
 table {
@@ -40,105 +29,58 @@ th {
 	font-size: 12px;
 	color: rgba(250, 250, 250, 0.4);
 	padding: 20px 7px;
-}
-
-thead th:first-child {
-	padding-left: 20px;
-}
-thead th:last-child {
-	padding-right: 20px;
-}
-
-td {
-	font-weight: 400;
-	font-size: 14px;
-	color: #fafafa;
-	padding: 10px 7px;
-	text-align: left;
-	&:first-child {
+	&:nth-child(1) {
+		width: 80px;
 		padding-left: 20px;
 	}
-}
-
-tbody tr:first-child td {
-	padding-top: 20px;
-}
-
-tbody tr:last-child td {
-	padding-bottom: 20px;
-}
-
-.buttons {
-	display: inline-flex;
-	column-gap: 6px;
-}
-
-.editBtn,
-.deleteBtn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 26px;
-	height: 26px;
-	border-radius: 50%;
-	span {
-		display: none;
+	&:nth-child(2) {
+		width: 80px;
 	}
-}
-
-.editBtn {
-	background-color: #0ef387;
-	transition: background-color 250ms linear;
-	&:hover {
-		background-color: #0ebb69;
+	&:nth-child(3) {
+		width: 90px;
 	}
-}
-.deleteBtn {
-	border: 1px solid transparent;
-	background-color: #0c0d0d;
-	transition: border 250ms linear;
-	&:hover {
-		border: 1px solid #0ef387;
+	&:nth-child(4) {
+		width: 90px;
 	}
-}
-
-.icon {
-	width: 12px;
-	height: 12px;
+	&:nth-child(5) {
+		width: 140px;
+	}
+	&:nth-child(6) {
+		width: 120px;
+		padding-right: 20px;
+	}
 }
 
 @media screen and (min-width: 768px) {
 	.tableWrapper {
 		max-width: 704px;
-		max-height: 360px;
+		max-height: 375px;
+		overflow-x: hidden;
 	}
 	th {
 		font-size: 16px;
+		padding: 20px 10px;
+		&:nth-child(1) {
+			width: 130px;
+		}
+		&:nth-child(2) {
+			width: 115px;
+		}
+		&:nth-child(3) {
+			width: 105px;
+		}
+		&:nth-child(4) {
+			width: 95px;
+		}
+		&:nth-child(5) {
+			width: 125px;
+		}
 	}
 	thead th:first-child {
 		padding-left: 32px;
 	}
 	thead th:last-child {
 		padding-right: 32px;
-	}
-	td {
-		font-size: 20px;
-		padding: 15px 10px;
-		&:first-child {
-			padding-left: 32px;
-		}
-	}
-	.buttons {
-		column-gap: 8px;
-	}
-	.editBtn,
-	.deleteBtn {
-		width: 44px;
-		height: 44px;
-	}
-	.icon {
-		width: 16px;
-		height: 16px;
 	}
 }
 
@@ -147,35 +89,30 @@ tbody tr:last-child td {
 		max-width: 1240px;
 		max-height: 328px;
 	}
+	tbody {
+		max-height: 300px;
+	}
 	thead th:first-child {
 		padding-left: 40px;
 	}
 	thead th:last-child {
 		padding-right: 40px;
 	}
-	td {
-		padding: 10px;
-		&:first-child {
-			padding-left: 40px;
+	th {
+		&:nth-child(1) {
+			width: 200px;
 		}
-	}
-	.editBtn,
-	.deleteBtn {
-		font-weight: 400;
-		font-size: 16px;
-		letter-spacing: -0.02em;
-		column-gap: 8px;
-		border-radius: 40px;
-		span {
-			display: block;
+		&:nth-child(2) {
+			width: 200px;
 		}
-	}
-	.editBtn {
-		min-width: 118px;
-		color: #0c0d0d;
-	}
-	.deleteBtn {
-		min-width: 133px;
-		color: #fafafa;
+		&:nth-child(3) {
+			width: 200px;
+		}
+		&:nth-child(4) {
+			width: 155px;
+		}
+		&:nth-child(5) {
+			width: 165px;
+		}
 	}
 }
