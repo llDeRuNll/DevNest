@@ -4,6 +4,8 @@
   align-items: flex-start;
   gap: 40px;
   width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .listInfo {
@@ -47,7 +49,7 @@
   color: rgba(250, 250, 250, 0.4);
   text-align: left;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   padding-bottom: 30px;
 }
 
@@ -175,14 +177,10 @@
     align-items: flex-start;
     gap: 10px;
   }
-
-  .imageSection {
-    width: 768px;
-  }
-
   .mainImg {
+    width: 611px;
     height: auto;
-    width: 704px;
+    background: url("../../../public/imgWelcomePage/Rec1xLopTop.png, ../../Rec2xLopTop.png");
     overflow: hidden;
   }
   .description {
