@@ -1,6 +1,6 @@
 .authNav {
   display: flex;
-  margin-top: 32px;
+  gap: 10px;
   margin: 0;
 }
 
@@ -48,7 +48,6 @@
 @media (min-width: 768px) {
   .authNav {
     flex-direction: row;
-    justify-content: flex-start;
     gap: 20px;
   }
 

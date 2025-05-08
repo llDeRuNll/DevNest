@@ -34,7 +34,6 @@ const WelcomePage = () => {
           <img
             srcSet="/imgWelcomePage/Rec1x.png, /imgWelcomePage/Rec1x.png 2x"
             alt="Happy couple using ExpenseTracker"
-            width="611"
             className={s.mainImg}
           />
           <div className={s.balanceCard}>
