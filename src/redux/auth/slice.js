@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   userAvatarChange,
+  userAvatarDelete,
   userCurrent,
   userInfoUpdate,
   userLogin,
@@ -69,6 +70,9 @@ const slice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.sid = action.payload.sid;
       })
+      .addCase(userRefresh.rejected, () => {
+        return initialState;
+      })
       .addCase(userCurrent.fulfilled, (state, action) => {
         userLocalDataUpdate(state, action.payload);
       })
@@ -82,6 +86,9 @@ const slice = createSlice({
       })
       .addCase(userAvatarChange.fulfilled, (state, action) => {
         state.user.avatarUrl = action.payload.avatarUrl;
+      })
+      .addCase(userAvatarDelete.fulfilled, (state) => {
+        state.user.avatarUrl = initialState.user.avatarUrl;
       });
   },
 });
