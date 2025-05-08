@@ -73,6 +73,9 @@ const slice = createSlice({
       .addCase(userLogout.fulfilled, () => {
         return initialState;
       })
+      .addCase(userRefresh.rejected, () => {
+        return initialState;
+      })
       .addCase(transactionPost.fulfilled, (state, action) => {
         state.transactionsTotal[action.payload.type] += action.payload.sum;
       })

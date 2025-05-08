@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { trakerApi } from "../auth/operations";
+import { trackerApi } from "../auth/operations";
 
 export const transactionPost = createAsyncThunk(
   "transactions/post",
   async (transaction, thunkAPI) => {
     try {
-      const response = await trakerApi.post("/transactions", transaction);
+      const response = await trackerApi.post("/transactions", transaction);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -17,11 +17,15 @@ export const transactionsGetByType = createAsyncThunk(
   "transactions/getByType",
   async (params, thunkAPI) => {
     try {
-      const response = await trakerApi.get("/transactions/" + params.type, "", {
-        params: {
-          date: params.date,
-        },
-      });
+      const response = await trackerApi.get(
+        "/transactions/" + params.type,
+        "",
+        {
+          params: {
+            date: params.date,
+          },
+        }
+      );
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -34,7 +38,7 @@ export const transactionDelete = createAsyncThunk(
   "transactions/delete",
   async ({ _id, type, sum }, thunkAPI) => {
     try {
-      await trakerApi.delete("/transactions/" + _id);
+      await trackerApi.delete("/transactions/" + _id);
       return { _id, type, sum };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -46,7 +50,7 @@ export const transactionChangeInfo = createAsyncThunk(
   "transactions/change",
   async ({ _id, type, ...newInfo }, thunkAPI) => {
     try {
-      const response = await trakerApi.patch(
+      const response = await trackerApi.patch(
         `/transactions/${type}/${_id}`,
         newInfo
       );
