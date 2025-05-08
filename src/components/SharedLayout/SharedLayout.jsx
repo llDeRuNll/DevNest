@@ -4,7 +4,7 @@ import BgImageWrapper from "../BgImageWrapper/BgImageWrapper";
 
 const SharedLayout = () => {
   return (
-    <div>
+    <div className="container">
       <Header />
       <BgImageWrapper />
       <main>
