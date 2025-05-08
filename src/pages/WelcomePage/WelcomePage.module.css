@@ -1,16 +1,9 @@
-.container {
-  display: flex;
-  justify-content: center;
-}
-
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 40px;
   width: 100%;
-  max-width: 704px;
-  margin: 0 auto;
 }
 
 .listInfo {
@@ -39,6 +32,7 @@
   white-space: nowrap;
   text-align: left;
   padding-bottom: 14px;
+  width: 100%;
 }
 
 .spanHeading {
@@ -51,33 +45,25 @@
   font-size: 16px;
   letter-spacing: -0.02em;
   color: rgba(250, 250, 250, 0.4);
-  margin-top: 24px;
   text-align: left;
-  max-width: 533px;
-  margin: 0;
+  width: 100%;
+  margin: 0 auto;
   padding-bottom: 30px;
 }
 
 .authNav {
   display: flex;
-
-  gap: 20px;
-  margin: 0;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 30px;
+  width: 100%;
 }
 
 .btnGreen,
 .btnOutline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 145px;
-  height: 47px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 40px;
-  padding: 14px 44px;
-  white-space: nowrap;
-  text-decoration: none;
+  width: 100%;
+  max-width: 335px;
+  margin: 0 auto;
 }
 
 .btnGreen {
@@ -104,50 +90,63 @@
 .imageSection {
   position: relative;
   border-radius: 20px;
-  width: 335px;
-  height: 381px;
-  overflow: hidden;
+  width: 100%;
+  max-width: 335px;
+  height: auto;
+  overflow: visible;
 }
 
 .mainImg {
+  height: 381px;
+  width: 333px;
   width: 100%;
-  height: 100%;
   object-fit: cover;
   border-radius: 20px;
 }
 
 .balanceCard {
   position: absolute;
-  bottom: 1rem;
+  bottom: 4rem;
   left: 1rem;
+  transform: translateX(-30px);
   background-color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
+  padding: 22px 23px 20px;
+  border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 248px;
   height: 81px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 10;
+}
+.iconCircle {
+  background-color: #0ef387;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.arrowIcon {
+  width: 36px;
+  height: 36px;
+  color: #0c0d0d;
+}
+.balance {
+  display: flex;
+  flex-direction: column;
+  width: 89px;
+  white-space: nowrap;
+}
 .balanceLabel {
   font-weight: 400;
   font-size: 12px;
   color: rgba(17, 16, 28, 0.5);
   margin: 0;
-}
-.balanceAmount {
-  font-weight: 700;
-  font-size: 18px;
-  color: #11101c;
-  margin: 0;
-}
-.balanceChange {
-  margin: 0;
-  font-weight: 400;
-  font-size: 12px;
-  color: #02b15a;
-  justify-content: end;
 }
 
 .balanceLabel {
@@ -158,8 +157,9 @@
 
 .balanceAmount {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   color: #11101c;
+  margin: 0;
 }
 
 .balanceChange {
@@ -167,4 +167,25 @@
   width: 58px;
   height: 22px;
   background: rgba(2, 177, 90, 0.15);
+  color: #02b15a;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .main {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .imageSection {
+    width: 768px;
+  }
+
+  .mainImg {
+    height: auto;
+    width: 704px;
+    overflow: hidden;
+  }
+  .description {
+    width: 533px;
+  }
 }

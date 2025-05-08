@@ -1,8 +1,6 @@
 .authNav {
   display: flex;
-  gap: 16px;
   margin-top: 32px;
-  width: 100%;
   margin: 0;
 }
 

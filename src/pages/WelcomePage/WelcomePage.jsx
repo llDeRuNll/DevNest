@@ -2,6 +2,7 @@ import React from "react";
 import s from "./WelcomePage.module.css";
 import AuthNav from "../../components/AuthNav/AuthNav";
 import AllUsersTab from "../../components/AllUsersTab/AllUsersTab";
+import { HiMiniArrowUpRight } from "react-icons/hi2";
 
 const WelcomePage = () => {
   return (
@@ -31,13 +32,19 @@ const WelcomePage = () => {
 
         <div className={s.imageSection}>
           <img
-            src="/imgWelcomePage/Rec2x.png"
+            srcSet="/imgWelcomePage/Rec1x.png, /imgWelcomePage/Rec1x.png 2x"
             alt="Happy couple using ExpenseTracker"
+            width="611"
             className={s.mainImg}
           />
           <div className={s.balanceCard}>
-            <p className={s.balanceLabel}>Your balance</p>
-            <p className={s.balanceAmount}>$632.000</p>
+            <div className={s.iconCircle}>
+              <HiMiniArrowUpRight className={s.arrowIcon} />
+            </div>
+            <div className={s.balance}>
+              <p className={s.balanceLabel}>Your balance</p>
+              <p className={s.balanceAmount}>$632.000</p>
+            </div>
             <p className={s.balanceChange}>+1.29%</p>
           </div>
         </div>
