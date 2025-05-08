@@ -14,7 +14,7 @@ export const userRegister = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
     try {
-      const response = await trakerApi.post("/auth/regisster", user);
+      const response = await trakerApi.post("/auth/register", user);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
