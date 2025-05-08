@@ -34,26 +34,3 @@ body {
   background: var(--background);
   color: var(--white);
 }
-.container {
-  max-width: 335px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 704px;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container {
-    max-width: 1240px;
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-}
