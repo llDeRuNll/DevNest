@@ -26,7 +26,7 @@ export const transactionsGetByType = createAsyncThunk(
           },
         }
       );
-      return response.data;
+      return { items: response.data, type: params.type };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
