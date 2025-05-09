@@ -23,19 +23,44 @@ const TransactionHistoryPage = lazy(() =>
 );
 
 function App() {
-  return (
-    <Suspense>
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(userRefresh());
+  }, [dispatch]);
+
+  return isRefreshing ? null : (
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route element={<SharedLayout />}>
           <Route index element={<WelcomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/transactions/:transactionType"
-            element={<MainTransactionPage />}
+            path="register"
+            element={
+              <RestrictedRoute>
+                <RegisterPage />
+              </RestrictedRoute>
+            }
           />
           <Route
-            path="/transactions/history/:transactionsType"
+            path="login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="transactions/:transactionType"
+            element={
+              <PrivateRoute>
+                <MainTransactionPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="transactions/history/:transactionsType"
             element={<TransactionHistoryPage />}
           />
         </Route>
