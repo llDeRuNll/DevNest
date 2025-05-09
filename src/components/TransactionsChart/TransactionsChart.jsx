@@ -1,6 +1,7 @@
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import { FaCircle } from "react-icons/fa";
+
 import s from "./TransactionsChart.module.css";
+import TransactionChartStatistics from "../TransactionChartStatistics/TransactionChartStatistics";
 
 const data = [
   { name: "Group A", value: 500 },
@@ -8,6 +9,7 @@ const data = [
   { name: "Group C", value: 300 },
   { name: "Group D", value: 200 },
 ];
+
 const COLORS = ["#0ebb69", "#0ef387", "#fafafa", "#FAFAFA33"];
 
 const TransactionsChart = () => {
@@ -44,37 +46,7 @@ const TransactionsChart = () => {
         </div>
         <div className={s.percentage}>100%</div>
       </div>
-
-      <ul className={s.statisticsList}>
-        <li className={s.statisticsListItem}>
-          <div className={s.iconTextWrapper}>
-            <FaCircle className={s.iconOne} />
-            <p>Hobby</p>
-          </div>
-          <span>45%</span>
-        </li>
-        <li className={s.statisticsListItem}>
-          <div className={s.iconTextWrapper}>
-            <FaCircle className={s.iconTwo} />
-            <p>Products</p>
-          </div>
-          <span>25%</span>
-        </li>
-        <li className={s.statisticsListItem}>
-          <div className={s.iconTextWrapper}>
-            <FaCircle className={s.iconThree} />
-            <p>Cinema</p>
-          </div>
-          <span>20%</span>
-        </li>
-        <li className={s.statisticsListItem}>
-          <div className={s.iconTextWrapper}>
-            <FaCircle className={s.iconFour} />
-            <p>Health</p>
-          </div>
-          <span>10%</span>
-        </li>
-      </ul>
+      <TransactionChartStatistics />
     </div>
   );
 };

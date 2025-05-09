@@ -1,0 +1,39 @@
+.statisticsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+  margin-top: 40px;
+  padding-right: 21px;
+  max-height: 126px;
+  overflow-y: auto;
+  @media (min-width: 768px) {
+    width: 196px;
+    margin-top: 0px;
+  }
+}
+.statisticsListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.percentage {
+  font-weight: 700;
+  font-size: 24px;
+  color: #fafafa;
+}
+.iconTextWrapper {
+  display: flex;
+  column-gap: 8px;
+}
+.iconOne {
+  color: #0ebb69;
+}
+.iconTwo {
+  color: #0ef387;
+}
+.iconThree {
+  color: #fafafa;
+}
+.iconFour {
+  color: #fafafa33;
+}
