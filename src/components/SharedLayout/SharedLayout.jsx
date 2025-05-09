@@ -6,7 +6,6 @@ const SharedLayout = () => {
   return (
     <div>
       <Header />
-      <BgImageWrapper />
       <main>
         <Outlet />
       </main>
