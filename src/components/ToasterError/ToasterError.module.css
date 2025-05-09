@@ -1,0 +1,7 @@
+.customToastDelete {
+  color: var(--dark);
+  background-color: var(--success);
+}
+.icon {
+  color: var(--dark);
+}
