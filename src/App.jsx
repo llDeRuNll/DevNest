@@ -8,6 +8,7 @@ import SharedLayout from "./components/SharedLayout/SharedLayout";
 import NotFoundPage from "./routes/NotFoundPage/NotFoundPage";
 import Loader from "./components/Loader/Loader";
 import PrivateRoute from "./routes/PrivateRoute/PrivateRoute";
+import RestrictedRoute from "./routes/RestrictedRoute/RestrictedRoute";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
