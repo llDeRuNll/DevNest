@@ -46,12 +46,10 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(userRegister.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.user.name = action.payload.name;
         state.user.email = action.payload.email;
       })
       .addCase(userLogin.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoggedIn = true;
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;

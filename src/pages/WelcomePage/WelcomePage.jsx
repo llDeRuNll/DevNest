@@ -6,8 +6,8 @@ import { HiMiniArrowUpRight } from "react-icons/hi2";
 
 const WelcomePage = () => {
   return (
-    <div className={s.container}>
-      <main className={s.main}>
+    <div className="container">
+      <section className={s.main}>
         <div className={s.textSection}>
           <div className={s.listInfo}>
             <p className={s.subheading}>EXPENSE LOG</p>
@@ -43,7 +43,7 @@ const WelcomePage = () => {
             <p className={s.balanceChange}>+1.29%</p>
           </div>
         </div>
-      </main>
+      </section>
     </div>
   );
 };

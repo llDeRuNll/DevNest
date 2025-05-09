@@ -6,6 +6,14 @@ import { categoryReduser } from "./category/slice";
 import { transactionsReduser } from "./transactions/slice";
 import { configureStore } from "@reduxjs/toolkit";
 
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 const persistConfig = {
   key: "root-auth",
   storage,
@@ -19,6 +27,12 @@ export const store = configureStore({
     category: categoryReduser,
     transactions: transactionsReduser,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);
