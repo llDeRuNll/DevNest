@@ -8,15 +8,17 @@
 }
 /* === DESKTOP (1280px): === */
 @media (min-width: 1280px) {
-  .usersImg {
-    width: 56px;
-    height: 56px;
+  .alUsersTab {
+    display: flex;
+    flex-direction: row;
+    padding-top: 140px;
+    justify-content: flex-start;
+    align-items: center;
   }
   .userAvatar {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-top: 80px;
     text-align: center;
   }
   /* Зображення аватарів */
@@ -34,13 +36,12 @@
   /* Блок тексту */
   .countText {
     display: flex;
+    justify-content: flex-end;
     flex-direction: column;
-    text-align: left;
-    justify-content: center;
     gap: 4px;
     width: 210px;
     height: 84px;
-    padding-left: 20px;
+    padding-left: 32px;
   }
 
   .usersCount {
