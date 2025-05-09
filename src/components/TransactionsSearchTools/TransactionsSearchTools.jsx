@@ -7,16 +7,13 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './TransactionsDatePicker.css'
 import enUS from 'date-fns/locale/en-US'
 
-const TransactionsSearchTools = () => {
-	const [startDate, setStartDate] = useState(new Date())
-
+const TransactionsSearchTools = ({setUserValue, setStartDate, startDate}) => {	
 	const handleChange = value => {
-		console.log(value)
+		setUserValue(value)
 	}
 
 	const handleDateChange = date => {
 		setStartDate(date)
-		console.log(startDate)
 	}
 
 	const customLocale = {
@@ -30,7 +27,7 @@ const TransactionsSearchTools = () => {
 	registerLocale('custom-en', customLocale)
 	return (
 		<>
-			<form className={s.form} autoComplete>
+			<form className={s.form} autoComplete="false">
 				<div className={s.fields}>
 					<div className={s.fieldWrapper}>
 						<input
