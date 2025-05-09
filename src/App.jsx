@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import NotFoundPage from "./routes/NotFoundPage/NotFoundPage";
+import { ToastContainer } from "react-toastify";
+import Loader from "./components/Loader/Loader";
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -32,6 +34,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer />
     </Suspense>
   );
 }
