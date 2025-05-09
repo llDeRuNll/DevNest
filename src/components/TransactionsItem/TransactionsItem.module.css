@@ -1,6 +1,10 @@
 tbody {
 	max-height: 270px;
 	overflow-y: auto;
+<<<<<<< HEAD
+=======
+	overflow-x: hidden;
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 }
 
 td {
@@ -9,6 +13,7 @@ td {
 	color: var(--white);
 	padding: 10px 7px;
 	&:nth-child(1) {
+<<<<<<< HEAD
 		width: 85px;
 		padding-left: 20px;
 	}
@@ -25,6 +30,25 @@ td {
 		width: 80px;
 	}
 	&:nth-child(6) {
+=======
+		width: 147px;
+		padding-left: 20px;
+	}
+	&:nth-child(2) {
+		width: 174px;
+	}
+	&:nth-child(3) {
+		width: 187px;
+	}
+	&:nth-child(4) {
+		width: 116px;
+	}
+	&:nth-child(5) {
+		width: 167px;
+	}
+	&:nth-child(6) {
+		width: 317px;
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 		padding-right: 20px;
 	}
 }
@@ -37,7 +61,11 @@ tbody tr:last-child td {
 	padding-bottom: 20px;
 }
 
+<<<<<<< HEAD
 .buttonsWrapper {
+=======
+.buttons {
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 	display: inline-flex;
 	column-gap: 6px;
 }
@@ -83,6 +111,7 @@ tbody tr:last-child td {
 	td {
 		font-size: 20px;
 		padding: 15px 10px;
+<<<<<<< HEAD
 		&:nth-child(1) {
 			width: 125px;
 			padding-left: 32px;
@@ -104,6 +133,13 @@ tbody tr:last-child td {
 		}
 	}
 	.buttonsWrapper {
+=======
+		&:first-child {
+			padding-left: 32px;
+		}
+	}
+	.buttons {
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 		column-gap: 8px;
 	}
 	.editBtn,
@@ -118,6 +154,7 @@ tbody tr:last-child td {
 }
 
 @media screen and (min-width: 1440px) {
+<<<<<<< HEAD
 	tbody {
 		max-height: 280px;
 	}
@@ -142,6 +179,13 @@ tbody tr:last-child td {
 		&:nth-child(6) {
 			padding-right: 60px;
 		}
+=======
+	td {
+		padding: 10px;
+		&:first-child {
+			padding-left: 40px;
+		}
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 	}
 	.editBtn,
 	.deleteBtn {
@@ -150,7 +194,10 @@ tbody tr:last-child td {
 		letter-spacing: -0.02em;
 		column-gap: 8px;
 		border-radius: 40px;
+<<<<<<< HEAD
 		height: 47px;
+=======
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 		span {
 			display: block;
 		}

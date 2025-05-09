@@ -35,6 +35,7 @@ const TransactionHistoryPage = () => {
 	}, [dispatch, transactionsType])
 
 	return (
+<<<<<<< HEAD
 		<>
 			{isLoading && <Loader />}
 			<section className={s.section}>
@@ -67,6 +68,23 @@ const TransactionHistoryPage = () => {
 							transactions={transactions}
 						/>
 					</div>
+=======
+		<section className={s.section}>
+			<div className='container'>
+				<div className={s.summaryWrapper}>
+					<div className={s.textWrapper}>
+						<h2 className={s.title}>All Expense</h2>
+						<p className={s.description}>
+							View and manage every transaction seamlessly! Your entire
+							financial landscape, all in one place.
+						</p>
+					</div>
+					<TransactionsTotalAmount />
+				</div>
+				<div className={s.transactionWrapper}>
+					<TransactionsSearchTools />
+					<TransactionsList />
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 				</div>
 			</section>
 		</>

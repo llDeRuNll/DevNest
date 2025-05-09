@@ -1,0 +1,58 @@
+[
+	{
+		"id": 1,
+		"category": "Cinema",
+		"comment": "Jhon week 4",
+		"date": "Sn, 3.03.2023",
+		"time": "14:30",
+		"sum": "150/UAH"
+	},
+	{
+		"id": 2,
+		"category": "Products",
+		"comment": "Milk, Bread, Fish",
+		"date": "Sn, 18.03.2023",
+		"time": "10:30",
+		"sum": "1500/UAH"
+	},
+	{
+		"id": 3,
+		"category": "Сlothes",
+		"comment": "Tshirt",
+		"date": "Sn, 20.03.2023",
+		"time": "17:30",
+		"sum": "5000/UAH"
+	},
+	{
+		"id": 4,
+		"category": "Cinema",
+		"comment": "Avatar 2",
+		"date": "Sn, 29.03.2023",
+		"time": "11:30",
+		"sum": "150/UAH"
+	},
+	{
+		"id": 5,
+		"category": "Сlothes",
+		"comment": "Tshirt",
+		"date": "Sn, 20.03.2023",
+		"time": "17:30",
+		"sum": "5000/UAH"
+	},
+	{
+		"id": 6,
+		"category": "Cinema",
+		"comment": "Avatar 2",
+		"date": "Sn, 29.03.2023",
+		"time": "11:30",
+		"sum": "150/UAH"
+	},
+	{
+		"id": 7,
+		"category": "Сlothes",
+		"comment": "Tshirt",
+		"date": "Sn, 20.03.2023",
+		"time": "17:30",
+		"sum": "5000/UAH"
+	}
+]

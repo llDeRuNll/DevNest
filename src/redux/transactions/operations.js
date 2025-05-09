@@ -1,6 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { trackerApi } from "../auth/operations";
 
+<<<<<<< HEAD
 export const transactionPost = createAsyncThunk(
   "transactions/post",
   async (transaction, thunkAPI) => {
@@ -60,3 +59,5 @@ export const transactionChangeInfo = createAsyncThunk(
     }
   }
 );
+=======
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351

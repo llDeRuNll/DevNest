@@ -31,7 +31,7 @@ const TransactionsSearchTools = ({ setUserValue, setStartDate, startDate }) => {
 	registerLocale('custom-en', customLocale)
 	return (
 		<>
-			<form className={s.form} autoComplete='false'>
+			<form className={s.form} autoComplete>
 				<div className={s.fields}>
 					<div className={s.fieldWrapper}>
 						<input

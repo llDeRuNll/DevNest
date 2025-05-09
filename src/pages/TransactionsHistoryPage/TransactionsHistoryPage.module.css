@@ -14,7 +14,11 @@
 	font-weight: 400;
 	font-size: 32px;
 	letter-spacing: -0.02em;
+<<<<<<< HEAD
 	color: var(--white);
+=======
+	color: #fafafa;
+>>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 	margin-bottom: 20px;
 }
 
