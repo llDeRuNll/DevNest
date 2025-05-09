@@ -59,11 +59,7 @@ function App() {
           />
           <Route
             path="transactions/history/:transactionsType"
-            element={
-              <PrivateRoute>
-                <TransactionHistoryPage />
-              </PrivateRoute>
-            }
+            element={<TransactionHistoryPage />}
           />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
