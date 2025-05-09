@@ -35,11 +35,19 @@ function App() {
           <Route index element={<WelcomePage />} />
           <Route
             path="register"
-            element={<RestrictedRoute component={<RegisterPage />} />}
+            element={
+              <RestrictedRoute>
+                <RegisterPage />
+              </RestrictedRoute>
+            }
           />
           <Route
             path="login"
-            element={<RestrictedRoute component={<LoginPage />} />}
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
           />
           <Route
             path="transactions/:transactionType"
