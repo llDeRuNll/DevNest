@@ -1,5 +1,5 @@
 tbody {
-	max-height: 270px;
+	height: 270px;
 	overflow-y: auto;
 }
 
@@ -9,20 +9,20 @@ td {
 	color: var(--white);
 	padding: 10px 7px;
 	&:nth-child(1) {
-		width: 147px;
+		width: 85px;
 		padding-left: 20px;
 	}
 	&:nth-child(2) {
-		width: 174px;
+		width: 70px;
 	}
 	&:nth-child(3) {
-		width: 187px;
+		width: 65px;
 	}
 	&:nth-child(4) {
-		width: 116px;
+		width: 55px;
 	}
 	&:nth-child(5) {
-		width: 167px;
+		width: 80px;
 	}
 	&:nth-child(6) {
 		padding-right: 20px;
@@ -84,22 +84,22 @@ tbody tr:last-child td {
 		font-size: 20px;
 		padding: 15px 10px;
 		&:nth-child(1) {
-			width: 145px;
+			width: 125px;
 			padding-left: 32px;
 		}
 		&:nth-child(2) {
-			width: 140px;
+			width: 120px;
 		}
 		&:nth-child(3) {
-			width: 140px;
+			width: 110px;
 		}
 		&:nth-child(4) {
-			width: 140px;
+			width: 100px;
 		}
 		&:nth-child(5) {
-			width: 145px;
+			width: 120px;
 		}
-		&:nth-child(6) {
+		&:nth-child(6){
 			padding-right: 32px;
 		}
 	}
@@ -124,23 +124,22 @@ tbody tr:last-child td {
 	td {
 		padding: 10px;
 		&:nth-child(1) {
-			width: 200px;
+			width: 197px;
 			padding-left: 40px;
 		}
 		&:nth-child(2) {
-			width: 200px;
+			width: 194px;
 		}
 		&:nth-child(3) {
-			width: 200px;
+			width: 197px;
 		}
 		&:nth-child(4) {
-			width: 150px;
+			width: 136px;
 		}
 		&:nth-child(5) {
-			width: 160px;
+			width: 188px;
 		}
 		&:nth-child(6) {
-			width: 200px;
 			padding-right: 60px;
 		}
 	}
