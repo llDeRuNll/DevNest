@@ -35,3 +35,17 @@ body {
   background: var(--background);
   color: var(--white);
 }
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: rgba(250, 250, 250, 0.2);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background-color: rgba(250, 250, 250, 0.2);
+}

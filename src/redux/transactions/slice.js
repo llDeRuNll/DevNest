@@ -23,7 +23,8 @@ import {
 } from "./operations";
 
 const initialState = {
-  items: [],
+  expenses: [],
+  incomes: [],
   transactionsTotal: {
     incomes: null,
     expenses: null,
@@ -77,34 +78,26 @@ const slice = createSlice({
         return initialState;
       })
       .addCase(transactionPost.fulfilled, (state, action) => {
+        state[action.payload.type].push(action.payload);
         state.transactionsTotal[action.payload.type] += action.payload.sum;
       })
       .addCase(transactionsGetByType.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state[action.type] = action.payload.items;
       })
       .addCase(transactionDelete.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          (item) => item._id == action.payload._id
+        state[action.payload.type] = state[action.payload.type].filter(
+          (item) => item._id != action.payload._id
         );
         state.transactionsTotal[action.payload.type] -= action.payload.sum;
       })
       .addCase(transactionChangeInfo.fulfilled, (state, action) => {
         const changedTransaction = action.payload;
-        // let indexOfChangedTransaction = state.expenses.findIndex(
-        //   (item) => item._id == changedTransaction._id
-        // );
-        // state.transactionsTotal[changedTransaction.type] -=
-        //   state.items[indexOfChangedTransaction];
-        // state.items[indexOfChangedTransaction] = changedTransaction;
-        // state.transactionsTotal[changedTransaction.type] +=
-        //   changedTransaction.sum;
-        const index = state.items.findIndex(
+        const index = state[changedTransaction.type].findIndex(
           (item) => item._id === changedTransaction._id
         );
-        const prevSum = state.items[index].sum;
-
+        const prevSum = state[changedTransaction.type][index].sum;
         state.transactionsTotal[changedTransaction.type] -= prevSum;
-        state.items[index] = changedTransaction;
+        state[changedTransaction.type][index] = changedTransaction;
         state.transactionsTotal[changedTransaction.type] +=
           changedTransaction.sum;
       })

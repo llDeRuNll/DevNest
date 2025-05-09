@@ -1,10 +1,20 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userRefresh } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
 import "./App.css";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import NotFoundPage from "./routes/NotFoundPage/NotFoundPage";
+<<<<<<< HEAD
 import { ToastContainer } from "react-toastify";
 import Loader from "./components/Loader/Loader";
+=======
+import Loader from "./components/Loader/Loader";
+import PrivateRoute from "./routes/PrivateRoute/PrivateRoute";
+import RestrictedRoute from "./routes/RestrictedRoute/RestrictedRoute";
+
+>>>>>>> origin
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -16,19 +26,44 @@ const TransactionHistoryPage = lazy(() =>
 );
 
 function App() {
-  return (
-    <Suspense>
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(userRefresh());
+  }, [dispatch]);
+
+  return isRefreshing ? null : (
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route element={<SharedLayout />}>
           <Route index element={<WelcomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/transactions/:transactionType"
-            element={<MainTransactionPage />}
+            path="register"
+            element={
+              <RestrictedRoute>
+                <RegisterPage />
+              </RestrictedRoute>
+            }
           />
           <Route
-            path="/transactions/history/:transactionsType"
+            path="login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="transactions/:transactionType"
+            element={
+              <PrivateRoute>
+                <MainTransactionPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="transactions/history/:transactionsType"
             element={<TransactionHistoryPage />}
           />
         </Route>
