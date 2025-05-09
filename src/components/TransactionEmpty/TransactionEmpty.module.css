@@ -1,0 +1,14 @@
+.emptyWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 30px;
+	min-height: 80%;
+}
+
+.text {
+	font-weight: 500;
+	font-size: 18px;
+	color: rgba(197, 197, 197, 0.2);
+}

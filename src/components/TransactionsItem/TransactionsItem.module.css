@@ -1,5 +1,5 @@
 tbody {
-	height: 270px;
+	max-height: 270px;
 	overflow-y: auto;
 }
 
@@ -99,7 +99,7 @@ tbody tr:last-child td {
 		&:nth-child(5) {
 			width: 120px;
 		}
-		&:nth-child(6){
+		&:nth-child(6) {
 			padding-right: 32px;
 		}
 	}
