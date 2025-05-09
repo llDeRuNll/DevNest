@@ -1,29 +1,28 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
-	userAvatarChange,
-	userAvatarDelete,
-	userCurrent,
-	userInfoUpdate,
-	userLogin,
-	userLogout,
-	userRefresh,
-	userRegister,
-} from '../auth/operations'
+  userAvatarChange,
+  userAvatarDelete,
+  userCurrent,
+  userInfoUpdate,
+  userLogin,
+  userLogout,
+  userRefresh,
+  userRegister,
+} from "../auth/operations";
 import {
-	categoryChangeInfo,
-	categoryDelete,
-	categoryGetAll,
-	categoryPost,
-} from '../category/operations'
+  categoryChangeInfo,
+  categoryDelete,
+  categoryGetAll,
+  categoryPost,
+} from "../category/operations";
 import {
-	transactionsGetByType,
-	transactionPost,
-	transactionDelete,
-	transactionChangeInfo,
-} from './operations'
+  transactionsGetByType,
+  transactionPost,
+  transactionDelete,
+  transactionChangeInfo,
+} from "./operations";
 
 const initialState = {
-<<<<<<< HEAD
   expenses: [],
   incomes: [],
   transactionsTotal: {
@@ -33,54 +32,43 @@ const initialState = {
   error: null,
   isLoading: false,
 };
-=======
-	items: [],
-	transactionsTotal: {
-		incomes: null,
-		expences: null,
-	},
-	error: null,
-	isLoading: false,
-}
->>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 
 const allOperations = [
-	userLogin,
-	userLogout,
-	userRegister,
-	userRefresh,
-	userCurrent,
-	userInfoUpdate,
-	userAvatarChange,
-	userAvatarDelete,
-	categoryPost,
-	categoryGetAll,
-	categoryChangeInfo,
-	categoryDelete,
-	transactionPost,
-	transactionsGetByType,
-	transactionDelete,
-	transactionChangeInfo,
-]
+  userLogin,
+  userLogout,
+  userRegister,
+  userRefresh,
+  userCurrent,
+  userInfoUpdate,
+  userAvatarChange,
+  userAvatarDelete,
+  categoryPost,
+  categoryGetAll,
+  categoryChangeInfo,
+  categoryDelete,
+  transactionPost,
+  transactionsGetByType,
+  transactionDelete,
+  transactionChangeInfo,
+];
 
-const allOperationsCertainResalt = resalt => {
-	switch (resalt) {
-		case 'pending':
-			return allOperations.map(el => el.pending)
-		case 'rejected':
-			return allOperations.map(el => el.rejected)
-		case 'fulfilled':
-			return allOperations.map(el => el.fulfilled)
-		default:
-			console.log('only pending, rejected or fulfilled')
-	}
-}
+const allOperationsCertainResalt = (resalt) => {
+  switch (resalt) {
+    case "pending":
+      return allOperations.map((el) => el.pending);
+    case "rejected":
+      return allOperations.map((el) => el.rejected);
+    case "fulfilled":
+      return allOperations.map((el) => el.fulfilled);
+    default:
+      console.log("only pending, rejected or fulfilled");
+  }
+};
 
 const slice = createSlice({
-	name: 'transactionsSlice',
-	initialState,
+  name: "transactionsSlice",
+  initialState,
 
-<<<<<<< HEAD
   extraReducers: (builder) => {
     builder
       .addCase(userLogout.fulfilled, () => {
@@ -146,8 +134,5 @@ const slice = createSlice({
       );
   },
 });
-=======
->>>>>>> 4e9ea20416a868658c947df04bacdd7210cb9351
 
-
-export const transactionsReduser = slice.reducer
+export const transactionsReduser = slice.reducer;
