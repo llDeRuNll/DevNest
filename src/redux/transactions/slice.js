@@ -26,7 +26,7 @@ const initialState = {
   items: [],
   transactionsTotal: {
     incomes: null,
-    expences: null,
+    expenses: null,
   },
   error: null,
   isLoading: false,
@@ -90,12 +90,21 @@ const slice = createSlice({
       })
       .addCase(transactionChangeInfo.fulfilled, (state, action) => {
         const changedTransaction = action.payload;
-        let indexOfChangedTransaction = state.expenses.findIndex(
-          (item) => item._id == changedTransaction._id
+        // let indexOfChangedTransaction = state.expenses.findIndex(
+        //   (item) => item._id == changedTransaction._id
+        // );
+        // state.transactionsTotal[changedTransaction.type] -=
+        //   state.items[indexOfChangedTransaction];
+        // state.items[indexOfChangedTransaction] = changedTransaction;
+        // state.transactionsTotal[changedTransaction.type] +=
+        //   changedTransaction.sum;
+        const index = state.items.findIndex(
+          (item) => item._id === changedTransaction._id
         );
-        state.transactionsTotal[changedTransaction.type] -=
-          state.items[indexOfChangedTransaction];
-        state.items[indexOfChangedTransaction] = changedTransaction;
+        const prevSum = state.items[index].sum;
+
+        state.transactionsTotal[changedTransaction.type] -= prevSum;
+        state.items[index] = changedTransaction;
         state.transactionsTotal[changedTransaction.type] +=
           changedTransaction.sum;
       })
@@ -105,7 +114,7 @@ const slice = createSlice({
           if (action.payload.transactionsTotal) {
             state.transactionsTotal.incomes =
               action.payload.transactionsTotal.incomes;
-            state.transactionsTotal.expences =
+            state.transactionsTotal.expenses =
               action.payload.transactionsTotal.expences;
           }
         }
