@@ -6,9 +6,12 @@ import { selectIsRefreshing } from "./redux/auth/selectors";
 import "./App.css";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import NotFoundPage from "./routes/NotFoundPage/NotFoundPage";
+import { ToastContainer } from "react-toastify";
 import Loader from "./components/Loader/Loader";
+
 import PrivateRoute from "./routes/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./routes/RestrictedRoute/RestrictedRoute";
+
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -64,6 +67,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer />
     </Suspense>
   );
 }
