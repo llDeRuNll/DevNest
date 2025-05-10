@@ -35,8 +35,7 @@ const slice = createSlice({
         else state.expenses.push(newPost);
       })
       .addCase(categoryGetAll.fulfilled, (state, action) => {
-        state.incomes = action.payload.incomes;
-        state.expenses = action.payload.expenses;
+        state[action.payload.type] = action.payload.items;
       })
       .addCase(categoryChangeInfo.fulfilled, (state, action) => {
         const changedCategory = action.payload;
