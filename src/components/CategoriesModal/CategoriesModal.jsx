@@ -1,4 +1,3 @@
-// src/components/CategoriesModal/CategoriesModal.jsx
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -27,7 +26,6 @@ const categorySchema = Yup.object().shape({
 const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
   const dispatch = useDispatch();
 
-  // Вибираємо відповідні категорії з Redux
   const rawCategories =
     useSelector(
       type === "expenses" ? selectExpensesCategories : selectIncomesCategories
@@ -35,12 +33,10 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
 
   const [editingCategory, setEditingCategory] = useState(null);
 
-  // Підтягуємо списки на старті
   useEffect(() => {
     dispatch(categoryGetAll());
   }, [dispatch]);
 
-  // Закриття по Esc
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -49,7 +45,6 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
-  // Ініціали форми залежать від режиму (Add vs Edit)
   const initialValues = {
     categoryName: editingCategory ? editingCategory.categoryName : "",
   };
@@ -68,7 +63,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
       }
       resetForm();
       setEditingCategory(null);
-      // Підтягуємо свіжі дані
+
       dispatch(categoryGetAll());
     } catch (err) {
       toast.error(err.message || "Something went wrong");

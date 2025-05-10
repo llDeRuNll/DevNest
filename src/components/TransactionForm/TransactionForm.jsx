@@ -37,7 +37,6 @@ const TransactionForm = ({ transaction, onClose, isModal = false }) => {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
-  // Redux: беремо категорії для доходів і витрат
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
 
@@ -108,7 +107,7 @@ const TransactionForm = ({ transaction, onClose, isModal = false }) => {
     }
 
     resetForm();
-    setSelectedCategoryName(""); // очищаємо назву категорії
+    setSelectedCategoryName("");
     onClose();
   };
 
@@ -192,7 +191,7 @@ const TransactionForm = ({ transaction, onClose, isModal = false }) => {
                 placeholder="Select category"
                 value={selectedCategoryName}
                 className={s["t-input"]}
-                onClick={() => setIsCategoryModalOpen(true)} // відкриваємо модалку
+                onClick={() => setIsCategoryModalOpen(true)}
               />
               <ErrorMessage
                 name="category"

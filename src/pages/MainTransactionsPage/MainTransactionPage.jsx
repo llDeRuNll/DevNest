@@ -7,16 +7,25 @@ const MainTransactionPage = () => {
   return (
     <div className="container">
       <div className={s.wrapper}>
-        <div>
+        <div className={s.headerSection}>
           <p className={s.header}>Expense Log</p>
-          <p className={s.text}>
+          <h1 className={s.text}>
             Capture and organize every penny spent with ease! A clear view of
             your financial habits at your fingertips.
-          </p>
+          </h1>
         </div>
-        <TransactionsTotalAmount />
-        <TransactionForm transaction={null} isModal={false} />
-        <TransactionsChart />
+
+        <div className={s.totalsSection}>
+          <TransactionsTotalAmount />
+        </div>
+
+        <div className={s.chartSection}>
+          <TransactionsChart />
+        </div>
+
+        <div className={s.formSection}>
+          <TransactionForm transaction={null} isModal={false} />
+        </div>
       </div>
     </div>
   );
