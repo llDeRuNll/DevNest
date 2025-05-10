@@ -7,18 +7,22 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './TransactionsDatePicker.css'
 import enUS from 'date-fns/locale/en-US'
 
-const TransactionsSearchTools = ({ setUserValue, setStartDate, startDate }) => {
-	// const handleChange = value => {
-	// 	setUserValue(value)
-	// }
+const TransactionsSearchTools = ({
+	setSearchQuery,
+	setSelectedDate,
+	selectedDate,
+	setHasUserPickedDate,
+	hasUserPickedDate,
+}) => {
+	const handleDateChange = date => {
+		setSelectedDate(date)
+		setHasUserPickedDate(true)
+	}
 
-	// const handleDateChange = date => {
-	// 	setStartDate(date)
-	// }
-
-	// const handleClose = () => {
-	// 	setStartDate(null)
-	// }
+	const handleClose = () => {
+		setSelectedDate(new Date())
+		setHasUserPickedDate(false)
+	}
 
 	const customLocale = {
 		...enUS,
@@ -31,38 +35,37 @@ const TransactionsSearchTools = ({ setUserValue, setStartDate, startDate }) => {
 	registerLocale('custom-en', customLocale)
 	return (
 		<>
-			<form className={s.form} autoComplete>
-				<div className={s.fields}>
+			<form className={s.searchForm} autoComplete='false'>
+				<div className={s.searchFields}>
 					<div className={s.fieldWrapper}>
 						<input
 							className={s.searchInput}
 							type='text'
 							name='text'
-							onChange={e => setUserValue(e.target.value)}
+							onChange={e => setSearchQuery(e.target.value)}
 							placeholder='Search for anything..'
 							id='search'
 						/>
-						<CiSearch className={s.icon} color='#0EF387' size={20} />
+						<CiSearch className={s.fieldIcon} color='#0EF387' size={20} />
 					</div>
 					<div className={s.fieldWrapper}>
 						<DatePicker
 							className={s.datePicker}
 							dateFormat='dd/MM/yyyy'
-							selected={startDate}
+							selected={selectedDate}
 							locale='custom-en'
-							placeholderText='dd/mm/yyyy'
-							onChange={date => setStartDate(date)}
+							onChange={date => handleDateChange(date)}
 						/>
-						{startDate ? (
+						{hasUserPickedDate ? (
 							<IoMdClose
-								className={s.closeIcon}
+								className={s.clearDateIcon}
 								color='#0EF387'
 								size={20}
-								onClick={() => setStartDate(null)}
+								onClick={handleClose}
 							/>
 						) : (
 							<MdOutlineDateRange
-								className={s.icon}
+								className={s.fieldIcon}
 								color='#0EF387'
 								size={20}
 							/>
