@@ -1,8 +1,10 @@
-.userAvatar {
+.userAvatar,
+.countText {
   display: none;
 }
 @media (min-width: 768px) {
-  .userAvatar {
+  .userAvatar,
+  .countText {
     display: none;
   }
 }
@@ -21,7 +23,7 @@
     align-items: center;
     text-align: center;
   }
-  /* Зображення аватарів */
+ 
   .usersImg {
     border: 2px solid #11101c;
     border-radius: 42px;
@@ -33,7 +35,7 @@
     position: relative;
   }
 
-  /* Блок тексту */
+
   .countText {
     display: flex;
     justify-content: flex-end;
@@ -46,7 +48,7 @@
 
   .usersCount {
     font-weight: 400;
-    font-size: 22px;
+    font-size: 28px;
     letter-spacing: -0.02em;
     color: #fafafa;
     margin: 0;
@@ -54,7 +56,9 @@
   }
 
   .usersNote {
-    font-size: 0.85rem;
+    font-weight: 400;
+font-size: 16px;
+letter-spacing: -0.02em;
     color: #666;
     margin: 0;
     text-align: left;
