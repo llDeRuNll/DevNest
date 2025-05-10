@@ -1,6 +1,6 @@
 .authContainer {
-    margin-bottom: 186px;
-    margin-top: 126px;
+  margin-bottom: 186px;
+  margin-top: 126px;
 }
 
 .authTitle {
@@ -31,7 +31,7 @@
   padding-left: 18px;
   padding-top: 12px;
   padding-bottom: 12px;
-  max-width: 335px;
+  width: 100%;
   background-color: inherit;
   color: #fafafa;
 }
@@ -47,12 +47,21 @@
   border-radius: 40px;
   padding: 14px 44px;
   max-width: 138px;
-  margin-top: 142px;
+  margin-top: 60px;
   background: #0ef387;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: -0.02em;
   color: #0c0d0d;
+}
+
+.btnLogin {
+  margin-top: 122px;
+}
+
+.authBtn:hover,
+.authBtn:focus {
+  background: #0ebb69;
 }
 
 .authText {
@@ -66,4 +75,146 @@
 .authLink {
   text-decoration: underline;
   color: #fafafa;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 335px;
+}
+
+.authInput {
+  width: 100%;
+  padding: 12px 40px 12px 18px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  border-radius: 12px;
+  background-color: inherit;
+  color: #fafafa;
+}
+
+.authInput::placeholder {
+  color: rgba(250, 250, 250, 0.4);
+}
+
+.inputError {
+  border-color: #e74a3b;
+}
+
+.inputSuccess {
+  border-color: #097b45;
+}
+
+.iconRight,
+.iconRightError,
+.iconRightSuccess {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 20px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.iconRightError {
+  color: #e74a3b;
+}
+
+.iconRightSuccess {
+  color: #097b45;
+}
+
+.successMessage {
+  color: #097b45;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.authError {
+  color: #e74a3b;
+  font-size: 10px;
+  margin-top: 4px;
+  margin-left: 18px;
+}
+
+.authInput:hover,
+.authInput:focus,
+.authInput:active {
+  outline: none;
+  border-color: #0ef387;
+}
+
+.authBgWrapper {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .authContainer {
+    width: 399px;
+    margin: 262px auto;
+  }
+  .authTitle {
+    font-size: 56px;
+  }
+
+  .authDescription {
+    font-size: 16px;
+  }
+
+  .authForm {
+    width: 399px;
+    gap: 24px;
+  }
+
+  .inputWrapper {
+    max-width: 399px;
+    
+  } 
+
+  .authInput {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .authInput::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .authBtn {
+    max-width: 145px;
+    margin-top: 36px;
+    font-size: 16px;
+  }
+
+  .btnLogin {
+    margin-top: 108px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .authContainer {
+    display: flex;
+    width: 100%;
+    gap: 54px;
+    margin-top: 132px;
+    margin-bottom: 100px;
+  }
+  .authFormContainer {
+    margin-top: 18px;
+    width: 533px;
+  }
+
+  .authBgWrapper {
+    display: block;
+    width: 611px;
+    height: 568px;
+    flex-shrink: 0;
+  }
+
+  .authBg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
 }

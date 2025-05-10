@@ -1,34 +1,42 @@
-import AuthForm from "../../components/AuthForm/AuthForm";
-import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../redux/auth/operations";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+
+import AuthForm from "../../components/AuthForm/AuthForm";
+import { userLogin } from "../../redux/auth/operations";
+import ToasterSuccess from "../../components/ToasterSuccess/ToasterSuccess";
+import ToasterError from "../../components/ToasterError/ToasterError";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { error, isLoading } = useSelector((state) => state.auth);
-
   const initialValues = { email: "", password: "" };
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string()
-      .min(6, "Minimum 6 characters")
+      .min(8, "Minimum 8 characters")
       .required("Password is required"),
   });
 
   const handleLogin = async (values) => {
-    const result = await dispatch(userLogin(values));
-
-    if (userLogin.fulfilled.match(result)) {
-      console.log("successful login");
+    try {
+      await dispatch(userLogin(values)).unwrap();
+      ToasterSuccess();
       navigate("/transactions/income");
-    } else {
-      console.error("login error", result.payload);
+    } catch {
+      ToasterError();
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      ToasterError();
+    }
+  }, [error]);
 
   return (
     <div className="container">
@@ -43,8 +51,8 @@ const LoginPage = () => {
         navigationText="Don't have an account?"
         navigationLinkText="Sign Up"
         navigationLinkHref="/register"
-        error={error}
         isLoading={isLoading}
+        variant="login"
       />
     </div>
   );
