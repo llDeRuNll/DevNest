@@ -6,10 +6,10 @@ import {
   userRefresh,
 } from "../auth/operations";
 import {
+  categoryPost,
+  categoryGetAll,
   categoryChangeInfo,
   categoryDelete,
-  categoryGetAll,
-  categoryPost,
 } from "./operations";
 
 const initialState = {
@@ -17,54 +17,55 @@ const initialState = {
   expenses: [],
 };
 
-const slice = createSlice({
-  name: "categorySlice",
+const categorySlice = createSlice({
+  name: "category",
   initialState,
-
   extraReducers: (builder) => {
     builder
-      .addCase(userLogout.fulfilled, () => {
-        return initialState;
+
+      .addCase(userLogout.fulfilled, () => initialState)
+      .addCase(userRefresh.rejected, () => initialState)
+
+      .addCase(categoryPost.fulfilled, (state, { payload }) => {
+        if (payload.type === "incomes") {
+          state.incomes.push(payload);
+        } else {
+          state.expenses.push(payload);
+        }
       })
-      .addCase(userRefresh.rejected, () => {
-        return initialState;
+
+      .addCase(categoryGetAll.fulfilled, (state, { payload }) => {
+        state.incomes = payload.incomes;
+        state.expenses = payload.expenses;
       })
-      .addCase(categoryPost.fulfilled, (state, action) => {
-        const newPost = action.payload;
-        if (newPost.type == "incomes") state.incomes.push(newPost);
-        else state.expenses.push(newPost);
+
+      .addCase(categoryChangeInfo.fulfilled, (state, { payload }) => {
+        const changed = payload;
+        const incIdx = state.incomes.findIndex((c) => c._id === changed._id);
+        if (incIdx !== -1) {
+          state.incomes[incIdx] = changed;
+        } else {
+          const expIdx = state.expenses.findIndex((c) => c._id === changed._id);
+          if (expIdx !== -1) {
+            state.expenses[expIdx] = changed;
+          }
+        }
       })
-      .addCase(categoryGetAll.fulfilled, (state, action) => {
-        state[action.payload.type] = action.payload.items;
+
+      .addCase(categoryDelete.fulfilled, (state, { payload }) => {
+        state.incomes = state.incomes.filter((c) => c._id !== payload);
+        state.expenses = state.expenses.filter((c) => c._id !== payload);
       })
-      .addCase(categoryChangeInfo.fulfilled, (state, action) => {
-        const changedCategory = action.payload;
-        let indexOfChangedCategory = state.expenses.findIndex(
-          (item) => item._id == changedCategory._id
-        );
-        if (indexOfChangedCategory === undefined) {
-          indexOfChangedCategory = state.incomes.findIndex(
-            (item) => item._id == changedCategory._id
-          );
-          state.incomes[indexOfChangedCategory] = changedCategory;
-        } else state.expenses[indexOfChangedCategory] = changedCategory;
-      })
-      .addCase(categoryDelete.fulfilled, (state, action) => {
-        state.incomes = state.incomes.filter(
-          (item) => item._id == action.payload
-        );
-        state.expenses = state.expenses.filter(
-          (item) => item._id == action.payload
-        );
-      })
+
       .addMatcher(
         isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
         (state, action) => {
-          state.incomes = action.payload.user.categories.incomes;
-          state.expenses = action.payload.user.categories.expenses;
+          const { incomes, expenses } = action.payload.user.categories;
+          state.incomes = incomes;
+          state.expenses = expenses;
         }
       );
   },
 });
 
-export const categoryReduser = slice.reducer;
+export const categoryReduser = categorySlice.reducer;

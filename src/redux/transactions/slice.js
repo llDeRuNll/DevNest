@@ -26,8 +26,8 @@ const initialState = {
   expenses: [],
   incomes: [],
   transactionsTotal: {
-    incomes: null,
-    expenses: null,
+    incomes: 0,
+    expenses: 0,
   },
   error: null,
   isLoading: false,
@@ -82,7 +82,7 @@ const slice = createSlice({
         state.transactionsTotal[action.payload.type] += action.payload.sum;
       })
       .addCase(transactionsGetByType.fulfilled, (state, action) => {
-        state[action.type] = action.payload.items;
+        state[action.payload.type] = action.payload.items;
       })
       .addCase(transactionDelete.fulfilled, (state, action) => {
         state[action.payload.type] = state[action.payload.type].filter(

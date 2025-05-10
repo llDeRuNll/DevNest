@@ -1,7 +1,8 @@
+// src/components/CategoriesModal/CategoriesModal.jsx
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
+import * as Yup from "yup";
 import toast from "react-hot-toast";
 import styles from "./CategoriesModal.module.css";
 import {
@@ -9,15 +10,14 @@ import {
   selectIncomesCategories,
 } from "../../redux/category/selectors";
 import {
-  categoryChangeInfo,
-  categoryDelete,
   categoryGetAll,
   categoryPost,
+  categoryChangeInfo,
+  categoryDelete,
 } from "../../redux/category/operations";
 
-const categorySchema = yup.object().shape({
-  categoryName: yup
-    .string()
+const categorySchema = Yup.object().shape({
+  categoryName: Yup.string()
     .trim()
     .min(3, "Min 3 characters")
     .max(25, "Max 25 characters")
@@ -27,186 +27,154 @@ const categorySchema = yup.object().shape({
 const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
   const dispatch = useDispatch();
 
-  const expensesCategories = useSelector(selectExpensesCategories);
-  const incomesCategories = useSelector(selectIncomesCategories);
-  const categories =
-    type === "expenses" ? expensesCategories : incomesCategories;
+  // Вибираємо відповідні категорії з Redux
+  const rawCategories =
+    useSelector(
+      type === "expenses" ? selectExpensesCategories : selectIncomesCategories
+    ) ?? [];
 
-  const [editingCategoryId, setEditingCategoryId] = useState(null);
-  const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
-  const [localCategories, setLocalCategories] = useState(categories);
+  const [editingCategory, setEditingCategory] = useState(null);
 
+  // Підтягуємо списки на старті
   useEffect(() => {
     dispatch(categoryGetAll());
   }, [dispatch]);
 
+  // Закриття по Esc
   useEffect(() => {
-    setLocalCategories(categories);
-  }, [categories]);
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) onClose();
+  // Ініціали форми залежать від режиму (Add vs Edit)
+  const initialValues = {
+    categoryName: editingCategory ? editingCategory.categoryName : "",
   };
 
-  const handleAddOrEditCategory = async (values, { resetForm }) => {
-    const trimmedName = values.categoryName.trim();
-
-    const duplicateCategory = localCategories.find(
-      (category) =>
-        category.categoryName.toLowerCase() === trimmedName.toLowerCase() &&
-        category._id !== editingCategoryId
-    );
-
-    if (duplicateCategory) {
-      toast.error("Category name already exists");
-      return;
-    }
-
+  const handleAddOrEdit = async (values, { resetForm }) => {
+    const name = values.categoryName.trim();
     try {
-      if (editingCategoryId) {
+      if (editingCategory) {
         await dispatch(
-          categoryChangeInfo({ _id: editingCategoryId, name: trimmedName })
+          categoryChangeInfo({ _id: editingCategory._id, name })
         ).unwrap();
         toast.success("Category updated");
       } else {
-        await dispatch(
-          categoryPost({ categoryName: trimmedName, type })
-        ).unwrap();
-        toast.success("Category created");
+        await dispatch(categoryPost({ categoryName: name, type })).unwrap();
+        toast.success("Category added");
       }
-
       resetForm();
-      setEditingCategoryId(null);
-    } catch (error) {
-      toast.error(error.message || "Something went wrong");
+      setEditingCategory(null);
+      // Підтягуємо свіжі дані
+      dispatch(categoryGetAll());
+    } catch (err) {
+      toast.error(err.message || "Something went wrong");
     }
   };
 
-  const handleDeleteCategory = async (id) => {
+  const handleDelete = async (id) => {
     try {
       await dispatch(categoryDelete(id)).unwrap();
       toast.success("Category deleted");
+      dispatch(categoryGetAll());
     } catch {
       toast.error("Failed to delete category");
     }
   };
 
-  useEffect(() => {
-    const updatedCategories = categories.filter(
-      (category) => category._id !== editingCategoryId
-    );
-    setLocalCategories(updatedCategories);
-  }, [categories, editingCategoryId]);
-
-  const handleEditCategory = (category, setFieldValue) => {
-    setFieldValue("categoryName", category.categoryName);
-    setEditingCategoryId(category._id);
+  const handleEditClick = (cat) => {
+    setEditingCategory(cat);
   };
 
-  const handleCategorySelect = (category) => {
-    onSelectCategory(category);
-    setEditingCategoryId(null);
+  const handleSelect = (cat) => {
+    onSelectCategory(cat);
     onClose();
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Escape") onClose();
   };
 
   return (
     <div
       className={styles.modalBackdrop}
-      onClick={handleBackdropClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={-1}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div className={styles.modalContent}>
         <div className={styles.closeButtonContainer}>
           <button onClick={onClose}>
-            <div className={styles.icon}>x</div>
+            <div className={styles.icon}>×</div>
           </button>
         </div>
+
         <h2 className={styles.modalTitle}>
-          {type === "expenses" ? "Expenses" : "Incomes"}
+          {type === "expenses" ? "Expenses" : "Incomes"} Categories
         </h2>
 
-        <div className={styles.categoriesList}>
-          <ul>
-            {localCategories.map((category) => (
-              <li
-                key={category._id}
-                className={styles.categoryItem}
-                onMouseEnter={() => setHoveredCategoryId(category._id)}
-                onMouseLeave={() => setHoveredCategoryId(null)}
-              >
-                <span className={styles.categoryName}>
-                  {category.categoryName}
-                </span>
-                {hoveredCategoryId === category._id && (
-                  <div className={styles.categoryActions}>
-                    <button
-                      onClick={() => handleCategorySelect(category)}
-                      className={styles.icon}
-                    >
-                      Select
-                    </button>
-                    <Formik initialValues={{ categoryName: "" }}>
-                      {({ setFieldValue }) => (
-                        <button
-                          onClick={() =>
-                            handleEditCategory(category, setFieldValue)
-                          }
-                          className={styles.icon}
-                        >
-                          Edit
-                        </button>
-                      )}
-                    </Formik>
-                    <button
-                      onClick={() => handleDeleteCategory(category._id)}
-                      className={styles.icon}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                )}
+        <ul className={styles.categoriesList}>
+          {rawCategories.length === 0 ? (
+            <li className={styles.emptyMessage}>No categories yet.</li>
+          ) : (
+            rawCategories.map((cat) => (
+              <li key={cat._id} className={styles.categoryItem}>
+                <span className={styles.categoryName}>{cat.categoryName}</span>
+                <div className={styles.categoryActions}>
+                  <button
+                    onClick={() => handleSelect(cat)}
+                    className={styles.icon}
+                  >
+                    Select
+                  </button>
+                  <button
+                    onClick={() => handleEditClick(cat)}
+                    className={styles.icon}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(cat._id)}
+                    className={styles.icon}
+                  >
+                    Delete
+                  </button>
+                </div>
               </li>
-            ))}
-          </ul>
-        </div>
+            ))
+          )}
+        </ul>
 
         <div className={styles.newCategoryContainer}>
-          <h2 className={styles.newCategoryTitle}>
-            {editingCategoryId ? "Edit Category" : "New Category"}
-          </h2>
+          <h3 className={styles.newCategoryTitle}>
+            {editingCategory ? "Edit Category" : "New Category"}
+          </h3>
+
           <Formik
-            initialValues={{ categoryName: "" }}
+            initialValues={initialValues}
+            enableReinitialize
             validationSchema={categorySchema}
-            onSubmit={handleAddOrEditCategory}
-            enableReinitialize={true}
+            onSubmit={handleAddOrEdit}
           >
-            {({ setFieldValue }) => (
-              <Form className={styles.newCategoryForm}>
-                <Field
-                  type="text"
-                  name="categoryName"
-                  placeholder="Enter category name"
-                  className={styles.newCategoryInput}
-                />
-                <ErrorMessage
-                  name="categoryName"
-                  component="div"
-                  className={styles.error}
-                />
-                <button type="submit" className={styles.submitButton}>
-                  {editingCategoryId ? "Save" : "Add"}
-                </button>
-              </Form>
-            )}
+            <Form className={styles.newCategoryForm}>
+              <Field
+                type="text"
+                name="categoryName"
+                placeholder="Enter category name"
+                className={styles.newCategoryInput}
+              />
+              <ErrorMessage
+                name="categoryName"
+                component="div"
+                className={styles.error}
+              />
+
+              <button type="submit" className={styles.submitButton}>
+                {editingCategory ? "Save" : "Add"}
+              </button>
+            </Form>
           </Formik>
         </div>
       </div>
     </div>
   );
 };
+
 export default CategoriesModal;

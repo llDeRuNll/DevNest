@@ -1,20 +1,28 @@
 import s from './TransactionsList.module.css'
-import TransactionsItem from '../TransactionsItem/TransactionsItem'
 import TransactionEmpty from '../TransactionEmpty/TransactionEmpty'
 import { searchSelection } from '../../utils/searchSelection'
 import { useEffect, useState } from 'react'
+import TransactionsItem from '../TransactionsItem/TransactionsItem'
 
 const TransactionsList = ({
 	transactions,
 	windowWidth,
-	startDate,
-	userValue,
+	selectedDate,
+	searchQuery,
+	hasUserPickedDate,
 }) => {
 	const [filteredTransactions, setFilteredTransactions] = useState([])
 
 	useEffect(() => {
-		setFilteredTransactions(searchSelection(transactions, userValue, startDate))
-	}, [transactions, userValue, startDate])
+		setFilteredTransactions(
+			searchSelection(
+				transactions,
+				searchQuery,
+				selectedDate,
+				hasUserPickedDate
+			)
+		)
+	}, [transactions, searchQuery, selectedDate, hasUserPickedDate])
 
 	return (
 		<>
@@ -22,27 +30,23 @@ const TransactionsList = ({
 				<TransactionEmpty />
 			) : (
 				<div className={s.tableWrapper}>
-					<table>
-						<thead>
-							<tr>
-								<th>Category</th>
-								<th>Comment</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Sum</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							{filteredTransactions?.map(transaction => (
-								<TransactionsItem
-									key={transaction._id}
-									data={transaction}
-									windowWidth={windowWidth}
-								/>
-							))}
-						</tbody>
-					</table>
+					<div className={s.tableHeaderWrapper}>
+						<p className={s.tableHeaderCell}>Category</p>
+						<p className={s.tableHeaderCell}>Comment</p>
+						<p className={s.tableHeaderCell}>Date</p>
+						<p className={s.tableHeaderCell}>Time</p>
+						<p className={s.tableHeaderCell}>Sum</p>
+						<p className={s.tableHeaderCell}>Actions</p>
+					</div>
+					<div className={s.tableBodyWrapper}>
+						{filteredTransactions?.map(transaction => (
+							<TransactionsItem
+								key={transaction._id}
+								transaction={transaction}
+								windowWidth={windowWidth}
+							/>
+						))}
+					</div>
 				</div>
 			)}
 		</>
