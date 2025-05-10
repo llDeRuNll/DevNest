@@ -1,5 +1,3 @@
-/* CategoriesModal.module.css */
-/* ===== базові (мобайл) ===== */
 .modalBackdrop {
   position: fixed;
   inset: 0;
@@ -123,7 +121,6 @@
   color: var(--error);
 }
 
-/* планшет і десктоп */
 @media (min-width: 768px) {
   .modalContent {
     border-radius: 30px;
@@ -145,7 +142,6 @@
   }
 }
 
-/* великі екрани ≥1440px */
 @media (min-width: 1440px) {
   .modalContent {
     padding: 48px;
