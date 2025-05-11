@@ -1,0 +1,7 @@
+.customToastDelete {
+  color: var(--white);
+  background-color: var(--surface);
+}
+.icon {
+  color: var(--green-light);
+}

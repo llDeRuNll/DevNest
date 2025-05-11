@@ -1,10 +1,6 @@
 @import "modern-normalize/modern-normalize.css";
-@import "./variable.css";
 @import "./container.css";
-
-html {
-  scroll-behavior: smooth;
-}
+@import "./variable.css";
 
 h1,
 h2,
@@ -13,88 +9,43 @@ h4,
 h5,
 h6,
 p {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
-
-p:last-child {
-  margin-bottom: 0;
-}
-
 ul,
 ol {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
-  outline: none;
 }
-
-button {
-  cursor: pointer;
-  all: unset;
-  cursor: pointer;
-  color: currentColor;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-input,
-textarea,
-select {
-  font: inherit;
-  border: none;
-  outline: none;
-  background: none;
-}
-
 body {
-  font-family: var(--font-family), sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  letter-spacing: -0.02em;
-  background-color: var(--background);
+  background: var(--background);
   color: var(--white);
 }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
 }
 
-table,
-th,
-td {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  vertical-align: top;
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: rgba(250, 250, 250, 0.2);
 }
 
-.section-title {
-  font-family: var(--font-family), sans-serif;
-  color: var(--white);
-  font-weight: 400;
-  font-size: 32px;
-  letter-spacing: -0.02em;
-}
-
-@media screen and (min-width: 768px) {
-  .section-title {
-    font-size: 56px;
-  }
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background-color: rgba(250, 250, 250, 0.2);
 }

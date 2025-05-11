@@ -1,0 +1,66 @@
+.authNav {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+
+.btnGreen,
+.btnOutline {
+  width: 100%;
+  max-width: 300px;
+  height: 47px;
+  padding: 14px 44px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btnGreen {
+  background-color: #0ef387;
+  color: black;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.btnGreen:hover {
+  background-color: #0be077;
+}
+
+.btnOutline {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.btnOutline:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: white;
+}
+
+/* === TABLET (≥768px):=== */
+@media (min-width: 768px) {
+  .authNav {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .btnGreen,
+  .btnOutline {
+    width: 145px;
+  }
+}
+
+/* === DESKTOP (≥1024px): === */
+@media (min-width: 1024px) {
+  .btnGreen,
+  .btnOutline {
+    font-size: 1.05rem;
+  }
+}
