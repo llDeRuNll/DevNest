@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, useField } from "formik";
 import { Link } from "react-router-dom";
 import s from "./AuthForm.module.css";
+import BgImageWrapper from "../BgImageWrapper/BgImageWrapper";
 
 import {
   AiOutlineCheckCircle,
@@ -80,11 +81,7 @@ const AuthForm = ({
   return (
     <div className={s.authContainer}>
       <div className={s.authBgWrapper}>
-        <img
-          src="../../../imgWelcomePage/Rec2x.png"
-          alt="background image"
-          className={s.authBg}
-        />
+        <BgImageWrapper className={s.authBg}/>
       </div>
       <div className={s.authFormContainer}>
         <h2 className={s.authTitle}>{title}</h2>
