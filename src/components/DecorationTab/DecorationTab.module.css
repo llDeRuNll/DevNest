@@ -5,7 +5,6 @@
   top: 0;
   left: 0;
   z-index: 2;
-
   overflow: visible; 
   pointer-events: none; 
 
@@ -16,7 +15,7 @@
 
   top: 0;
   left: 0;
-  transform: none;
+  transform: translate(0, 0);
   transition: transform 0.1s linear;
 }
 
@@ -42,6 +41,8 @@
 }
 @media (min-width: 1440px) {
   .wrapper {
+    position: absolute;
     overflow: hidden;
   }
+
 }
