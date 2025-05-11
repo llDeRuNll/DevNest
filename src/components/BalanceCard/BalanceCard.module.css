@@ -80,4 +80,11 @@
 height: 43px;
   }
 }
-
+@media (min-width: 1440px) {
+  .balanceCard {
+    position: static;
+    transform: none;
+    bottom: auto;
+    left: auto;
+  }
+}

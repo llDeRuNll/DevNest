@@ -1,49 +1,24 @@
-tbody {
-  max-height: 270px;
-  overflow-y: auto;
+.tableRow {
+  display: grid;
+  grid-template-columns: 73px 71px 65px 50px 80px 1fr;
+  row-gap: 15px;
 }
 
-td {
+.tableCell {
+  display: flex;
+  align-items: center;
   font-weight: 400;
   font-size: 14px;
   color: var(--white);
-  padding: 10px 7px;
-  &:nth-child(1) {
-    width: 85px;
-    padding-left: 20px;
-  }
-  &:nth-child(2) {
-    width: 70px;
-  }
-  &:nth-child(3) {
-    width: 65px;
-  }
-  &:nth-child(4) {
-    width: 55px;
-  }
-  &:nth-child(5) {
-    width: 80px;
-  }
-  &:nth-child(6) {
-    padding-right: 20px;
-  }
 }
 
-tbody tr:first-child td {
-  padding-top: 20px;
-}
-
-tbody tr:last-child td {
-  padding-bottom: 20px;
-}
-
-.buttonsWrapper {
+.actionButtonsWrapper {
   display: inline-flex;
   column-gap: 6px;
 }
 
-.editBtn,
-.deleteBtn {
+.editButton,
+.deleteButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,14 +30,14 @@ tbody tr:last-child td {
   }
 }
 
-.editBtn {
+.editButton {
   background-color: var(--green-light);
   transition: background-color 250ms linear;
   &:hover {
     background-color: var(--green);
   }
 }
-.deleteBtn {
+.deleteButton {
   border: 1px solid transparent;
   background-color: var(--background);
   transition: border 250ms linear;
@@ -71,80 +46,41 @@ tbody tr:last-child td {
   }
 }
 
-.icon {
+.buttonIcon {
   width: 12px;
   height: 12px;
 }
 
 @media screen and (min-width: 768px) {
-  tbody {
-    max-height: 300px;
+  .tableRow {
+    grid-template-columns: 108px 120px 99px 77px 136px 107px;
   }
-  td {
+  .tableCell {
     font-size: 20px;
-    padding: 15px 10px;
-    &:nth-child(1) {
-      width: 125px;
-      padding-left: 32px;
-    }
-    &:nth-child(2) {
-      width: 120px;
-    }
-    &:nth-child(3) {
-      width: 110px;
-    }
-    &:nth-child(4) {
-      width: 100px;
-    }
-    &:nth-child(5) {
-      width: 120px;
-    }
-    &:nth-child(6) {
-      padding-right: 32px;
-    }
   }
-  .buttonsWrapper {
+  .actionButtonsWrapper {
     column-gap: 8px;
   }
-  .editBtn,
-  .deleteBtn {
+  .editButton,
+  .deleteButton {
     width: 44px;
     height: 44px;
   }
-  .icon {
+  .buttonIcon {
     width: 16px;
     height: 16px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  tbody {
-    max-height: 280px;
-  }
-  td {
+  .tableCell {
     padding: 10px;
-    &:nth-child(1) {
-      width: 197px;
-      padding-left: 40px;
-    }
-    &:nth-child(2) {
-      width: 194px;
-    }
-    &:nth-child(3) {
-      width: 197px;
-    }
-    &:nth-child(4) {
-      width: 136px;
-    }
-    &:nth-child(5) {
-      width: 188px;
-    }
-    &:nth-child(6) {
-      padding-right: 60px;
-    }
   }
-  .editBtn,
-  .deleteBtn {
+  .tableRow {
+    grid-template-columns: 160px 199px 201px 140px 190px 293px;
+  }
+  .editButton,
+  .deleteButton {
     font-weight: 400;
     font-size: 16px;
     letter-spacing: -0.02em;
@@ -155,11 +91,11 @@ tbody tr:last-child td {
       display: block;
     }
   }
-  .editBtn {
+  .editButton {
     min-width: 118px;
     color: var(--background);
   }
-  .deleteBtn {
+  .deleteButton {
     min-width: 133px;
     color: var(--white);
   }

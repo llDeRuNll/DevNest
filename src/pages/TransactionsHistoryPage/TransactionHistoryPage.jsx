@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import TransactionsSearchTools from "../../components/TransactionsSearchTools/TransactionsSearchTools";
-import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
 import s from "./TransactionsHistoryPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { transactionsGetByType } from "../../redux/transactions/operations";
 import { useParams } from "react-router-dom";
 import { selectIsLoading } from "../../redux/transactions/selectors";
-import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import Loader from "../../components/Loader/Loader";
+import TransactionsSummary from "../../components/TransactionsSummary/TransactionsSummary";
+import TransactionsList from "../../components/TransactionsList/TransactionsList";
 
 const TransactionHistoryPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [startDate, setStartDate] = useState(null);
-  const [userValue, setUserValue] = useState("");
+  const [hasUserPickedDate, setHasUserPickedDate] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [searchQuery, setSearchQuery] = useState("");
   const { transactionsType } = useParams();
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-
-  const transactions = useSelector(
-    (state) => state.transactions[transactionsType]
-  );
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -36,37 +33,29 @@ const TransactionHistoryPage = () => {
     loadDataByType();
   }, [dispatch, transactionsType]);
 
+  const transactions = useSelector(
+    (state) => state.transactions[transactionsType]
+  );
   return (
     <>
       {isLoading && <Loader />}
       <section className={s.section}>
         <div className="container">
-          <div className={s.summaryWrapper}>
-            <div className={s.textWrapper}>
-              <h2 className={s.title}>
-                {transactionsGetByType === "expenses"
-                  ? "All Expense"
-                  : "All Income"}
-              </h2>
-              <p className={s.description}>
-                {transactionsGetByType === "expenses"
-                  ? "View and manage every transaction seamlessly! Your entire financial landscape, all in one place."
-                  : "Track and celebrate every bit of earnings effortlessly! Gain insights into your total revenue in a snap."}
-              </p>
-            </div>
-            <TransactionsTotalAmount />
-          </div>
+          <TransactionsSummary transactionsType={transactionsType} />
           <div className={s.transactionWrapper}>
             <TransactionsSearchTools
-              setUserValue={setUserValue}
-              setStartDate={setStartDate}
-              startDate={startDate}
+              setSearchQuery={setSearchQuery}
+              setSelectedDate={setSelectedDate}
+              selectedDate={selectedDate}
+              setHasUserPickedDate={setHasUserPickedDate}
+              hasUserPickedDate={hasUserPickedDate}
             />
             <TransactionsList
               windowWidth={windowWidth}
-              userValue={userValue}
-              startDate={startDate}
+              searchQuery={searchQuery}
+              selectedDate={selectedDate}
               transactions={transactions}
+              hasUserPickedDate={hasUserPickedDate}
             />
           </div>
         </div>
