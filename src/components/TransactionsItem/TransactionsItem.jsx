@@ -18,7 +18,7 @@ const TransactionsItem = ({
 
   const handleDelete = async () => {
     try {
-      await dispatch(transactionDelete({ _id, type })).unwrap();
+      await dispatch(transactionDelete({ _id, type, sum })).unwrap();
       toast.success("Транзакцію видалено");
     } catch (err) {
       toast.error(err.message || "Помилка при видаленні");
