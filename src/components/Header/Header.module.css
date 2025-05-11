@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1rem; /* Відстань між бургер-кнопкою та іншими елементами */
+  gap: 1rem;
 }
 
 .logo {
@@ -42,5 +42,5 @@
   align-items: center;
   gap: 12px;
   padding: 0 1rem;
-  height: 44px; /* Вирівнює висоту з бургер-кнопкою (SVG у BurgerMenuBtn має 44px) */
+  height: 44px;
 }
