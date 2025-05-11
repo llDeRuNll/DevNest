@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import toast from "react-hot-toast";
 import styles from "./CategoriesModal.module.css";
 import {
@@ -14,23 +12,15 @@ import {
   categoryChangeInfo,
   categoryDelete,
 } from "../../redux/category/operations";
-
-const categorySchema = Yup.object().shape({
-  categoryName: Yup.string()
-    .trim()
-    .min(3, "Min 3 characters")
-    .max(25, "Max 25 characters")
-    .required("Category name is required"),
-});
+import CategoryList from "./CategoryList";
+import CategoryForm from "./CategoryForm";
 
 const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
   const dispatch = useDispatch();
-
   const rawCategories =
     useSelector(
       type === "expenses" ? selectExpensesCategories : selectIncomesCategories
     ) ?? [];
-
   const [editingCategory, setEditingCategory] = useState(null);
 
   useEffect(() => {
@@ -45,49 +35,48 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
-  const initialValues = {
-    categoryName: editingCategory ? editingCategory.categoryName : "",
-  };
-
-  const handleAddOrEdit = async (values, { resetForm }) => {
-    const name = values.categoryName.trim();
-    try {
-      if (editingCategory) {
-        await dispatch(
-          categoryChangeInfo({ _id: editingCategory._id, name })
-        ).unwrap();
-        toast.success("Category updated");
-      } else {
-        await dispatch(categoryPost({ categoryName: name, type })).unwrap();
-        toast.success("Category added");
+  const handleAddOrEdit = useCallback(
+    async (values, { resetForm }) => {
+      const name = values.categoryName.trim();
+      try {
+        if (editingCategory) {
+          await dispatch(
+            categoryChangeInfo({ _id: editingCategory._id, name })
+          ).unwrap();
+          toast.success("Category updated");
+        } else {
+          await dispatch(categoryPost({ categoryName: name, type })).unwrap();
+          toast.success("Category added");
+        }
+        resetForm();
+        setEditingCategory(null);
+      } catch (err) {
+        toast.error(err.message || "Something went wrong");
       }
-      resetForm();
-      setEditingCategory(null);
+    },
+    [dispatch, editingCategory, type]
+  );
 
-      dispatch(categoryGetAll());
-    } catch (err) {
-      toast.error(err.message || "Something went wrong");
-    }
-  };
+  const handleDelete = useCallback(
+    async (id) => {
+      try {
+        await dispatch(categoryDelete(id)).unwrap();
+        toast.success("Category deleted");
+      } catch {
+        toast.error("Failed to delete category");
+      }
+    },
+    [dispatch]
+  );
 
-  const handleDelete = async (id) => {
-    try {
-      await dispatch(categoryDelete(id)).unwrap();
-      toast.success("Category deleted");
-      dispatch(categoryGetAll());
-    } catch {
-      toast.error("Failed to delete category");
-    }
-  };
-
-  const handleEditClick = (cat) => {
-    setEditingCategory(cat);
-  };
-
-  const handleSelect = (cat) => {
-    onSelectCategory(cat);
-    onClose();
-  };
+  const handleEdit = useCallback((cat) => setEditingCategory(cat), []);
+  const handleSelect = useCallback(
+    (cat) => {
+      onSelectCategory(cat);
+      onClose();
+    },
+    [onSelectCategory, onClose]
+  );
 
   return (
     <div
@@ -105,68 +94,18 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
           {type === "expenses" ? "Expenses" : "Incomes"} Categories
         </h2>
 
-        <ul className={styles.categoriesList}>
-          {rawCategories.length === 0 ? (
-            <li className={styles.emptyMessage}>No categories yet.</li>
-          ) : (
-            rawCategories.map((cat) => (
-              <li key={cat._id} className={styles.categoryItem}>
-                <span className={styles.categoryName}>{cat.categoryName}</span>
-                <div className={styles.categoryActions}>
-                  <button
-                    onClick={() => handleSelect(cat)}
-                    className={styles.icon}
-                  >
-                    Select
-                  </button>
-                  <button
-                    onClick={() => handleEditClick(cat)}
-                    className={styles.icon}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(cat._id)}
-                    className={styles.icon}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </li>
-            ))
-          )}
-        </ul>
+        <CategoryList
+          categories={rawCategories}
+          onSelect={handleSelect}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
 
-        <div className={styles.newCategoryContainer}>
-          <h3 className={styles.newCategoryTitle}>
-            {editingCategory ? "Edit Category" : "New Category"}
-          </h3>
-
-          <Formik
-            initialValues={initialValues}
-            enableReinitialize
-            validationSchema={categorySchema}
-            onSubmit={handleAddOrEdit}
-          >
-            <Form className={styles.newCategoryForm}>
-              <Field
-                type="text"
-                name="categoryName"
-                placeholder="Enter category name"
-                className={styles.newCategoryInput}
-              />
-              <ErrorMessage
-                name="categoryName"
-                component="div"
-                className={styles.error}
-              />
-
-              <button type="submit" className={styles.submitButton}>
-                {editingCategory ? "Save" : "Add"}
-              </button>
-            </Form>
-          </Formik>
-        </div>
+        <CategoryForm
+          initialValue={editingCategory ? editingCategory.categoryName : ""}
+          isEditing={!!editingCategory}
+          onSubmit={handleAddOrEdit}
+        />
       </div>
     </div>
   );
