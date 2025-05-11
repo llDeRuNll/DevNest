@@ -73,15 +73,17 @@ const categorySlice = createSlice({
       .addMatcher(
         isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
         (state, action) => {
-          const { categories } = action.payload.user;
-          state.incomes = categories.incomes.map((cat) => ({
-            ...cat,
-            type: "incomes",
-          }));
-          state.expenses = categories.expenses.map((cat) => ({
-            ...cat,
-            type: "expenses",
-          }));
+          const { categories } = action.payload;
+          if (categories.incomes)
+            state.incomes = categories.incomes.map((cat) => ({
+              ...cat,
+              type: "incomes",
+            }));
+          if (categories.expenses)
+            state.expenses = categories.expenses.map((cat) => ({
+              ...cat,
+              type: "expenses",
+            }));
         }
       );
   },
