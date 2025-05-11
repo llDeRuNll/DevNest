@@ -74,4 +74,4 @@ const DecorationTab = ({ parentRef }) => {
   );
 };
 
-export default DecorationTab;
+export default DecorationTab;   
