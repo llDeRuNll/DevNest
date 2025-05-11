@@ -1,42 +1,59 @@
-.userBarBtnContainer {
-  position: relative; /* Додаємо для позиціонування UserPanel */
-}
-
-.userBarBtn {
+.userContainer {
+  position: relative;
+  display: inline-block;
+  min-width: 200px;
   background-color: #171719;
-  display: flex;
-  align-items: center;
   border-radius: 30px;
-  padding: 6px 16px;
-  width: 217px;
-  height: 56px;
-  gap: 8px;
-  cursor: pointer; /* Додаємо, оскільки елемент поводиться як кнопка */
 }
 
-.avatar {
-  border-radius: 40px;
-  width: 44px;
-  height: 44px;
-  object-fit: cover; /* Додаємо, щоб зображення коректно масштабувалося */
-}
-
-.avatarPlaceholder {
-  border-radius: 40px;
-  width: 44px;
-  height: 44px;
+.userBar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #e0e0e0; /* Дефолтний фон для placeholder */
-  font-size: 18px;
-  font-weight: 600;
-  color: #171719;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
 }
 
-.userBarBtnName {
-  font-weight: 400;
-  font-size: 16px;
-  letter-spacing: -0.02em;
-  color: rgba(250, 250, 250, 0.4);
+.userImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.userName {
+  margin: 0;
+}
+
+.vector {
+  font-size: 14px;
+}
+
+.userImg {
+  width: 44px;
+  height: 44px;
+  border-radius: 40px;
+  margin-left: 16px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.userConteiner {
+  display: flex;
+
+  align-items: center;
+  gap: 10px;
+  background-color: #171719;
+  border-radius: 30px;
+  color: white;
+  justify-content: space-between;
+  width: 220px;
+  height: 56px;
+}
+.userName {
+  color: #fafafa66;
+}
+.vector {
+  margin-right: 16px;
+  fill: #0ef387;
+  width: 20px;
+  height: 20px;
 }
