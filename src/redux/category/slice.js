@@ -6,10 +6,10 @@ import {
   userRefresh,
 } from "../auth/operations";
 import {
+  categoryPost,
+  categoryGetAll,
   categoryChangeInfo,
   categoryDelete,
-  categoryGetAll,
-  categoryPost,
 } from "./operations";
 
 const initialState = {
@@ -17,55 +17,78 @@ const initialState = {
   expenses: [],
 };
 
-const slice = createSlice({
-  name: "categorySlice",
+const categorySlice = createSlice({
+  name: "category",
   initialState,
-
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(userLogout.fulfilled, () => {
-        return initialState;
-      })
-      .addCase(userRefresh.rejected, () => {
-        return initialState;
-      })
+
+      .addCase(userLogout.fulfilled, () => initialState)
+      .addCase(userRefresh.rejected, () => initialState)
+
       .addCase(categoryPost.fulfilled, (state, action) => {
-        const newPost = action.payload;
-        if (newPost.type == "incomes") state.incomes.push(newPost);
-        else state.expenses.push(newPost);
+        const newCat = action.payload;
+        if (newCat.type === "incomes") {
+          state.incomes.push(newCat);
+        } else if (newCat.type === "expenses") {
+          state.expenses.push(newCat);
+        }
       })
+
       .addCase(categoryGetAll.fulfilled, (state, action) => {
-        state.incomes = action.payload.incomes;
-        state.expenses = action.payload.expenses;
+        const { incomes = [], expenses = [] } = action.payload;
+        state.incomes = incomes.map((cat) => ({ ...cat, type: "incomes" }));
+        state.expenses = expenses.map((cat) => ({ ...cat, type: "expenses" }));
       })
+
       .addCase(categoryChangeInfo.fulfilled, (state, action) => {
-        const changedCategory = action.payload;
-        let indexOfChangedCategory = state.expenses.findIndex(
-          (item) => item._id == changedCategory._id
-        );
-        if (indexOfChangedCategory === undefined) {
-          indexOfChangedCategory = state.incomes.findIndex(
-            (item) => item._id == changedCategory._id
-          );
-          state.incomes[indexOfChangedCategory] = changedCategory;
-        } else state.expenses[indexOfChangedCategory] = changedCategory;
+        const updated = action.payload;
+        const list =
+          updated.type === "incomes" ? state.incomes : state.expenses;
+        const idx = list.findIndex((c) => c._id === updated._id);
+        if (idx !== -1) list[idx] = updated;
       })
+
       .addCase(categoryDelete.fulfilled, (state, action) => {
-        state.incomes = state.incomes.filter(
-          (item) => item._id == action.payload
-        );
-        state.expenses = state.expenses.filter(
-          (item) => item._id == action.payload
-        );
+        const payload = action.payload;
+        let id;
+        let type;
+        if (typeof payload === "string") {
+          id = payload;
+        } else {
+          id = payload.id;
+          type = payload.type;
+        }
+        if (type === "incomes") {
+          state.incomes = state.incomes.filter((c) => c._id !== id);
+        } else if (type === "expenses") {
+          state.expenses = state.expenses.filter((c) => c._id !== id);
+        } else {
+          state.incomes = state.incomes.filter((c) => c._id !== id);
+          state.expenses = state.expenses.filter((c) => c._id !== id);
+        }
       })
+
       .addMatcher(
         isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
         (state, action) => {
-          state.incomes = action.payload.user.categories.incomes;
-          state.expenses = action.payload.user.categories.expenses;
+          const { categories } = action.payload;
+          if (categories.incomes)
+            state.incomes = categories.incomes.map((cat) => ({
+              ...cat,
+              type: "incomes",
+            }));
+          if (categories.expenses)
+            state.expenses = categories.expenses.map((cat) => ({
+              ...cat,
+              type: "expenses",
+            }));
         }
       );
   },
 });
 
-export const categoryReduser = slice.reducer;
+const categoryReduser = categorySlice.reducer;
+export { categoryReduser };
+export default categorySlice.reducer;

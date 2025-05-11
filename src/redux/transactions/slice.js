@@ -26,8 +26,8 @@ const initialState = {
   expenses: [],
   incomes: [],
   transactionsTotal: {
-    incomes: null,
-    expenses: null,
+    incomes: 0,
+    expenses: 0,
   },
   error: null,
   isLoading: false,
@@ -82,7 +82,9 @@ const slice = createSlice({
         state.transactionsTotal[action.payload.type] += action.payload.sum;
       })
       .addCase(transactionsGetByType.fulfilled, (state, action) => {
-        state[action.type] = action.payload.items;
+        state[action.payload.type] = action.payload.items;
+        state.transactionsTotal[action.payload.type] =
+          action.payload.items.reduce((acc, item) => acc + item.sum, 0);
       })
       .addCase(transactionDelete.fulfilled, (state, action) => {
         state[action.payload.type] = state[action.payload.type].filter(
@@ -101,17 +103,24 @@ const slice = createSlice({
         state.transactionsTotal[changedTransaction.type] +=
           changedTransaction.sum;
       })
-      .addMatcher(
-        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
-        (state, action) => {
-          if (action.payload.transactionsTotal) {
-            state.transactionsTotal.incomes =
-              action.payload.transactionsTotal.incomes;
-            state.transactionsTotal.expenses =
-              action.payload.transactionsTotal.expences;
-          }
-        }
-      )
+      // .addMatcher(
+      //   isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
+      //   (state, action) => {
+      //     if (action.payload.transactionsTotal) {
+      //       console.log(action.payload.transactionsTotal);
+      //       if (action.payload.transactionsTotal.incomes) {
+      //         console.log(action.payload.transactionsTotal.incomes);
+      //         state.transactionsTotal.incomes =
+      //           action.payload.transactionsTotal.incomes;
+      //       }
+      //       if (action.payload.transactionsTotal.expenses) {
+      //         console.log(action.payload.transactionsTotal.expenses);
+      //         state.transactionsTotal.expenses =
+      //           action.payload.transactionsTotal.expenses;
+      //       }
+      //     }
+      //   }
+      // )
       .addMatcher(
         isAnyOf(...allOperationsCertainResalt("pending")),
         (state) => {

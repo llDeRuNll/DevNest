@@ -1,0 +1,47 @@
+.wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  overflow: visible; 
+  pointer-events: none; 
+
+}
+
+.cardWrapper {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  transform: none;
+  transition: transform 0.1s linear;
+}
+
+.static {
+  top: 420px;
+  transform: none !important;
+  width: 248px;
+  height: 81px;
+  left: -10px;
+  position: absolute
+}
+
+@media (max-width: 767px) {
+  .static {
+    top: 300px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .static {
+    top: 420px;
+  }
+}
+@media (min-width: 1440px) {
+  .wrapper {
+    overflow: hidden;
+  }
+}

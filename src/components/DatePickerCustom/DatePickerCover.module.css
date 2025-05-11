@@ -1,0 +1,33 @@
+.datePicker {
+	width: 100%;
+	height: 50px;
+	padding: 0 55px 0 30px;
+	border: 1px solid var(--grey);
+	border-radius: 30px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--white);
+	background-color: transparent;
+	transition: border 250ms linear;
+	&::placeholder {
+		font-weight: 400;
+		font-size: 16px;
+		letter-spacing: -0.02em;
+		color: var(--grey);
+	}
+	&:hover {
+		border: 1px solid var(--green-light);
+	}
+	&:focus {
+		outline: transparent;
+		border: 1px solid var(--green-light);
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.datePicker {
+		max-width: 183px;
+		padding: 0 45px 0 30px;
+	}
+}

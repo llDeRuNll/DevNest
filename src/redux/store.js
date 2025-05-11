@@ -18,7 +18,7 @@ const persistConfig = {
   key: "root-auth",
   storage,
   version: 1,
-  whitelist: ["refreshToken", "sid"],
+  whitelist: ["refreshToken", "sid", "transactions", "category"],
 };
 
 export const store = configureStore({
