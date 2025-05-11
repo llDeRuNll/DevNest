@@ -6,10 +6,10 @@ import {
   userRefresh,
 } from "../auth/operations";
 import {
-  categoryPost,
+  // categoryPost,
   categoryGetAll,
-  categoryChangeInfo,
-  categoryDelete,
+  // categoryChangeInfo,
+  // categoryDelete,
 } from "./operations";
 
 const initialState = {
@@ -26,36 +26,48 @@ const categorySlice = createSlice({
       .addCase(userLogout.fulfilled, () => initialState)
       .addCase(userRefresh.rejected, () => initialState)
 
-      .addCase(categoryPost.fulfilled, (state, { payload }) => {
-        if (payload.type === "incomes") {
-          state.incomes.push(payload);
-        } else {
-          state.expenses.push(payload);
-        }
-      })
+      // .addCase(categoryPost.fulfilled, (state, { payload }) => {
+      //   if (payload.type === "incomes") {
+      //     state.incomes.push({...payload, type: "incomes"});
+      //   } else {
+      //     state.expenses.push({...payload, type: "expenses"});
+      //   }
+      // })
 
       .addCase(categoryGetAll.fulfilled, (state, { payload }) => {
         state.incomes = payload.incomes;
         state.expenses = payload.expenses;
       })
 
-      .addCase(categoryChangeInfo.fulfilled, (state, { payload }) => {
-        const changed = payload;
-        const incIdx = state.incomes.findIndex((c) => c._id === changed._id);
-        if (incIdx !== -1) {
-          state.incomes[incIdx] = changed;
-        } else {
-          const expIdx = state.expenses.findIndex((c) => c._id === changed._id);
-          if (expIdx !== -1) {
-            state.expenses[expIdx] = changed;
-          }
-        }
-      })
+      // .addCase(categoryChangeInfo.fulfilled, (state, { payload }) => {
+      //   try {
+      //     const changed = payload;
+      //     if (payload.incomes) {
+      //       const incIdx = state.incomes.findIndex(
+      //         (c) => c._id === changed._id
+      //       );
+      //       if (incIdx !== -1) {
+      //         state.incomes[incIdx] = changed;
+      //       }
+      //     } else {
+      //       const expIdx = state.expenses.findIndex(
+      //         (c) => c._id === changed._id
+      //       );
+      //       if (expIdx !== -1) {
+      //         state.expenses[expIdx] = changed;
+      //       }
+      //     }
+      //   } catch (e) {
+      //     console.log(e);
+      //   }
+      // })
 
-      .addCase(categoryDelete.fulfilled, (state, { payload }) => {
-        state.incomes = state.incomes.filter((c) => c._id !== payload);
-        state.expenses = state.expenses.filter((c) => c._id !== payload);
-      })
+      // .addCase(categoryDelete.fulfilled, (state, { payload }) => {
+      //   if (payload.incomes)
+      //     state.incomes = state.incomes.filter((c) => c._id !== payload);
+      //   if (payload.expenses)
+      //     state.expenses = state.expenses.filter((c) => c._id !== payload);
+      // })
 
       .addMatcher(
         isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
