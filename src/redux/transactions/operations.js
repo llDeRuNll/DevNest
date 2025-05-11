@@ -14,7 +14,7 @@ export const transactionPost = createAsyncThunk(
 );
 
 export const transactionsGetByType = createAsyncThunk(
-  "transactions/getByType",
+  "transactions/getTransactions",
   async (params, thunkAPI) => {
     try {
       const response = await trackerApi.get(

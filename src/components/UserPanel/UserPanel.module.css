@@ -1,0 +1,29 @@
+.userPanel {
+  position: absolute;
+  margin-top: 8px;
+  background: #171719;
+  border: 1px solid rgba(250, 250, 250, 0.1);
+  border-radius: 15px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 217px;
+  height: 86px;
+}
+
+.userPanelBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: rgba(250, 250, 250, 0.4);
+}
+
+.userPanelBtn:hover {
+  background: #2a2a2c;
+}
