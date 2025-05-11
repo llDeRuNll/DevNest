@@ -105,10 +105,17 @@ const slice = createSlice({
         isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
         (state, action) => {
           if (action.payload.transactionsTotal) {
-            state.transactionsTotal.incomes =
-              action.payload.transactionsTotal.incomes;
-            state.transactionsTotal.expenses =
-              action.payload.transactionsTotal.expences;
+            console.log(action.payload.transactionsTotal);
+            if (action.payload.transactionsTotal.incomes) {
+              console.log(action.payload.transactionsTotal.incomes);
+              state.transactionsTotal.incomes =
+                action.payload.transactionsTotal.incomes;
+            }
+            if (action.payload.transactionsTotal.expenses) {
+              console.log(action.payload.transactionsTotal.expenses);
+              state.transactionsTotal.expenses =
+                action.payload.transactionsTotal.expenses;
+            }
           }
         }
       )
