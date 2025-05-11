@@ -1,18 +1,16 @@
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import toast from "react-hot-toast";
 import DatePicker from "react-datepicker";
+import { toast } from "react-toastify";
 import "react-datepicker/dist/react-datepicker.css";
-import { FaRegClock } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+
 import s from "./TransactionForm.module.css";
 import {
   transactionChangeInfo,
   transactionPost,
 } from "../../redux/transactions/operations";
-
-import { useSelector } from "react-redux";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
 
 const validationSchema = Yup.object({
@@ -27,18 +25,23 @@ const validationSchema = Yup.object({
     .moreThan(0, "Sum must be greater than zero")
     .max(1000000, "Sum must be less than or equal to 1,000,000"),
   comment: Yup.string()
-    .required("Comment is required")
+    .trim()
     .max(300, "Max 300 characters")
-    .trim(),
+    .required("Comment is required"),
 });
 
-const TransactionForm = ({ transaction, onClose, isModal = false }) => {
+const TransactionForm = ({
+  transaction,
+  onClose = () => {},
+  isModal = false,
+  defaultType = "expenses",
+}) => {
   const dispatch = useDispatch();
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
-  const incomeCategories = useSelector((state) => state.category.incomes);
-  const expenseCategories = useSelector((state) => state.category.expenses);
+  const incomeCategories = useSelector((s) => s.category.incomes);
+  const expenseCategories = useSelector((s) => s.category.expenses);
 
   const initialValues = transaction
     ? {
@@ -50,7 +53,7 @@ const TransactionForm = ({ transaction, onClose, isModal = false }) => {
         comment: transaction.comment,
       }
     : {
-        type: "expenses",
+        type: defaultType,
         date: null,
         time: null,
         category: "",
@@ -59,203 +62,168 @@ const TransactionForm = ({ transaction, onClose, isModal = false }) => {
       };
 
   useEffect(() => {
-    if (transaction && transaction.category) {
-      const categories =
+    if (transaction?.category) {
+      const list =
         transaction.type === "incomes" ? incomeCategories : expenseCategories;
-
-      const matched = categories.find(
-        (cat) => cat._id === transaction.category
-      );
-
-      if (matched) {
-        setSelectedCategoryName(matched.categoryName);
-      }
+      const found = list.find((c) => c._id === transaction.category);
+      if (found) setSelectedCategoryName(found.categoryName);
     }
   }, [transaction, incomeCategories, expenseCategories]);
 
   const handleSubmit = async (values, { resetForm }) => {
-    const transactionData = {
+    const data = {
       type: values.type,
-      date: values.date.toISOString().split("T")[0],
+      date: values.date.toISOString().slice(0, 10),
       time: values.time.toTimeString().slice(0, 5),
       category: values.category,
       sum: parseFloat(values.sum),
       comment: values.comment.trim(),
     };
-
-    if (transaction) {
-      await toast.promise(
-        dispatch(
+    try {
+      if (transaction) {
+        await dispatch(
           transactionChangeInfo({
-            type: transaction.type,
-            id: transaction._id,
-            data: transactionData,
+            _id: transaction._id,
+            type: values.type,
+            ...data,
           })
-        ).unwrap(),
-        {
-          loading: "Updating transaction...",
-          success: "Transaction successfully updated!",
-          error: (error) => error?.message || "Error updating transaction",
-        }
-      );
-    } else {
-      await toast.promise(dispatch(transactionPost(transactionData)).unwrap(), {
-        loading: "Adding transaction...",
-        success: "Transaction successfully added!",
-        error: (error) => error?.message || "Error adding transaction",
-      });
+        ).unwrap();
+        toast.success("Transaction successfully updated!");
+      } else {
+        await dispatch(transactionPost(data)).unwrap();
+        toast.success("Transaction successfully added!");
+      }
+      resetForm();
+      setSelectedCategoryName("");
+      onClose();
+    } catch (err) {
+      toast.error(err.message || "Something went wrong, please try again");
     }
-
-    resetForm();
-    setSelectedCategoryName("");
-    onClose();
   };
 
-  return (
+  const formContent = (
     <Formik
       initialValues={initialValues}
+      enableReinitialize
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       {({ values, setFieldValue, isSubmitting }) => (
-        <>
-          <Form className={isModal ? s["edit-form"] : s["add-form"]}>
-            <div className={s["t-radio-group"]}>
-              <label className={s["t-radio-label"]}>
+        <Form className={isModal ? s.editForm : s.addForm}>
+          <div className={s.tRadioGroup}>
+            {["expenses", "incomes"].map((t) => (
+              <label key={t} className={s.tRadioLabel}>
                 <Field
                   type="radio"
                   name="type"
-                  value="expenses"
-                  checked={values.type === "expenses"}
-                  disabled={!!transaction}
-                  className={s["t-radio-btn"]}
+                  value={t}
+                  className={s.tRadioBtn}
                 />
-                Expense
+                {t === "expenses" ? "Expense" : "Income"}
               </label>
-              <label className={s["t-radio-label"]}>
-                <Field
-                  type="radio"
-                  name="type"
-                  value="incomes"
-                  checked={values.type === "incomes"}
-                  disabled={!!transaction}
-                  className={s["t-radio-btn"]}
-                />
-                Income
-              </label>
-              {!transaction && (
-                <ErrorMessage name="type" component="div" className={s.error} />
-              )}
-            </div>
-            <div className={s["date-section"]}>
-              <div>
-                <label className={s["t-label"]}>Date</label>
-                <DatePicker
-                  selected={values.date}
-                  onChange={(date) => setFieldValue("date", date)}
-                  dateFormat="yyyy-MM-dd"
-                  placeholderText="0000-00-00"
-                />
-                <ErrorMessage
-                  name="date"
-                  component="div"
-                  className={s["t-error"]}
-                />
-              </div>
+            ))}
+            <ErrorMessage name="type" component="div" className={s.tError} />
+          </div>
 
-              <div>
-                <label className={s["t-label"]}>Time</label>
-                <DatePicker
-                  selected={values.time}
-                  onChange={(time) => setFieldValue("time", time)}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={15}
-                  timeCaption="Time"
-                  dateFormat="HH:mm"
-                  placeholderText="00:00"
-                />
-                <ErrorMessage
-                  name="time"
-                  component="div"
-                  className={s["t-error"]}
-                />
-              </div>
+          <div className={s.dateSection}>
+            <div>
+              <label className={s.tLabel}>Date</label>
+              <DatePicker
+                selected={values.date}
+                onChange={(v) => setFieldValue("date", v)}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="YYYY-MM-DD"
+                className={s.tInput}
+              />
+              <ErrorMessage name="date" component="div" className={s.tError} />
             </div>
+            <div>
+              <label className={s.tLabel}>Time</label>
+              <DatePicker
+                selected={values.time}
+                onChange={(v) => setFieldValue("time", v)}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="HH:mm"
+                placeholderText="HH:mm"
+                className={s.tInput}
+              />
+              <ErrorMessage name="time" component="div" className={s.tError} />
+            </div>
+          </div>
 
-            <div className={s["t-input-group"]}>
-              <label className={s["t-label"]}>Category</label>
+          <div className={s.tInputGroup}>
+            <label className={s.tLabel}>Category</label>
+            <input
+              name="category"
+              readOnly
+              placeholder="Select category"
+              value={selectedCategoryName}
+              className={s.tInput}
+              onClick={() => setIsCategoryModalOpen(true)}
+            />
+            <ErrorMessage
+              name="category"
+              component="div"
+              className={s.tError}
+            />
+          </div>
+
+          <div className={s.tInputGroup}>
+            <label className={s.tLabel}>Sum</label>
+            <div className={s.tInputWrapper}>
               <Field
-                name="category"
-                readOnly
-                placeholder="Select category"
-                value={selectedCategoryName}
-                className={s["t-input"]}
-                onClick={() => setIsCategoryModalOpen(true)}
-              />
-              <ErrorMessage
-                name="category"
-                component="div"
-                className={s["t-error"]}
-              />
-            </div>
-
-            <div className={s["t-input-group"]}>
-              <label className={s["t-label"]}>Sum</label>
-              <div className={s["t-input-wrapper"]}>
-                <Field
-                  type="number"
-                  name="sum"
-                  placeholder="Enter the sum"
-                  className={s["t-input"]}
-                />
-                <span className={s["t-currency"]}>UAH</span>
-              </div>
-              <ErrorMessage
+                type="number"
                 name="sum"
-                component="div"
-                className={s["t-error"]}
+                placeholder="Enter sum"
+                className={s.tInput}
               />
+              <span className={s.tCurrency}>UAH</span>
             </div>
+            <ErrorMessage name="sum" component="div" className={s.tError} />
+          </div>
 
-            <div className={s["t-input-group"]}>
-              <label className={s["t-label"]}>Comment</label>
-              <Field
-                as="textarea"
-                name="comment"
-                placeholder="Enter the text"
-                className={s["t-textarea"]}
-              />
-              <ErrorMessage
-                name="comment"
-                component="div"
-                className={s["t-error"]}
-              />
-            </div>
+          <div className={s.tInputGroup}>
+            <label className={s.tLabel}>Comment</label>
+            <Field
+              as="textarea"
+              name="comment"
+              placeholder="Enter comment"
+              className={s.tTextarea}
+            />
+            <ErrorMessage name="comment" component="div" className={s.tError} />
+          </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={s["t-send-btn"]}
-            >
-              {transaction ? "Save" : "Add"}
-            </button>
-          </Form>
+          <button type="submit" disabled={isSubmitting} className={s.tSendBtn}>
+            {transaction ? "Edit" : "Add"}
+          </button>
 
           {isCategoryModalOpen && (
             <CategoriesModal
               type={values.type}
               onClose={() => setIsCategoryModalOpen(false)}
-              onSelectCategory={(category) => {
-                setFieldValue("category", category._id);
-                setSelectedCategoryName(category.categoryName);
+              onSelectCategory={(cat) => {
+                setFieldValue("category", cat._id);
+                setSelectedCategoryName(cat.categoryName);
                 setIsCategoryModalOpen(false);
               }}
             />
           )}
-        </>
+        </Form>
       )}
     </Formik>
+  );
+
+  if (!isModal) return formContent;
+
+  return (
+    <div className={s.backdrop} onClick={onClose}>
+      <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
+        {formContent}
+      </div>
+    </div>
   );
 };
 

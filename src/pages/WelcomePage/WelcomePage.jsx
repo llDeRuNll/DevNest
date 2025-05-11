@@ -4,6 +4,7 @@ import AuthNav from "../../components/AuthNav/AuthNav";
 import AllUsersTab from "../../components/AllUsersTab/AllUsersTab";
 import BgImageWrapper from "../../components/BgImageWrapper/BgImageWrapper";
 
+
 const WelcomePage = () => {
   return (
     <div className="container">

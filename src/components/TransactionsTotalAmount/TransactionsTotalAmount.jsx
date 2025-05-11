@@ -1,11 +1,18 @@
 import s from "./TransactionsTotalAmount.module.css";
 import TotalAmountElement from "../TotalAmountElement/TotalAmountElement";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectTransactionsTotal } from "../../redux/transactions/selectors";
+import { useEffect } from "react";
+import { transactionsGetByType } from "../../redux/transactions/operations";
 
 const TransactionsTotalAmount = () => {
   const { incomes, expenses } = useSelector(selectTransactionsTotal);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(transactionsGetByType({ type: "expenses" }));
+    dispatch(transactionsGetByType({ type: "incomes" }));
+  }, [dispatch]);
   const currency = "$";
 
   return (
