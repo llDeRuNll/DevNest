@@ -1,6 +1,6 @@
-@import "modern-normalize/modern-normalize.css";
-@import "./container.css";
-@import "./variable.css";
+@import 'modern-normalize/modern-normalize.css';
+@import './container.css';
+@import './variable.css';
 
 h1,
 h2,
@@ -9,43 +9,43 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
+	margin: 0;
 }
 ul,
 ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 img {
-  max-width: 100%;
-  display: block;
+	max-width: 100%;
+	display: block;
 }
 button {
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  background-color: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	background-color: transparent;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 body {
-  background: var(--background);
-  color: var(--white);
+	background: var(--background);
+	color: var(--white);
 }
 ::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+	height: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 12px;
-  background-color: rgba(250, 250, 250, 0.2);
+	border-radius: 12px;
+	background-color: rgba(250, 250, 250, 0.2);
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: 12px;
-  background-color: rgba(250, 250, 250, 0.2);
+	border-radius: 12px;
+	background-color: rgba(250, 250, 250, 0.2);
 }

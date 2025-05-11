@@ -12,8 +12,7 @@
 	position: relative;
 }
 
-.searchInput,
-.datePicker {
+.searchInput {
 	width: 100%;
 	height: 50px;
 	padding: 0 55px 0 30px;
@@ -38,11 +37,6 @@
 		outline: transparent;
 		border: 1px solid var(--green-light);
 	}
-}
-
-.datePicker {
-	border: 1px solid var(--grey);
-	background-color: transparent;
 }
 
 .fieldIcon,

@@ -1,7 +1,7 @@
 import TransactionsTotalAmount from '../TransactionsTotalAmount/TransactionsTotalAmount'
 import s from './TransactionsSummary.module.css'
 
-const TransactionsSummary = transactionsType => {
+const TransactionsSummary = ({ transactionsType }) => {
 	return (
 		<div className={s.summaryWrapper}>
 			<div className={s.summaryTextWrapper}>

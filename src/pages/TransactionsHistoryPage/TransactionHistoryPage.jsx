@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react'
 import TransactionsSearchTools from '../../components/TransactionsSearchTools/TransactionsSearchTools'
 import s from './TransactionsHistoryPage.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { transactionsGetByType } from '../../redux/transactions/operations'
+import {
+	transactionPost,
+	transactionsGetByType,
+} from '../../redux/transactions/operations'
 import { useParams } from 'react-router-dom'
 import { selectIsLoading } from '../../redux/transactions/selectors'
 import Loader from '../../components/Loader/Loader'
 import TransactionsSummary from '../../components/TransactionsSummary/TransactionsSummary'
 import TransactionsList from '../../components/TransactionsList/TransactionsList'
+import { categoryPost } from '../../redux/category/operations'
 
 const TransactionHistoryPage = () => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -27,6 +31,22 @@ const TransactionHistoryPage = () => {
 	useEffect(() => {
 		const loadDataByType = async () => {
 			await dispatch(transactionsGetByType({ type: transactionsType })).unwrap()
+			// await dispatch(
+			// 	categoryPost({
+			// 		type: 'expenses',
+			// 		categoryName: 'Salary',
+			// 	})
+			// ).unwrap()
+			// await dispatch(
+			// 	transactionPost({
+			// 		type: 'expenses',
+			// 		date: '2022-12-28',
+			// 		time: '19:45',
+			// 		category: '681f8e0af1df95584aacfa20',
+			// 		sum: 700,
+			// 		comment: 'Grumobile salary',
+			// 	})
+			// ).unwrap()
 		}
 		loadDataByType()
 	}, [dispatch, transactionsType])
