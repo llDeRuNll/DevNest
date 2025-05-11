@@ -35,6 +35,9 @@
   padding-bottom: 14px;
   width: 100%;
 }
+.heading br {
+  display: none;
+}
 .spanHeading {
   text-decoration: underline;
   text-decoration-skip-ink: none;
@@ -73,6 +76,13 @@
   .main {
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .heading br {
+    display: inline;
+  }
+  .noBreak {
+    white-space: normal; /* ❗️важливо: дозволити перенос всередині */
   }
 
   .description {

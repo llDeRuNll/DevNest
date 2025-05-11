@@ -13,11 +13,11 @@ const WelcomePage = () => {
           <div className={s.listInfo}>
             <p className={s.subheading}>EXPENSE LOG</p>
             <h2 className={s.heading}>
-              Manage {""}
+              Manage{" "}
               <span className={s.noBreak}>
-                Your <span className={s.spanHeading}>Finances</span>
-              </span>
-              <br />
+                Your
+                <br /> <span className={s.spanHeading}>Finances</span>
+              </span>{" "}
               Masterfully!
             </h2>
             <p className={s.description}>

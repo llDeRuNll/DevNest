@@ -1,11 +1,14 @@
-import React from "react";
+
+import React, { useRef } from "react";
 import DecorationTab from "../DecorationTab/DecorationTab";
 import s from "./BgImageWrapper.module.css";
 
-
 const BgImageWrapper = () => {
+  const backgroundRef = useRef(null);
+
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} ref={backgroundRef}>
+
       <div className={s.backgroundImage}>
         <picture>
           <source
@@ -23,8 +26,9 @@ const BgImageWrapper = () => {
           />
         </picture>
 
-        <DecorationTab />
-        
+
+        <DecorationTab parentRef={backgroundRef} />
+
       </div>
     </div>
   );
