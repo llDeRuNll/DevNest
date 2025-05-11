@@ -4,11 +4,7 @@ export const searchSelection = (
 	startDate,
 	hasUserPickedDate
 ) => {
-	const dataConversion = startDate
-		? `${startDate.getFullYear()}-${
-				startDate.getMonth() + 1
-		  }-${startDate.getDate()}`
-		: null
+	const dataConversion = startDate.toLocaleDateString('en-CA')
 
 	if (hasUserPickedDate) {
 		return transactions.filter(
