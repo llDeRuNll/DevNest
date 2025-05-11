@@ -103,24 +103,24 @@ const slice = createSlice({
         state.transactionsTotal[changedTransaction.type] +=
           changedTransaction.sum;
       })
-      .addMatcher(
-        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
-        (state, action) => {
-          if (action.payload.transactionsTotal) {
-            console.log(action.payload.transactionsTotal);
-            if (action.payload.transactionsTotal.incomes) {
-              console.log(action.payload.transactionsTotal.incomes);
-              state.transactionsTotal.incomes =
-                action.payload.transactionsTotal.incomes;
-            }
-            if (action.payload.transactionsTotal.expenses) {
-              console.log(action.payload.transactionsTotal.expenses);
-              state.transactionsTotal.expenses =
-                action.payload.transactionsTotal.expenses;
-            }
-          }
-        }
-      )
+      // .addMatcher(
+      //   isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
+      //   (state, action) => {
+      //     if (action.payload.transactionsTotal) {
+      //       console.log(action.payload.transactionsTotal);
+      //       if (action.payload.transactionsTotal.incomes) {
+      //         console.log(action.payload.transactionsTotal.incomes);
+      //         state.transactionsTotal.incomes =
+      //           action.payload.transactionsTotal.incomes;
+      //       }
+      //       if (action.payload.transactionsTotal.expenses) {
+      //         console.log(action.payload.transactionsTotal.expenses);
+      //         state.transactionsTotal.expenses =
+      //           action.payload.transactionsTotal.expenses;
+      //       }
+      //     }
+      //   }
+      // )
       .addMatcher(
         isAnyOf(...allOperationsCertainResalt("pending")),
         (state) => {
