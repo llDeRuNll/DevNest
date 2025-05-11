@@ -1,8 +1,6 @@
-// components/CategoriesModal/CategoryItem.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./CategoryItem.module.css";
-
+import styles from "../CategoriesModal/CategoriesModal.module.css";
 const CategoryItem = React.memo(({ cat, onSelect, onEdit, onDelete }) => (
   <li className={styles.categoryItem}>
     <span className={styles.categoryName}>{cat.categoryName}</span>

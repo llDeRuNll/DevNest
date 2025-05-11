@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import styles from "./CategoriesModal.module.css";
+import styles from "../CategoriesModal/CategoriesModal.module.css";
 
 const CategorySchema = Yup.object().shape({
   categoryName: Yup.string()

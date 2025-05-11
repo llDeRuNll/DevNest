@@ -1,8 +1,8 @@
-// components/CategoriesModal/CategoryList.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import CategoryItem from "./CategoryItem";
-import styles from "./CategoriesModal.module.css";
+
+import styles from "../CategoriesModal/CategoriesModal.module.css";
+import CategoryItem from "../CategoryItem/CategoryItem";
 
 const CategoryList = ({ categories, onSelect, onEdit, onDelete }) => (
   <ul className={styles.categoriesList}>

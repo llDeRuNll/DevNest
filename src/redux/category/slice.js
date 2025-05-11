@@ -6,10 +6,10 @@ import {
   userRefresh,
 } from "../auth/operations";
 import {
-  // categoryPost,
+  categoryPost,
   categoryGetAll,
-  // categoryChangeInfo,
-  // categoryDelete,
+  categoryChangeInfo,
+  categoryDelete,
 } from "./operations";
 
 const initialState = {
@@ -20,64 +20,73 @@ const initialState = {
 const categorySlice = createSlice({
   name: "category",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
 
       .addCase(userLogout.fulfilled, () => initialState)
       .addCase(userRefresh.rejected, () => initialState)
 
-      // .addCase(categoryPost.fulfilled, (state, { payload }) => {
-      //   if (payload.type === "incomes") {
-      //     state.incomes.push({...payload, type: "incomes"});
-      //   } else {
-      //     state.expenses.push({...payload, type: "expenses"});
-      //   }
-      // })
-
-      .addCase(categoryGetAll.fulfilled, (state, { payload }) => {
-        state.incomes = payload.incomes;
-        state.expenses = payload.expenses;
+      .addCase(categoryPost.fulfilled, (state, action) => {
+        const newCat = action.payload;
+        if (newCat.type === "incomes") {
+          state.incomes.push(newCat);
+        } else if (newCat.type === "expenses") {
+          state.expenses.push(newCat);
+        }
       })
 
-      // .addCase(categoryChangeInfo.fulfilled, (state, { payload }) => {
-      //   try {
-      //     const changed = payload;
-      //     if (payload.incomes) {
-      //       const incIdx = state.incomes.findIndex(
-      //         (c) => c._id === changed._id
-      //       );
-      //       if (incIdx !== -1) {
-      //         state.incomes[incIdx] = changed;
-      //       }
-      //     } else {
-      //       const expIdx = state.expenses.findIndex(
-      //         (c) => c._id === changed._id
-      //       );
-      //       if (expIdx !== -1) {
-      //         state.expenses[expIdx] = changed;
-      //       }
-      //     }
-      //   } catch (e) {
-      //     console.log(e);
-      //   }
-      // })
+      .addCase(categoryGetAll.fulfilled, (state, action) => {
+        const { incomes = [], expenses = [] } = action.payload;
+        state.incomes = incomes.map((cat) => ({ ...cat, type: "incomes" }));
+        state.expenses = expenses.map((cat) => ({ ...cat, type: "expenses" }));
+      })
 
-      // .addCase(categoryDelete.fulfilled, (state, { payload }) => {
-      //   if (payload.incomes)
-      //     state.incomes = state.incomes.filter((c) => c._id !== payload);
-      //   if (payload.expenses)
-      //     state.expenses = state.expenses.filter((c) => c._id !== payload);
-      // })
+      .addCase(categoryChangeInfo.fulfilled, (state, action) => {
+        const updated = action.payload;
+        const list =
+          updated.type === "incomes" ? state.incomes : state.expenses;
+        const idx = list.findIndex((c) => c._id === updated._id);
+        if (idx !== -1) list[idx] = updated;
+      })
+
+      .addCase(categoryDelete.fulfilled, (state, action) => {
+        const payload = action.payload;
+        let id;
+        let type;
+        if (typeof payload === "string") {
+          id = payload;
+        } else {
+          id = payload.id;
+          type = payload.type;
+        }
+        if (type === "incomes") {
+          state.incomes = state.incomes.filter((c) => c._id !== id);
+        } else if (type === "expenses") {
+          state.expenses = state.expenses.filter((c) => c._id !== id);
+        } else {
+          state.incomes = state.incomes.filter((c) => c._id !== id);
+          state.expenses = state.expenses.filter((c) => c._id !== id);
+        }
+      })
 
       .addMatcher(
         isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
         (state, action) => {
-          const { incomes, expenses } = action.payload.user.categories;
-          state.incomes = incomes;
-          state.expenses = expenses;
+          const { categories } = action.payload.user;
+          state.incomes = categories.incomes.map((cat) => ({
+            ...cat,
+            type: "incomes",
+          }));
+          state.expenses = categories.expenses.map((cat) => ({
+            ...cat,
+            type: "expenses",
+          }));
         }
       );
   },
 });
 
-export const categoryReduser = categorySlice.reducer;
+const categoryReduser = categorySlice.reducer;
+export { categoryReduser };
+export default categorySlice.reducer;

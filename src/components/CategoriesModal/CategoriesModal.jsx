@@ -12,8 +12,8 @@ import {
   categoryChangeInfo,
   categoryDelete,
 } from "../../redux/category/operations";
-import CategoryList from "./CategoryList";
-import CategoryForm from "./CategoryForm";
+import CategoryForm from "../CategoryForm/CategoryForm";
+import CategoryList from "../CategoryList/CategoryList";
 
 const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
   const dispatch = useDispatch();
