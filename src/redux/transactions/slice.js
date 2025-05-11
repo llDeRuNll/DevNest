@@ -52,8 +52,8 @@ const allOperations = [
 	transactionChangeInfo,
 ]
 
-const allOperationsCertainResalt = resalt => {
-	switch (resalt) {
+const allOperationsCertainResult = result => {
+	switch (result) {
 		case 'pending':
 			return allOperations.map(el => el.pending)
 		case 'rejected':
@@ -108,22 +108,22 @@ const slice = createSlice({
 						state.transactionsTotal.incomes =
 							action.payload.transactionsTotal.incomes
 						state.transactionsTotal.expenses =
-							action.payload.transactionsTotal.expences
+							action.payload.transactionsTotal.expenses
 					}
 				}
 			)
-			.addMatcher(isAnyOf(...allOperationsCertainResalt('pending')), state => {
+			.addMatcher(isAnyOf(...allOperationsCertainResult('pending')), state => {
 				state.isLoading = true
 			})
 			.addMatcher(
-				isAnyOf(...allOperationsCertainResalt('rejected')),
+				isAnyOf(...allOperationsCertainResult('rejected')),
 				(state, action) => {
 					state.error = action.payload
 					state.isLoading = false
 				}
 			)
 			.addMatcher(
-				isAnyOf(...allOperationsCertainResalt('fulfilled')),
+				isAnyOf(...allOperationsCertainResult('fulfilled')),
 				state => {
 					state.isLoading = false
 					state.error = null
@@ -132,4 +132,4 @@ const slice = createSlice({
 	},
 })
 
-export const transactionsReduser = slice.reducer
+export const transactionsReducer = slice.reducer

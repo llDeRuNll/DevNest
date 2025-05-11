@@ -6,7 +6,7 @@ import TransactionsItem from '../TransactionsItem/TransactionsItem'
 
 const TransactionsList = ({
 	transactions,
-	windowWidth,
+	userWindowWidth,
 	selectedDate,
 	searchQuery,
 	hasUserPickedDate,
@@ -43,7 +43,7 @@ const TransactionsList = ({
 							<TransactionsItem
 								key={transaction._id}
 								transaction={transaction}
-								windowWidth={windowWidth}
+								userWindowWidth={userWindowWidth}
 							/>
 						))}
 					</div>

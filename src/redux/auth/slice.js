@@ -34,7 +34,7 @@ const userLocalDataUpdate = (state, { name, email, avatarUrl, currency }) => {
 }
 
 const slice = createSlice({
-	name: 'authReduser',
+	name: 'authReducer',
 	initialState,
 
 	reducers: {
@@ -96,5 +96,5 @@ const slice = createSlice({
 	},
 })
 
-export const authReduser = slice.reducer
+export const authReducer = slice.reducer
 export const { testAction } = slice.actions

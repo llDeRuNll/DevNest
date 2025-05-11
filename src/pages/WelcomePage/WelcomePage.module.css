@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 40px;
+  gap: 30px;
   width: 100%;
 }
 
@@ -49,7 +49,7 @@
 
 .description {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: -0.02em;
   color: rgba(250, 250, 250, 0.4);
   text-align: left;
@@ -62,90 +62,12 @@
   position: relative;
   border-radius: 20px;
   width: 100%;
-  max-width: 335px;
-  height: auto;
+  
+  height: auto; 
   overflow: visible;
   padding-bottom: 20px;
 }
 
-.mainImg {
-  width: 100%;
-  height: 381px;
-  border-radius: 20px;
-  background-image: url("../../../imgWelcomePage/Rec2x.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.balanceCard {
-  position: absolute;
-  bottom: 4rem;
-  left: 1rem;
-  transform: translateX(-30px);
-  background-color: white;
-  padding: 22px 23px 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  width: 248px;
-  height: 81px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  z-index: 10;
-}
-
-.iconCircle {
-  background-color: #0ef387;
-  border-radius: 10px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.arrowIcon {
-  width: 36px;
-  height: 36px;
-  color: #0c0d0d;
-}
-
-.balance {
-  display: flex;
-  flex-direction: column;
-  width: 89px;
-  white-space: nowrap;
-}
-
-.balanceLabel {
-  font-weight: 400;
-  font-size: 12px;
-  color: rgba(17, 16, 28, 0.5);
-  margin: 0;
-}
-
-.balanceLabel {
-  font-weight: 400;
-  font-size: 16px;
-  color: rgba(17, 16, 28, 0.5);
-}
-
-.balanceAmount {
-  font-weight: 700;
-  font-size: 18px;
-  color: #11101c;
-  margin: 0;
-}
-
-.balanceChange {
-  border-radius: 13px;
-  width: 58px;
-  height: 22px;
-  background: rgba(2, 177, 90, 0.15);
-  color: #02b15a;
-  margin: 0;
-}
 
 @media (min-width: 768px) {
   .main {
@@ -153,19 +75,10 @@
     gap: 10px;
   }
 
-  .mainImg {
-    max-width: none;
-    width: 611px;
-    overflow: hidden;
-    background-image: url("../../../imgWelcomePage/Rec2xLopTop.jpg");
-  }
-
-  .imageSection {
-    width: 50%;
-  }
-
   .description {
     width: 533px;
+    font-size: 16px;
+    
   }
 
   .breakMobile {
@@ -176,10 +89,12 @@
     display: inline;
     margin-top: 4px;
   }
+  .heading {
+    font-size: 56px;
+  }
 }
 
 @media (min-width: 1440px) {
-  .textSection,
   .imageSection {
     width: 50%;
     max-width: 580px;
@@ -191,27 +106,16 @@
     justify-content: center;
     gap: 54px;
   }
-
   .subheading {
     text-align: left;
     margin: 0;
     padding-bottom: 10px;
   }
-
-  .mainImg {
-    background-size: cover;
-    background-position: center;
-    border-radius: 20px;
-    width: 100%;
-    height: 568px;
-    background-image: url("../../../public/imgWelcomePage/Rec1Dectop.jpg");
-  }
-
   .heading {
     font-size: 56px;
   }
-
   .description {
     padding-bottom: 40px;
+
   }
 }
