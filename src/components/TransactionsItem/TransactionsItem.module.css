@@ -1,124 +1,124 @@
 .tableRow {
-  display: grid;
-  grid-template-columns: 73px 71px 65px 50px 80px 1fr;
-  row-gap: 15px;
+	display: grid;
+	grid-template-columns: 73px 71px 65px 50px 100px 1fr;
+	row-gap: 15px;
 }
 
 .tableCell {
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  font-size: 14px;
-  color: var(--white);
+	display: flex;
+	align-items: center;
+	font-weight: 400;
+	font-size: 14px;
+	color: var(--white);
 }
 
 .actionButtonsWrapper {
-  display: inline-flex;
-  column-gap: 6px;
+	display: inline-flex;
+	column-gap: 6px;
 }
 
 .editButton,
 .deleteButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  span {
-    display: none;
-  }
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	span {
+		display: none;
+	}
 }
 
 .editButton {
-  background-color: var(--green-light);
-  transition: background-color 250ms linear;
-  &:hover {
-    background-color: var(--green);
-  }
+	background-color: var(--green-light);
+	transition: background-color 250ms var(--animation-cubicBezier);
+	&:hover {
+		background-color: var(--green);
+	}
 }
 .deleteButton {
-  border: 1px solid transparent;
-  background-color: var(--background);
-  transition: border 250ms linear;
-  &:hover {
-    border: 1px solid var(--green-light);
-  }
+	border: 1px solid transparent;
+	background-color: var(--background);
+	transition: border 250ms var(--animation-cubicBezier);
+	&:hover {
+		border: 1px solid var(--green-light);
+	}
 }
 
 .buttonIcon {
-  width: 12px;
-  height: 12px;
+	width: 12px;
+	height: 12px;
 }
 
 @media screen and (min-width: 768px) {
-  .tableRow {
-    grid-template-columns: 108px 120px 99px 77px 136px 107px;
-  }
-  .tableCell {
-    font-size: 20px;
-  }
-  .actionButtonsWrapper {
-    column-gap: 8px;
-  }
-  .editButton,
-  .deleteButton {
-    width: 44px;
-    height: 44px;
-  }
-  .buttonIcon {
-    width: 16px;
-    height: 16px;
-  }
+	.tableRow {
+		grid-template-columns: 108px 120px 99px 77px 136px 107px;
+	}
+	.tableCell {
+		font-size: 20px;
+	}
+	.actionButtonsWrapper {
+		column-gap: 8px;
+	}
+	.editButton,
+	.deleteButton {
+		width: 44px;
+		height: 44px;
+	}
+	.buttonIcon {
+		width: 16px;
+		height: 16px;
+	}
 }
 
 @media screen and (min-width: 1440px) {
-  .tableCell {
-    padding: 10px;
-  }
-  .tableRow {
-    grid-template-columns: 160px 199px 201px 140px 190px 293px;
-  }
-  .editButton,
-  .deleteButton {
-    font-weight: 400;
-    font-size: 16px;
-    letter-spacing: -0.02em;
-    column-gap: 8px;
-    border-radius: 40px;
-    height: 47px;
-    span {
-      display: block;
-    }
-  }
-  .editButton {
-    min-width: 118px;
-    color: var(--background);
-  }
-  .deleteButton {
-    min-width: 133px;
-    color: var(--white);
-  }
+	.tableCell {
+		padding: 10px;
+	}
+	.tableRow {
+		grid-template-columns: 160px 199px 201px 140px 190px 293px;
+	}
+	.editButton,
+	.deleteButton {
+		font-weight: 400;
+		font-size: 16px;
+		letter-spacing: -0.02em;
+		column-gap: 8px;
+		border-radius: 40px;
+		height: 47px;
+		span {
+			display: block;
+		}
+	}
+	.editButton {
+		min-width: 118px;
+		color: var(--background);
+	}
+	.deleteButton {
+		min-width: 133px;
+		color: var(--white);
+	}
 }
 /* TransactionsItem.module.css */
 
 .backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
 }
 
 .modalContent {
-  background-color: var(--dark);
-  border-radius: 20px;
-  padding: 24px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 1001;
+	background-color: var(--dark);
+	border-radius: 20px;
+	padding: 24px;
+	width: 90%;
+	max-width: 500px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	position: relative;
+	z-index: 1001;
 }
