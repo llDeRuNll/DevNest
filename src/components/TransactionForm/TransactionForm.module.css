@@ -1,5 +1,5 @@
-.add-form,
-.edit-form {
+.addForm,
+.editForm {
   background-color: var(--dark);
   border-radius: 20px;
   padding: 20px;
@@ -8,26 +8,28 @@
   gap: 16px;
 }
 
-.t-radio-group {
+.tRadioGroup {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.date-section {
+.dateSection {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.t-label {
-  margin-bottom: 6px;
+.tLabel {
+  margin-bottom: 8px;
   font-size: 14px;
   color: var(--white);
 }
 
-.t-input,
-.react-datepicker__input-container input {
+.tInput,
+.react-datepicker__input-container input,
+input[type="date"],
+input[type="time"] {
   width: 100%;
   padding: 10px 14px;
   background-color: var(--surface);
@@ -37,7 +39,7 @@
   color: var(--white);
 }
 
-.t-textarea {
+.tTextarea {
   width: 100%;
   padding: 10px 14px;
   background-color: var(--surface);
@@ -49,13 +51,13 @@
   color: var(--white);
 }
 
-.t-error {
+.tError {
   margin-top: 4px;
   font-size: 12px;
   color: var(--error);
 }
 
-.t-send-btn {
+.tSendBtn {
   padding: 12px;
   background-color: var(--green);
   border-radius: 50px;
@@ -66,44 +68,150 @@
   transition: background-color var(--animation-cubicBezier);
 }
 
-.t-send-btn:hover:enabled {
+.tSendBtn:hover:enabled {
   background-color: var(--green-light);
 }
 
-.t-send-btn:disabled {
+.tSendBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
+.tRadioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.tRadioBtn {
+  accent-color: var(--green-light);
+}
+
+.tInputWrapper {
+  position: relative;
+}
+
+.tInputWrapper .tInput {
+  padding-right: 40px;
+}
+
+.tCurrency {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 14px;
+  color: var(--white);
+}
+
+.tInput[type="number"]::-webkit-outer-spin-button,
+.tInput[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tInput[type="number"] {
+  appearance: textfield;
+}
+
 @media (min-width: 768px) {
-  .add-form,
-  .edit-form {
+  .addForm,
+  .editForm {
     border-radius: 30px;
     padding: 40px;
     gap: 24px;
     align-items: stretch;
   }
 
-  .t-radio-group {
+  .tRadioGroup {
     flex-direction: row;
     gap: 24px;
   }
 
-  .date-section {
+  .dateSection {
     flex-direction: row;
     gap: 16px;
   }
 
-  .t-send-btn {
+  .tSendBtn {
     width: auto;
     align-self: flex-end;
   }
 }
 
 @media (min-width: 1440px) {
-  .add-form,
-  .edit-form {
+  .addForm,
+  .editForm {
     padding: 48px;
     gap: 32px;
   }
+}
+
+.tLabel {
+  margin-bottom: 6px;
+}
+@media (min-width: 768px) {
+  .tLabel {
+    margin-bottom: 8px;
+  }
+}
+
+.tRadioBtn {
+  accent-color: var(--green);
+  width: 16px;
+  height: 16px;
+}
+
+.tRadioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tInputWrapper {
+  position: relative;
+}
+.tInputWrapper .tInput {
+  padding-right: 40px;
+}
+.tCurrency {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 14px;
+  color: var(--white);
+}
+
+.tInput[type="number"]::-webkit-inner-spin-button,
+.tInput[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tInput[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.react-datepicker__input-container input,
+input[type="date"],
+input[type="time"] {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: var(--surface);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--white);
+
+  transition: box-shadow 0.2s ease, outline 0.2s ease;
+}
+.react-datepicker__input-container input:focus,
+input[type="date"]:focus,
+input[type="time"]:focus {
+  outline: 2px solid var(--green-light);
+  outline-offset: 2px;
 }

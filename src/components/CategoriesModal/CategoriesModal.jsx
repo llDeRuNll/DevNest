@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import styles from "./CategoriesModal.module.css";
@@ -23,10 +24,12 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     ) ?? [];
   const [editingCategory, setEditingCategory] = useState(null);
 
+  // Fetch categories on mount
   useEffect(() => {
     dispatch(categoryGetAll());
   }, [dispatch]);
 
+  // Close on Escape key
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -35,6 +38,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
+  // Add or edit category
   const handleAddOrEdit = useCallback(
     async (values, { resetForm }) => {
       const name = values.categoryName.trim();
@@ -43,33 +47,37 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
           await dispatch(
             categoryChangeInfo({ _id: editingCategory._id, name })
           ).unwrap();
-          toast.success("Category updated");
+          toast.success("Категорію оновлено");
         } else {
           await dispatch(categoryPost({ categoryName: name, type })).unwrap();
-          toast.success("Category added");
+          toast.success("Категорію додано");
         }
         resetForm();
         setEditingCategory(null);
       } catch (err) {
-        toast.error(err.message || "Something went wrong");
+        toast.error(err.message || "Щось пішло не так");
       }
     },
     [dispatch, editingCategory, type]
   );
 
+  // Delete category
   const handleDelete = useCallback(
-    async (id) => {
+    async (_id) => {
       try {
-        await dispatch(categoryDelete(id)).unwrap();
-        toast.success("Category deleted");
+        await dispatch(categoryDelete(_id)).unwrap();
+        toast.success("Категорію видалено");
       } catch {
-        toast.error("Failed to delete category");
+        toast.error("Не вдалося видалити категорію");
       }
     },
     [dispatch]
   );
 
+  // Start editing
   const handleEdit = useCallback((cat) => setEditingCategory(cat), []);
+
+  // Select category and close modal
   const handleSelect = useCallback(
     (cat) => {
       onSelectCategory(cat);
@@ -78,7 +86,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     [onSelectCategory, onClose]
   );
 
-  return (
+  const modalContent = (
     <div
       className={styles.modalBackdrop}
       onClick={(e) => e.target === e.currentTarget && onClose()}
@@ -91,7 +99,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
         </div>
 
         <h2 className={styles.modalTitle}>
-          {type === "expenses" ? "Expenses" : "Incomes"} Categories
+          {type === "expenses" ? "Expenses" : "Incomes"}
         </h2>
 
         <CategoryList
@@ -102,13 +110,15 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
         />
 
         <CategoryForm
-          initialValue={editingCategory ? editingCategory.categoryName : ""}
+          initialValue={editingCategory?.categoryName || ""}
           isEditing={!!editingCategory}
           onSubmit={handleAddOrEdit}
         />
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default CategoriesModal;
