@@ -1,11 +1,10 @@
+// redux/store.js
 import storage from "redux-persist/lib/storage";
-import persistReducer from "redux-persist/es/persistReducer";
-import persistStore from "redux-persist/es/persistStore";
+import { persistReducer, persistStore } from "redux-persist";
+import { configureStore } from "@reduxjs/toolkit";
 import { authReduser } from "./auth/slice";
 import { categoryReduser } from "./category/slice";
 import { transactionsReduser } from "./transactions/slice";
-import { configureStore } from "@reduxjs/toolkit";
-
 import {
   FLUSH,
   REHYDRATE,
@@ -14,16 +13,16 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-const persistConfig = {
-  key: "root-auth",
+
+const authPersistConfig = {
+  key: "auth",
   storage,
-  version: 1,
-  whitelist: ["refreshToken", "sid", "transactions", "category"],
+  whitelist: ["accessToken", "refreshToken", "sid", "user", "isLoggedIn"],
 };
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, authReduser),
+    auth: persistReducer(authPersistConfig, authReduser),
     category: categoryReduser,
     transactions: transactionsReduser,
   },
