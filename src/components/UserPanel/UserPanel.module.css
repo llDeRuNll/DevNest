@@ -1,9 +1,12 @@
 .dropdownMenu button:hover,
 .dropdownMenu button:focus {
-	opacity: 1;
-	.icon {
-		color: #0ef387;
-	}
+
+  opacity: 1;
+  .icon {
+    fill: #0ef387;
+    stroke: #0ef387;
+  }
+
 }
 .iconButton {
 	display: flex;
