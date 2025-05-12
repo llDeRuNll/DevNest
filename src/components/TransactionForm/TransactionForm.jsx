@@ -153,7 +153,12 @@ const TransactionForm = ({
           </div>
 
           <div className={s["date-section"]}>
-            <div>
+            <div className={s.dateSectionWrappDate}>
+              <MdOutlineDateRange
+                className={s.icon}
+                color="#fafafa"
+                size="16"
+              />
               <label className={s["t-label"]}>Date</label>
               <DatePicker
                 selected={values.date}
@@ -170,8 +175,8 @@ const TransactionForm = ({
             </div>
 
             <div className={s.dateSectionWrappTime}>
-              <LuClock4 className={s.icon} color="#fafafa" />
-              <label className={s.tLabel}>Time</label>
+              <LuClock4 className={s.icon} color="#fafafa" size="16" />
+              <label className={s["t-label"]}>Time</label>
 
               <DatePicker
                 selected={values.time}
@@ -181,7 +186,7 @@ const TransactionForm = ({
                 timeIntervals={15}
                 timeCaption="Time"
                 dateFormat="HH:mm"
-                placeholderText="hh:mm"
+                placeholderText="00:00:00"
                 className={s["t-input"]}
               />
               <ErrorMessage

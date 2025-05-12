@@ -7,8 +7,9 @@
 }
 
 .header {
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .text {
@@ -18,7 +19,12 @@
   letter-spacing: -0.02em;
   color: rgba(250, 250, 250, 0.4);
 }
-
+@media (min-width: 768px) {
+  .header {
+    font-size: 38px;
+    margin-bottom: 13px;
+  }
+}
 @media (min-width: 1440px) {
   .wrapper {
     display: grid;

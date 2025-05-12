@@ -99,7 +99,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
         <div className={styles.closeButtonContainer}>
           <button onClick={onClose}>
             <div className={styles.icon}>
-              <IoMdClose />
+              <IoMdClose size="24" />
             </div>
           </button>
         </div>
