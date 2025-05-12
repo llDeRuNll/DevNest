@@ -1,8 +1,15 @@
 import TransactionsHistoryNav from "../TransactionsHistoryNav/TransactionsHistoryNav";
 import UserBarBtn from "../UserBarBtn/UserBarBtn";
 import s from "./BurgerMenu.module.css";
+import { useEffect } from "react";
 
 const BurgerMenu = ({ onOpenModal, onClose }) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
   return (
     <div className={s.container}>
       <div
@@ -28,7 +35,7 @@ const BurgerMenu = ({ onOpenModal, onClose }) => {
             </button>
           </div>
           <div className={s.butttonnnn}>
-            <TransactionsHistoryNav />
+            <TransactionsHistoryNav onClick={onClose} />
           </div>
         </div>
       </div>
