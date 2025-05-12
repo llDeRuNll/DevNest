@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import styles from "./CategoriesModal.module.css";
+import { IoMdClose } from "react-icons/io";
 import {
   selectExpensesCategories,
   selectIncomesCategories,
@@ -15,6 +15,7 @@ import {
 } from "../../redux/category/operations";
 import CategoryForm from "../CategoryForm/CategoryForm";
 import CategoryList from "../CategoryList/CategoryList";
+import styles from "./CategoriesModal.module.css";
 
 const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
   const dispatch = useDispatch();
@@ -94,7 +95,9 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
       <div className={styles.modalContent}>
         <div className={styles.closeButtonContainer}>
           <button onClick={onClose}>
-            <div className={styles.icon}>×</div>
+            <div className={styles.icon}>
+              <IoMdClose />
+            </div>
           </button>
         </div>
 
