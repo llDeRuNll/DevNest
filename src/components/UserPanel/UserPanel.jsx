@@ -17,7 +17,7 @@ function UserPanel({ onProfileClick }) {
       navigate("/");
       toast.success("You have successfully logged out!");
     } catch (error) {
-      toast.error("Error logging out.");
+      toast.error(error, "Error logging out.");
     }
   };
 
