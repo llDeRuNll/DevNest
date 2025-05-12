@@ -87,14 +87,16 @@
 .newCategoryTitle {
   font-size: 16px;
   margin-bottom: 12px;
-  color: var(--white);
+  color: var(--green-light);
 }
 
 .newCategoryForm {
   display: flex;
   gap: 8px;
 }
-
+.t {
+  color: var(--grey);
+}
 .newCategoryInput {
   flex: 1;
   padding: 10px 14px;
