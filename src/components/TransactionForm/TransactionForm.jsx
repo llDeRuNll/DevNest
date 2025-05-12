@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
+import { MdOutlineDateRange } from "react-icons/md";
+import { LuClock4 } from "react-icons/lu";
 
 import s from "./TransactionForm.module.css";
 import {
@@ -150,10 +152,12 @@ const TransactionForm = ({
             />
           </div>
 
-          {/* Date and time pickers */}
-          <div className={s["date-section"]}>
-            <div>
-              <label className={s["t-label"]}>Date</label>
+
+          <div className={s.dateSection}>
+            <div className={s.dateSectionWrappDate}>
+              <MdOutlineDateRange className={s.icon} color="#fafafa" />
+              <label className={s.tLabel}>Date</label>
+
               <DatePicker
                 selected={values.date}
                 onChange={(v) => setFieldValue("date", v)}
@@ -167,8 +171,11 @@ const TransactionForm = ({
                 className={s["t-error"]}
               />
             </div>
-            <div>
-              <label className={s["t-label"]}>Time</label>
+
+            <div className={s.dateSectionWrappTime}>
+              <LuClock4 className={s.icon} color="#fafafa" />
+              <label className={s.tLabel}>Time</label>
+
               <DatePicker
                 selected={values.time}
                 onChange={(v) => setFieldValue("time", v)}
