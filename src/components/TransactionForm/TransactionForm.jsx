@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 import s from "./TransactionForm.module.css";
@@ -41,11 +42,17 @@ const TransactionForm = ({
     useSelector((state) => state.auth.user.currency) || "uah";
   const displayCurrency = userCurrency.toUpperCase();
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
+
+  // Determine initial type from URL or fallback
+  const initialType = transaction
+    ? transaction.type
+    : searchParams.get("type") || defaultType;
 
   const initialValues = transaction
     ? {
@@ -57,7 +64,7 @@ const TransactionForm = ({
         comment: transaction.comment,
       }
     : {
-        type: defaultType,
+        type: initialType,
         date: null,
         time: null,
         category: "",
@@ -115,15 +122,23 @@ const TransactionForm = ({
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
           <div className={s["t-radio-group"]}>
-            {["expenses", "incomes"].map((t) => (
-              <label key={t} className={s["t-radio-label"]}>
-                <Field
+            {[
+              { key: "expenses", label: "Expense" },
+              { key: "incomes", label: "Income" },
+            ].map(({ key, label }) => (
+              <label key={key} className={s["t-radio-label"]}>
+                <input
                   type="radio"
                   name="type"
-                  value={t}
+                  value={key}
+                  checked={values.type === key}
+                  onChange={() => {
+                    setFieldValue("type", key);
+                    setSearchParams({ type: key });
+                  }}
                   className={s["t-radio-btn"]}
                 />
-                {t === "expenses" ? "Expense" : "Income"}
+                {label}
               </label>
             ))}
             <ErrorMessage
@@ -133,6 +148,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Date and time pickers */}
           <div className={s["date-section"]}>
             <div>
               <label className={s["t-label"]}>Date</label>
@@ -170,6 +186,7 @@ const TransactionForm = ({
             </div>
           </div>
 
+          {/* Category field */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Category</label>
             <input
@@ -187,6 +204,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Sum field */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Sum</label>
             <div className={s["t-input-wrapper"]}>
@@ -201,6 +219,7 @@ const TransactionForm = ({
             <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
+          {/* Comment field */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Comment</label>
             <Field
