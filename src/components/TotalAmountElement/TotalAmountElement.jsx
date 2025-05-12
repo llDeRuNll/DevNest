@@ -1,8 +1,20 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import { GoArrowUpRight, GoArrowDownLeft } from "react-icons/go";
 import s from "./TotalAmountElement.module.css";
-import { GoArrowUpRight } from "react-icons/go";
-import { GoArrowDownLeft } from "react-icons/go";
 
-const TotalAmountElement = ({ currency, amount, type }) => {
+const currencySymbols = {
+  uah: "₴",
+  usd: "$",
+  eur: "€",
+};
+
+const TotalAmountElement = ({ amount, type }) => {
+  const userCurrencyCode =
+    useSelector((state) => state.auth.user.currency)?.toLowerCase() || "uah";
+  const symbol =
+    currencySymbols[userCurrencyCode] || userCurrencyCode.toUpperCase();
+
   return (
     <div className={s.totalContainer}>
       <div className={s.totalIconWrapper}>
@@ -15,7 +27,7 @@ const TotalAmountElement = ({ currency, amount, type }) => {
       <div className={s.totalDescription}>
         <p className={s.totalText}>Total {type}</p>
         <span className={s.currencySpan}>
-          {currency}
+          {symbol}
           {(amount || 0).toFixed(3)}
         </span>
       </div>

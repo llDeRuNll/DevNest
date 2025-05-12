@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import s from "./WelcomePage.module.css";
 import AuthNav from "../../components/AuthNav/AuthNav";
 import AllUsersTab from "../../components/AllUsersTab/AllUsersTab";
 import BgImageWrapper from "../../components/BgImageWrapper/BgImageWrapper";
 
-
 const WelcomePage = () => {
+  const imageRef = useRef(null);
+
   return (
     <div className="container">
       <section className={s.main}>
@@ -13,11 +14,11 @@ const WelcomePage = () => {
           <div className={s.listInfo}>
             <p className={s.subheading}>EXPENSE LOG</p>
             <h2 className={s.heading}>
-              Manage {""}
+              Manage{" "}
               <span className={s.noBreak}>
-                Your <span className={s.spanHeading}>Finances</span>
-              </span>
-              <br />
+                Your
+                <br /> <span className={s.spanHeading}>Finances</span>
+              </span>{" "}
               Masterfully!
             </h2>
             <p className={s.description}>
@@ -32,7 +33,7 @@ const WelcomePage = () => {
         </div>
 
         <div className={s.imageSection}>
-          <BgImageWrapper />
+          <BgImageWrapper parentRef={imageRef} />
         </div>
       </section>
     </div>

@@ -37,11 +37,16 @@ const TransactionForm = ({
   defaultType = "expenses",
 }) => {
   const dispatch = useDispatch();
+  // Динамічна валюта з профілю користувача
+  const userCurrency =
+    useSelector((state) => state.auth.user.currency) || "uah";
+  const displayCurrency = userCurrency.toUpperCase();
+
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
-  const incomeCategories = useSelector((s) => s.category.incomes);
-  const expenseCategories = useSelector((s) => s.category.expenses);
+  const incomeCategories = useSelector((state) => state.category.incomes);
+  const expenseCategories = useSelector((state) => state.category.expenses);
 
   const initialValues = transaction
     ? {
@@ -180,7 +185,7 @@ const TransactionForm = ({
                 placeholder="Enter sum"
                 className={s.tInput}
               />
-              <span className={s.tCurrency}>UAH</span>
+              <span className={s.tCurrency}>{displayCurrency}</span>
             </div>
             <ErrorMessage name="sum" component="div" className={s.tError} />
           </div>

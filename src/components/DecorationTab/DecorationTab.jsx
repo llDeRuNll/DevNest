@@ -2,56 +2,68 @@ import React, { useEffect, useRef, useState } from "react";
 import BalanceCard from "../BalanceCard/BalanceCard";
 import s from "./DecorationTab.module.css";
 
-
-const DecorationTab = () => {
-  const wrapperRef = useRef(null);
+const DecorationTab = ({ parentRef }) => {
   const cardRef = useRef(null);
-  const dirRef = useRef(1);
-  const posRef = useRef(0);
   const frameRef = useRef(null);
+  const posX = useRef(0);
+  const posY = useRef(0);
+  const dirX = useRef(1);
+  const dirY = useRef(1);
 
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1440);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1280);
+      setIsDesktop(window.innerWidth >= 1440);
+
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    const wrapper = wrapperRef.current;
+
+    const wrapper = parentRef?.current;
     const card = cardRef.current;
-    if (!wrapper || !card) return;
+    if (!wrapper || !card || !isDesktop) return;
 
     cancelAnimationFrame(frameRef.current);
-
-    if (!isDesktop) {
-      card.style.transform = "none";
-      return;
-    }
+    const speed = 1.6;
 
     const animate = () => {
-      const max = wrapper.offsetWidth - card.offsetWidth + 10;
-      let next = posRef.current + dirRef.current * 1.5;
+      const maxX = wrapper.clientWidth - card.offsetWidth;
+      const maxY = wrapper.clientHeight - card.offsetHeight;
 
-      if (next <= -10 || next >= max) {
-        dirRef.current *= -1;
-        next = Math.max(-10, Math.min(max, next));
+      let nextX = posX.current + dirX.current * speed;
+      let nextY = posY.current + dirY.current * speed;
+
+      if (nextX <= 0 || nextX >= maxX) {
+        dirX.current *= -1;
+        nextX = Math.max(0, Math.min(maxX, nextX));
       }
 
-      card.style.transform = `translateX(${next}px)`;
-      posRef.current = next;
+      if (nextY <= 0 || nextY >= maxY) {
+        dirY.current *= -1;
+        nextY = Math.max(0, Math.min(maxY, nextY));
+      }
+
+      card.style.transform = `translate(${nextX}px, ${nextY}px)`;
+      posX.current = nextX;
+      posY.current = nextY;
+
+
       frameRef.current = requestAnimationFrame(animate);
     };
 
     frameRef.current = requestAnimationFrame(animate);
+
+
     return () => cancelAnimationFrame(frameRef.current);
-  }, [isDesktop]);
+  }, [isDesktop, parentRef]);
 
   return (
-    <div ref={wrapperRef} className={s.wrapper}>
+    <div className={s.wrapper}>
+
       <div
         ref={cardRef}
         className={`${s.cardWrapper} ${!isDesktop ? s.static : ""}`}
@@ -62,4 +74,4 @@ const DecorationTab = () => {
   );
 };
 
-export default DecorationTab;
+export default DecorationTab;   

@@ -1,5 +1,5 @@
 export const normalizeData = (date, windowWidth) => {
-	const newData = new Date(date)
+	const dateInstance = new Date(date)
 
 	const dayShortNames = {
 		Monday: 'Mo',
@@ -11,13 +11,13 @@ export const normalizeData = (date, windowWidth) => {
 		Sunday: 'Su',
 	}
 
-	const weekday = newData.toLocaleDateString('en-US', {
+	const weekday = dateInstance.toLocaleDateString('en-US', {
 		weekday: 'long',
 	})
 
-	const day = newData.getDate()
-	const month = String(newData.getMonth() + 1).padStart(2, '0')
-	const year = newData.getFullYear()
+	const day = dateInstance.getDate()
+	const month = String(dateInstance.getMonth() + 1).padStart(2, '0')
+	const year = dateInstance.getFullYear()
 
 	const finalDate = `${dayShortNames[weekday]}, ${day}.${month}.${year}`
 
