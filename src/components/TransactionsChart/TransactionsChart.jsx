@@ -26,11 +26,11 @@ const COLORS = [
   "#74e3c1",
 ];
 
-const TransactionsChart = ({ data }) => {
+const TransactionsChart = ({ expences }) => {
   const categoryColorMap = {};
   let colorIndex = 0;
 
-  data.forEach((item) => {
+  expences.forEach((item) => {
     const category = item.category.categoryName;
     if (!categoryColorMap[category]) {
       categoryColorMap[category] = COLORS[colorIndex % COLORS.length];
@@ -38,7 +38,7 @@ const TransactionsChart = ({ data }) => {
     }
   });
   const pieChartData = Object.entries(
-    data.reduce((acc, item) => {
+    expences.reduce((acc, item) => {
       const category = item.category.categoryName;
       acc[category] = (acc[category] || 0) + item.sum;
       return acc;
@@ -48,12 +48,6 @@ const TransactionsChart = ({ data }) => {
     value,
     fill: categoryColorMap[category],
   }));
-
-  // console.log(data);
-  // const pieChartData = data.map((item) => ({
-  //   name: item.category.categoryName,
-  //   value: item.sum,
-  // }));
 
   return (
     <div className={s.expensesWrapper}>
@@ -85,7 +79,10 @@ const TransactionsChart = ({ data }) => {
         </div>
         <div className={s.percentage}>100%</div>
       </div>
-      <TransactionChartStatistics data={data} colorMap={categoryColorMap} />
+      <TransactionChartStatistics
+        expences={expences}
+        colorMap={categoryColorMap}
+      />
     </div>
   );
 };
