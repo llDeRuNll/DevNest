@@ -15,14 +15,12 @@ const DecorationTab = ({ parentRef }) => {
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1440);
-
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-
     const wrapper = parentRef?.current;
     const card = cardRef.current;
     if (!wrapper || !card || !isDesktop) return;
@@ -51,19 +49,16 @@ const DecorationTab = ({ parentRef }) => {
       posX.current = nextX;
       posY.current = nextY;
 
-
       frameRef.current = requestAnimationFrame(animate);
     };
 
     frameRef.current = requestAnimationFrame(animate);
-
 
     return () => cancelAnimationFrame(frameRef.current);
   }, [isDesktop, parentRef]);
 
   return (
     <div className={s.wrapper}>
-
       <div
         ref={cardRef}
         className={`${s.cardWrapper} ${!isDesktop ? s.static : ""}`}
@@ -74,4 +69,4 @@ const DecorationTab = ({ parentRef }) => {
   );
 };
 
-export default DecorationTab;   
+export default DecorationTab;

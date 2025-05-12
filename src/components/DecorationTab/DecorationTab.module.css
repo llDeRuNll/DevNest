@@ -5,9 +5,8 @@
   top: 0;
   left: 0;
   z-index: 2;
-  overflow: visible; 
-  pointer-events: none; 
-
+  overflow: visible;
+  pointer-events: none;
 }
 
 .cardWrapper {
@@ -25,7 +24,7 @@
   width: 248px;
   height: 81px;
   left: -10px;
-  position: absolute
+  position: absolute;
 }
 
 @media (max-width: 767px) {
@@ -44,5 +43,4 @@
     position: absolute;
     overflow: hidden;
   }
-
 }
