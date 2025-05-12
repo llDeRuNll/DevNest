@@ -4,7 +4,7 @@
   padding-bottom: 20px;
   display: flex;
   justify-content: center;
-
+  position: absolute;
   overflow: visible; 
 
 }
@@ -13,7 +13,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-
   border-radius: 20px;
   overflow: visible;
   
@@ -37,18 +36,23 @@
 
 @media (min-width: 1440px) {
   .wrapper {
-    max-width: 611px;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  height: 568px;
   }
   .mainImg {
     width: 100%;
-    height: 568px;
+    height: 100%;
     object-fit: cover;
     border-radius: 20px;
     display: block;
   }
   .backgroundImage{
-
-    overflow: hidden; 
+    position: relative;
+    overflow: visible;
+    height: 100%;
+    
 
   }
 }
