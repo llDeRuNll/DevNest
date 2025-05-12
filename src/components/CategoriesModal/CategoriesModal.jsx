@@ -107,7 +107,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
         <h2 className={styles.modalTitle}>
           {type === "expenses" ? "Expenses" : "Incomes"}
         </h2>
-
+        <p className={styles.t}>All Categories</p>
         <CategoryList
           categories={rawCategories}
           onSelect={handleSelect}
