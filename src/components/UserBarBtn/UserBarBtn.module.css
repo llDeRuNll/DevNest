@@ -43,3 +43,58 @@
   width: 20px;
   height: 20px;
 }
+.vector {
+  transition: transform 0.3s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+/* UserBarBtn.module.css */
+
+.userContainer {
+  position: relative;
+}
+
+.userBar {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: #1a1a1a; /* Темный фон для соответствия вашему скриншоту */
+  padding: 5px 10px;
+  border-radius: 20px; /* Скругленные углы для соответствия скриншоту */
+}
+
+.userImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  margin: 0 10px;
+  font-size: 16px;
+  color: #fff; /* Белый текст для читаемости на темном фоне */
+}
+
+.vector {
+  font-size: 16px;
+  color: #fff; /* Белая стрелка */
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.avatarIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #0c0d0d80; /* Серый фон для иконки */
+  font-size: 24px; /* Размер иконки */
+  color: #0ef387; /* Цвет иконки */
+}

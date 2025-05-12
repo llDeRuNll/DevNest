@@ -3,6 +3,7 @@
   opacity: 1;
   .icon {
     fill: #0ef387;
+    stroke: #0ef387;
   }
 }
 .iconButton {
