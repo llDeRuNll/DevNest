@@ -3,8 +3,14 @@ import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import TransactionsChart from "../../components/TransactionsChart/TransactionsChart";
 import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
 import s from "./MainTransactionsPage.module.css";
+import { selectTransactionsExpenses } from "../../redux/transactions/selectors";
+import { useSelector } from "react-redux";
+import { dataWithPercentage } from "../../utils/expensesOperations";
 
 const MainTransactionPage = () => {
+  const dataFromServer = useSelector(selectTransactionsExpenses);
+  const data = dataWithPercentage(dataFromServer);
+
   return (
     <div className="container">
       <div className={s.wrapper}>
@@ -21,7 +27,7 @@ const MainTransactionPage = () => {
         </div>
 
         <div className={s.chartSection}>
-          <TransactionsChart />
+          <TransactionsChart data={data} />
         </div>
 
         <div className={s.formSection}>

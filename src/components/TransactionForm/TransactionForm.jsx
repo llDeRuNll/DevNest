@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 import s from "./TransactionForm.module.css";
@@ -38,21 +38,23 @@ const TransactionForm = ({
   defaultType = "expenses",
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
+
   const userCurrency =
     useSelector((state) => state.auth.user.currency) || "uah";
   const displayCurrency = userCurrency.toUpperCase();
 
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
 
-  // Determine initial type from URL or fallback
+  // Determine initial type from URL param or fallback
   const initialType = transaction
     ? transaction.type
-    : searchParams.get("type") || defaultType;
+    : params.type || defaultType;
 
   const initialValues = transaction
     ? {
@@ -134,7 +136,7 @@ const TransactionForm = ({
                   checked={values.type === key}
                   onChange={() => {
                     setFieldValue("type", key);
-                    setSearchParams({ type: key });
+                    navigate(`/transactions/${key}`);
                   }}
                   className={s["t-radio-btn"]}
                 />

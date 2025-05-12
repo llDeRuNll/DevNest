@@ -25,15 +25,31 @@
   display: flex;
   column-gap: 8px;
 }
-.iconOne {
+.icon0 {
   color: #0ebb69;
 }
-.iconTwo {
+.icon1 {
   color: #0ef387;
 }
-.iconThree {
+.icon2 {
   color: #fafafa;
 }
-.iconFour {
+.icon3 {
   color: #fafafa33;
+}
+.icon4 {
+  color: #278559;
+}
+.icon5 {
+  color: #9ab4a8;
+}
+.icon6 {
+  color: #286a4b;
+}
+
+.icon7 {
+  color: #3a6b54;
+}
+.icon8 {
+  color: #6deab0;
 }
