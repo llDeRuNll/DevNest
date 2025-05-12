@@ -1,57 +1,42 @@
 .userContainer {
   position: relative;
-  display: inline-block;
-  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   background-color: #171719;
   border-radius: 30px;
+  color: white;
+  width: 220px;
+  height: 56px;
 }
 
 .userBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
   cursor: pointer;
-}
-
-.userImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
-
-.userName {
-  margin: 0;
-}
-
-.vector {
-  font-size: 14px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .userImg {
   width: 44px;
   height: 44px;
-  border-radius: 40px;
+  border-radius: 50%;
   margin-left: 16px;
   margin-top: 6px;
   margin-bottom: 6px;
+  object-fit: cover;
 }
-.userConteiner {
-  display: flex;
 
-  align-items: center;
-  gap: 10px;
-  background-color: #171719;
-  border-radius: 30px;
-  color: white;
-  justify-content: space-between;
-  width: 220px;
-  height: 56px;
-}
 .userName {
   color: #fafafa66;
+  margin: 0;
 }
+
 .vector {
+  font-size: 14px;
   margin-right: 16px;
   fill: #0ef387;
   width: 20px;
