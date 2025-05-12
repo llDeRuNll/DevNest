@@ -4,6 +4,8 @@ import { searchSelection } from '../../utils/Transaction/searchSelection'
 import { useEffect, useState } from 'react'
 import TransactionsItem from '../TransactionsItem/TransactionsItem'
 import ModalConfirm from '../ModalConfirm/ModalConfirm'
+import { useModal } from '../../utils/Modal/useModal'
+import { useConfirmDeleteTransaction } from '../../hooks/Modal/useConfirmDeleteTransaction'
 
 const TransactionsList = ({
 	transactions,
@@ -13,6 +15,9 @@ const TransactionsList = ({
 	hasUserPickedDate,
 }) => {
 	const [filteredTransactions, setFilteredTransactions] = useState([])
+	const { isModalOpen, openModal } = useModal()
+	const confirmDelete = useConfirmDeleteTransaction()
+	const [transactionToDelete, setTransactionToDelete] = useState(null)
 
 	useEffect(() => {
 		setFilteredTransactions(
@@ -27,6 +32,13 @@ const TransactionsList = ({
 
 	return (
 		<>
+			{isModalOpen && (
+				<ModalConfirm
+					title='Are you sure you want to delete this transaction?'
+					confirmButton='Delete'
+					confirmFc={() => confirmDelete(transactionToDelete)}
+				/>
+			)}
 			{filteredTransactions?.length === 0 ? (
 				<TransactionEmpty />
 			) : (
@@ -45,6 +57,8 @@ const TransactionsList = ({
 								key={transaction._id}
 								transaction={transaction}
 								userWindowWidth={userWindowWidth}
+								setTransactionToDelete={setTransactionToDelete}
+								openModal={openModal}
 							/>
 						))}
 					</div>
