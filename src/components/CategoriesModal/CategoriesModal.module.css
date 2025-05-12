@@ -12,7 +12,7 @@
 .modalContent {
   background-color: var(--dark);
   border-radius: 20px;
-  padding: 20px;
+  padding: 40px 16px 39px 20px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -35,8 +35,8 @@
 }
 
 .modalTitle {
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-size: 24px;
+  margin-bottom: 19px;
   color: var(--white);
 }
 
@@ -52,8 +52,14 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+  transition: all 0.3 var(--animation-cubicBezier);
 }
-
+.categoryItem:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.categoryItem:hover .icon {
+  color: var(--green);
+}
 .categoryName {
   font-size: 16px;
   color: var(--white);
@@ -65,7 +71,7 @@
 }
 
 .categoryActions .icon {
-  color: var(--green);
+  color: transparent;
   transition: color var(--animation-cubicBezier);
 }
 
@@ -100,8 +106,8 @@
 .newCategoryInput {
   flex: 1;
   padding: 10px 14px;
-  background-color: var(--surface);
-  border: none;
+  background-color: var(--dark);
+  border: 1px solid rgba(250, 250, 250, 0.2);
   border-radius: 8px;
   font-size: 14px;
   color: var(--white);
@@ -110,10 +116,13 @@
 .submitButton {
   padding: 10px 20px;
   background-color: var(--green);
-  border-radius: 50px;
+  border-radius: 12px;
   font-size: 14px;
   color: var(--dark);
   transition: background-color var(--animation-cubicBezier);
+  width: 115px;
+  height: 43px;
+  transform: translateX(-12%);
 }
 
 .submitButton:hover:enabled {
@@ -124,17 +133,22 @@
   margin-top: 4px;
   font-size: 12px;
   color: var(--error);
+  position: absolute;
+  bottom: 18px;
+  left: 40px;
 }
-
+.icon {
+  width: 20px;
+}
 @media (min-width: 768px) {
   .modalContent {
     border-radius: 30px;
-    padding: 40px;
+    padding: 40px 36px 40px 40px;
     max-width: 500px;
   }
 
   .modalTitle {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 24px;
   }
 
@@ -145,10 +159,13 @@
   .newCategoryContainer {
     margin-top: 32px;
   }
+  .icon {
+    width: 24px;
+  }
 }
 
 @media (min-width: 1440px) {
   .modalContent {
-    padding: 48px;
+    padding: 38px;
   }
 }

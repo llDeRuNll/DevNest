@@ -55,7 +55,9 @@ function UserBarBtn() {
               <LuUser />
             </span>
           )}
-          <p className={s.userName}>{name}</p>
+          <p className={s.userName} title={name}>
+            {name}
+          </p>
           <AiOutlineDown className={`${s.vector} ${isOpen ? s.rotated : ""}`} />
         </div>
         {isOpen && <UserPanel onProfileClick={openModal} />}
