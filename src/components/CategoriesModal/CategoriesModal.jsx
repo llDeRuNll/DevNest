@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
+
+import "react-toastify/dist/ReactToastify.css";
 import { IoMdClose } from "react-icons/io";
 import {
   selectExpensesCategories,
@@ -15,6 +16,8 @@ import {
 } from "../../redux/category/operations";
 import CategoryForm from "../CategoryForm/CategoryForm";
 import CategoryList from "../CategoryList/CategoryList";
+import ToasterError from "../ToasterError/ToasterError";
+import ToasterSuccess from "../ToasterSuccess/ToasterSuccess";
 import styles from "./CategoriesModal.module.css";
 
 const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
@@ -48,15 +51,15 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
           await dispatch(
             categoryChangeInfo({ _id: editingCategory._id, name })
           ).unwrap();
-          toast.success("Категорію оновлено");
+          ToasterSuccess();
         } else {
           await dispatch(categoryPost({ categoryName: name, type })).unwrap();
-          toast.success("Категорію додано");
+          ToasterSuccess();
         }
         resetForm();
         setEditingCategory(null);
       } catch (err) {
-        toast.error(err.message || "Щось пішло не так");
+        ToasterError(err);
       }
     },
     [dispatch, editingCategory, type]
@@ -67,9 +70,9 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     async (_id) => {
       try {
         await dispatch(categoryDelete(_id)).unwrap();
-        toast.success("Категорію видалено");
+        ToasterSuccess();
       } catch {
-        toast.error("Не вдалося видалити категорію");
+        ToasterError();
       }
     },
     [dispatch]

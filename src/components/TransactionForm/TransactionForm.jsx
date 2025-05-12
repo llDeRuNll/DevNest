@@ -159,7 +159,7 @@ const TransactionForm = ({
                 timeIntervals={15}
                 timeCaption="Time"
                 dateFormat="HH:mm"
-                placeholderText="HH:mm"
+                placeholderText="hh:mm"
                 className={s["t-input"]}
               />
               <ErrorMessage
