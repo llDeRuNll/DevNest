@@ -6,25 +6,36 @@
 }
 
 .header {
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1.2;
+  margin-bottom: 13px;
 }
 
 .text {
   font-size: 14px;
+  width: 335px;
+  color: rgba(250, 250, 250, 0.4);
 }
-
+@media (min-width: 768px) {
+  .text {
+    font-size: 16px;
+    width: 500px;
+  }
+  .header {
+    font-size: 38px;
+  }
+}
 @media (min-width: 1440px) {
   .wrapper {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
       "header form"
       "totals form"
       "chart  form";
-    column-gap: 64px;
-    row-gap: 32px;
+    column-gap: 44px;
+    row-gap: 40px;
     padding-top: 60px;
   }
 
@@ -41,11 +52,11 @@
     grid-area: form;
   }
 
-  .header {
-    font-size: 32px;
+  .text {
+    width: 630px;
   }
 
-  .text {
-    font-size: 16px;
+  .header {
+    margin-bottom: 20px;
   }
 }

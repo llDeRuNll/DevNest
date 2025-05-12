@@ -2,28 +2,36 @@
 .editForm {
   background-color: var(--dark);
   border-radius: 20px;
-  padding: 20px;
+  padding: 20px 20px 27px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 19px;
+  height: 600px;
 }
-
+.tInput::placeholder {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(250, 250, 250, 0.4);
+}
 .tRadioGroup {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: row;
+  gap: 14px;
 }
 
 .dateSection {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: row;
+  gap: 14px;
 }
 
 .tLabel {
   margin-bottom: 8px;
   font-size: 14px;
   color: var(--white);
+  margin-bottom: 6px;
+  font-weight: 400;
 }
 
 .tInput,
@@ -31,22 +39,52 @@
 input[type="date"],
 input[type="time"] {
   width: 100%;
-  padding: 10px 14px;
-  background-color: var(--surface);
+  padding: 12px 14px;
+  background-color: #171719;
   border: none;
   border-radius: 8px;
   font-size: 14px;
   color: var(--white);
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  height: 42px;
+}
+/* юююююююююююююююююююююююююююююююююююю */
+.react-datepicker {
+  font-family: inherit;
+  border: none;
+  background-color: #60df2e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.react-datepicker__day {
+  width: 32px; /* Фіксована ширина для симетрії */
+  height: 32px; /* Фіксована висота для симетрії */
+  line-height: 32px; /* Центрування тексту */
+  border-radius: 50%; /* Робить дні круглими */
+  margin: 2px; /* Відступи між днями */
+  text-align: center;
+  color: var(--white);
 }
 
+.react-datepicker__day--selected {
+  background-color: var(--green); /* Колір вибраного дня */
+  color: var(--dark); /* Колір тексту вибраного дня */
+  border-radius: 50%; /* Зберігаємо круглу форму для вибраного дня */
+}
+
+.react-datepicker__day--outside-month {
+  opacity: 0.5; /* Дні з інших місяців менш помітні */
+  color: #d4a373; /* Світло-коричневий для неактивних днів */
+}
+/* ююююююююююююююююююююююююююююююююююююююююююю */
 .tTextarea {
   width: 100%;
   padding: 10px 14px;
-  background-color: var(--surface);
-  border: none;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  background-color: #171719;
   border-radius: 8px;
   resize: none;
-  min-height: 80px;
+  min-height: 91px;
   font-size: 14px;
   color: var(--white);
 }
@@ -58,12 +96,11 @@ input[type="time"] {
 }
 
 .tSendBtn {
-  padding: 12px;
+  padding: 14px 44px;
   background-color: var(--green);
   border-radius: 50px;
   font-size: 16px;
   color: var(--dark);
-  align-self: stretch;
   text-align: center;
   transition: background-color var(--animation-cubicBezier);
 }
@@ -86,6 +123,7 @@ input[type="time"] {
 
 .tRadioBtn {
   accent-color: var(--green-light);
+  background-color: black;
 }
 
 .tInputWrapper {
@@ -103,7 +141,7 @@ input[type="time"] {
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 14px;
-  color: var(--white);
+  color: rgba(250, 250, 250, 0.4);
 }
 
 .tInput[type="number"]::-webkit-outer-spin-button,
@@ -115,13 +153,33 @@ input[type="time"] {
 .tInput[type="number"] {
   appearance: textfield;
 }
-
+.dateSectionWrappDate {
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  position: relative;
+}
+.dateSectionWrappTime {
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  position: relative;
+}
+.icon {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 10;
+}
+/* .............................................................. */
 @media (min-width: 768px) {
   .addForm,
   .editForm {
     border-radius: 30px;
-    padding: 40px;
-    gap: 24px;
+    padding: 40px 108px;
+    gap: 20px;
     align-items: stretch;
   }
 
@@ -132,29 +190,52 @@ input[type="time"] {
 
   .dateSection {
     flex-direction: row;
-    gap: 16px;
+    gap: 20px;
+    justify-content: space-between;
   }
 
+  .tTextarea {
+    height: 97px;
+  }
   .tSendBtn {
     width: auto;
-    align-self: flex-end;
+    align-self: flex-start;
+  }
+  .tLabel {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .tInput::placeholder {
+    font-size: 16px;
+  }
+  .tInput {
+    padding: 12px 18px;
+    height: 48px;
+  }
+  .tInput::placeholder {
+    font-size: 16px;
+  }
+  .dateSectionWrappDate {
+    display: flex;
+    flex-direction: column;
+    min-width: 247px;
+  }
+  .dateSectionWrappTime {
+    display: flex;
+    flex-direction: column;
+    min-width: 221px;
+  }
+  .icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (min-width: 1440px) {
   .addForm,
   .editForm {
-    padding: 48px;
-    gap: 32px;
-  }
-}
-
-.tLabel {
-  margin-bottom: 6px;
-}
-@media (min-width: 768px) {
-  .tLabel {
-    margin-bottom: 8px;
+    padding: 40px;
   }
 }
 
@@ -183,7 +264,7 @@ input[type="time"] {
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 14px;
-  color: var(--white);
+  color: rgba(250, 250, 250, 0.4);
 }
 
 .tInput[type="number"]::-webkit-inner-spin-button,
@@ -214,4 +295,9 @@ input[type="date"]:focus,
 input[type="time"]:focus {
   outline: 2px solid var(--green-light);
   outline-offset: 2px;
+}
+
+.tInputGroup {
+  display: flex;
+  flex-direction: column;
 }

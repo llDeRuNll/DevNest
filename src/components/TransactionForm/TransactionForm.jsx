@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
 import "react-datepicker/dist/react-datepicker.css";
+import { MdOutlineDateRange } from "react-icons/md";
+import { LuClock4 } from "react-icons/lu";
 
 import s from "./TransactionForm.module.css";
 import {
@@ -126,7 +128,8 @@ const TransactionForm = ({
           </div>
 
           <div className={s.dateSection}>
-            <div>
+            <div className={s.dateSectionWrappDate}>
+              <MdOutlineDateRange className={s.icon} color="#fafafa" />
               <label className={s.tLabel}>Date</label>
               <DatePicker
                 selected={values.date}
@@ -137,7 +140,8 @@ const TransactionForm = ({
               />
               <ErrorMessage name="date" component="div" className={s.tError} />
             </div>
-            <div>
+            <div className={s.dateSectionWrappTime}>
+              <LuClock4 className={s.icon} color="#fafafa" />
               <label className={s.tLabel}>Time</label>
               <DatePicker
                 selected={values.time}
