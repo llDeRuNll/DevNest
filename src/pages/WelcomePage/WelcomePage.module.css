@@ -4,6 +4,8 @@
   align-items: flex-start;
   gap: 30px;
   width: 100%;
+  margin-bottom: 186px;
+  margin-top: 126px;
 }
 
 .listInfo {
@@ -41,7 +43,7 @@
 .spanHeading {
   text-decoration: underline;
   text-decoration-skip-ink: none;
-  color: #0ef387;
+  color: var(--green-light);
 }
 .breakMobile {
   display: inline;
@@ -65,17 +67,17 @@
   position: relative;
   border-radius: 20px;
   width: 100%;
-  
-  height: auto; 
+
+  height: auto;
   overflow: visible;
   padding-bottom: 20px;
 }
-
 
 @media (min-width: 768px) {
   .main {
     align-items: flex-start;
     gap: 10px;
+    margin-top: 40px;
   }
 
   .heading br {
@@ -88,7 +90,6 @@
   .description {
     width: 533px;
     font-size: 16px;
-    
   }
 
   .breakMobile {
@@ -126,6 +127,5 @@
   }
   .description {
     padding-bottom: 40px;
-
   }
 }
