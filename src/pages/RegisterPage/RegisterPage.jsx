@@ -1,41 +1,69 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-
+import { toast } from "react-toastify";
+import { GiTerror } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { userRegister } from "../../redux/auth/operations";
 import ToasterSuccess from "../../components/ToasterSuccess/ToasterSuccess";
-import ToasterError from "../../components/ToasterError/ToasterError";
+
+const showRegisterErrorToast = () => {
+  toast.error("Something went wrong, please try again", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+    icon: <GiTerror style={{ color: "#a10000", fontSize: "20px" }} />,
+    style: {
+      backgroundColor: "#ffe5e5",
+      color: "#a10000",
+    },
+  });
+};
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { error, isLoading } = useSelector((state) => state.auth);
+
   const initialValues = { name: "", email: "", password: "" };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    name: Yup.string()
+      .min(2, "Minimum 2 characters")
+      .max(32, "Name must be at most 32 characters")
+      .required("Name is required"),
+    email: Yup.string()
+      .email("Invalid email")
+      .max(64, "Email must be at most 64 characters")
+      .required("Email is required"),
     password: Yup.string()
       .min(8, "Minimum 8 characters")
+      .max(64, "Email must be at most 64 characters")
       .required("Password is required"),
   });
 
-  const handleRegister = async (values) => {
+  const handleRegister = async (values, actions) => {
     try {
       await dispatch(userRegister(values)).unwrap();
       ToasterSuccess();
-      navigate("/transactions/income");
+      setTimeout(() => {
+        navigate("/transactions/expenses", { replace: true });
+      }, 1000); 
     } catch {
-      ToasterError()
+      showRegisterErrorToast();
+    } finally {
+      actions.setSubmitting(false);
     }
   };
 
   useEffect(() => {
     if (error) {
-      ToasterError();
+      showRegisterErrorToast();
     }
   }, [error]);
 

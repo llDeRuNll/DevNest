@@ -7,13 +7,13 @@ export const useConfirmDeleteTransaction = () => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
-  const confirmDelete = async (_id, type, sum) => {
+  const confirmDelete = async ({ _id, type, sum }) => {
     try {
       await dispatch(transactionDelete({ _id, type, sum })).unwrap();
-      toast.success("Transaction syccesful");
+      toast.success("transaction deleted");
       closeModal();
     } catch (err) {
-      toast.error(err.message || "deleted is not successful");
+      toast.error(err.message || "error delete");
     }
   };
 

@@ -11,6 +11,8 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 
+import Loader from "../Loader/Loader";
+
 const CustomInput = ({ type = "text", ...props }) => {
   const [field, meta] = useField(props);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -95,8 +97,7 @@ const AuthForm = ({
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, actions) => {
-            onSubmit(values);
-            actions.setSubmitting(false);
+            onSubmit(values, actions);
           }}
         >
           {({ isSubmitting }) => (
@@ -122,7 +123,7 @@ const AuthForm = ({
                 disabled={isSubmitting || isLoading}
                 className={buttonClass}
               >
-                {isLoading ? "Loading..." : buttonText}
+                {isLoading ? <Loader /> : buttonText}
               </button>
             </Form>
           )}

@@ -10,15 +10,18 @@ const BgImageWrapper = ({ parentRef }) => {
           <source
             media="(min-width: 1440px)"
             srcSet="/imgWelcomePage/Rec2xDesktop.jpg"
+            loading="lazy"
           />
           <source
             media="(min-width: 768px)"
             srcSet="/imgWelcomePage/Rec2xLopTop.jpg"
+            loading="lazy"
           />
           <img
             src="/imgWelcomePage/Rec2xMob.jpg"
             alt="Welcome"
             className={s.mainImg}
+            loading="lazy"
           />
         </picture>
 
