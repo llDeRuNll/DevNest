@@ -2,8 +2,8 @@
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
-import { authReduser } from "./auth/slice";
-import { categoryReduser } from "./category/slice";
+import { authReducer } from "./auth/slice";
+import { categoryReducer } from "./category/slice";
 import { transactionsReduser } from "./transactions/slice";
 import {
   FLUSH,
@@ -22,8 +22,8 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReduser),
-    category: categoryReduser,
+    auth: persistReducer(authPersistConfig, authReducer),
+    category: categoryReducer,
     transactions: transactionsReduser,
   },
   middleware: (getDefaultMiddleware) =>

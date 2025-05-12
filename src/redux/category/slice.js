@@ -89,6 +89,6 @@ const categorySlice = createSlice({
   },
 });
 
-const categoryReduser = categorySlice.reducer;
-export { categoryReduser };
+const categoryReducer = categorySlice.reducer;
+export { categoryReducer };
 export default categorySlice.reducer;
