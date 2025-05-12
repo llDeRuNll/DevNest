@@ -8,6 +8,7 @@ import {
   userAvatarDelete,
   userInfoUpdate,
 } from "../../redux/auth/operations";
+import CurrencySelect from "../CurrencySelect/CurrencySelect";
 
 function UserSetsModal({ onClose }) {
   const dispatch = useDispatch();
@@ -24,14 +25,12 @@ function UserSetsModal({ onClose }) {
   const [currency, setCurrency] = useState(currentCurrency || "uah");
   const [isSaving, setIsSaving] = useState(false);
 
-  // Синхронизация с Redux
   useEffect(() => {
     setPreview(avatarUrl || null);
     setName(currentName || "");
     setCurrency(currentCurrency || "uah");
   }, [avatarUrl, currentName, currentCurrency]);
 
-  // Очистка URL.createObjectURL
   useEffect(() => {
     return () => {
       if (preview && preview !== avatarUrl) {
@@ -69,7 +68,7 @@ function UserSetsModal({ onClose }) {
       fileInputRef.current.value = "";
       toast.success("Avatar successfully deleted!");
     } catch (error) {
-      toast.error(error, "Error deleting avatar.");
+      toast.error("Error deleting avatar.");
     }
   };
 
@@ -165,16 +164,7 @@ function UserSetsModal({ onClose }) {
         </div>
 
         <div className={s.formGroup}>
-          <select
-            className={s.select}
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            aria-label="Select currency"
-          >
-            <option value="uah">₴ UAH</option>
-            <option value="usd">$ USD</option>
-            <option value="eur">€ EUR</option>
-          </select>
+          <CurrencySelect value={currency} onChange={setCurrency} />
           <input
             type="text"
             className={s.input}

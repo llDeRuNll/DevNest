@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-import { LuUser } from "react-icons/lu"; // Импортируем LuUser
+import { LuUser } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import s from "./UserBarBtn.module.css";
 import UserPanel from "../UserPanel/UserPanel";
@@ -55,7 +55,9 @@ function UserBarBtn() {
               <LuUser />
             </span>
           )}
-          <p className={s.userName}>{name}</p>
+          <p className={s.userName} title={name}>
+            {name}
+          </p>
           <AiOutlineDown className={`${s.vector} ${isOpen ? s.rotated : ""}`} />
         </div>
         {isOpen && <UserPanel onProfileClick={openModal} />}
