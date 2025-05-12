@@ -5,8 +5,8 @@
   padding: 20px 20px 27px;
   display: flex;
   flex-direction: column;
+
   gap: 19px;
-  height: 600px;
 }
 .tInput::placeholder {
   font-size: 14px;
@@ -102,6 +102,8 @@ input[type="time"] {
   font-size: 16px;
   color: var(--dark);
   text-align: center;
+  width: 115px;
+  height: 45px;
   transition: background-color var(--animation-cubicBezier);
 }
 
