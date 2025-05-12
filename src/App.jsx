@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userRefresh } from "./redux/auth/operations";
+import { userLogout, userRefresh } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import "./App.css";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
@@ -11,6 +11,8 @@ import Loader from "./components/Loader/Loader";
 
 import PrivateRoute from "./routes/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./routes/RestrictedRoute/RestrictedRoute";
+import { selectError } from "./redux/transactions/selectors";
+import ToasterError from "./components/ToasterError/ToasterError";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -25,10 +27,18 @@ const TransactionHistoryPage = lazy(() =>
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const errorMessage = useSelector(selectError);
 
   useEffect(() => {
     dispatch(userRefresh());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (errorMessage === "Invalid session") {
+      dispatch(userLogout());
+      ToasterError();
+    }
+  }, [errorMessage, dispatch]);
 
   return isRefreshing ? null : (
     <Suspense fallback={<Loader />}>
