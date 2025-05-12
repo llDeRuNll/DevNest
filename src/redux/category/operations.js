@@ -8,7 +8,7 @@ export const categoryPost = createAsyncThunk(
       const response = await trackerApi.post("/categories", category);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -20,7 +20,7 @@ export const categoryGetAll = createAsyncThunk(
       const response = await trackerApi.get("/categories");
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -34,7 +34,7 @@ export const categoryChangeInfo = createAsyncThunk(
       });
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -46,7 +46,7 @@ export const categoryDelete = createAsyncThunk(
       await trackerApi.delete("/categories/" + categoryId);
       return categoryId;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );

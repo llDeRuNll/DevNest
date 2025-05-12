@@ -7,8 +7,8 @@ import { selectIsLoading } from '../../redux/transactions/selectors'
 import Loader from '../../components/Loader/Loader'
 import TransactionsSummary from '../../components/TransactionsSummary/TransactionsSummary'
 import TransactionsList from '../../components/TransactionsList/TransactionsList'
-import { useWindowWidth } from '../../hooks/useWindowWidth'
-import { useTransactionType } from '../../hooks/useTransactionType'
+import { useTransactionType } from '../../hooks/Transaction/useTransactionType'
+import { useWindowWidth } from '../../hooks/Transaction/useWindowWidth'
 
 const TransactionHistoryPage = () => {
 	const [hasUserPickedDate, setHasUserPickedDate] = useState(false)
