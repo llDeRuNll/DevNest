@@ -14,7 +14,7 @@ const TransactionsHistoryNav = () => {
           key={to}
           to={to}
           className={({ isActive }) =>
-            isActive ? styles.activeLink : styles.navLink
+            isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
           }
         >
           {label}

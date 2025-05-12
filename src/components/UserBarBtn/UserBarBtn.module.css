@@ -1,3 +1,4 @@
+
 .userContainer {
   position: relative;
   display: inline-block;
@@ -14,10 +15,12 @@
   cursor: pointer;
 }
 
+
 .userImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+
 }
 
 .userName {
@@ -40,6 +43,7 @@
   display: flex;
 
   align-items: center;
+
   gap: 10px;
   background-color: #171719;
   border-radius: 30px;
@@ -47,6 +51,7 @@
   justify-content: space-between;
   width: 220px;
   height: 56px;
+
 }
 .userName {
   color: #fafafa66;
