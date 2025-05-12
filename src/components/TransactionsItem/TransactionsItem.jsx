@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 import s from './TransactionsItem.module.css'
@@ -51,28 +52,28 @@ const TransactionsItem = ({
 				</div>
 			</div>
 
-			{/* модалка з формою */}
-			{isEditModalOpen && (
-				<div className={s.backdrop} onClick={() => setIsEditModalOpen(false)}>
-					<div className={s.modalContent} onClick={e => e.stopPropagation()}>
-						<TransactionForm
-							transaction={{
-								_id,
-								type,
-								category: category._id,
-								date,
-								time,
-								sum,
-								comment,
-							}}
-							isModal={true}
-							onClose={() => setIsEditModalOpen(false)}
-						/>
-					</div>
-				</div>
-			)}
-		</>
-	)
-}
 
-export default TransactionsItem
+      {isEditModalOpen && (
+        <div className={s.backdrop} onClick={() => setIsEditModalOpen(false)}>
+          <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
+            <TransactionForm
+              transaction={{
+                _id,
+                type,
+                category: category._id,
+                date,
+                time,
+                sum,
+                comment,
+              }}
+              isModal={true}
+              onClose={() => setIsEditModalOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default TransactionsItem;

@@ -20,7 +20,7 @@ export const userRegister = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -33,7 +33,7 @@ export const userLogin = createAsyncThunk(
       setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -45,7 +45,7 @@ export const userLogout = createAsyncThunk(
       await trackerApi.get("/auth/logout");
       setAuthHeader("");
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -63,7 +63,7 @@ export const userRefresh = createAsyncThunk(
       setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -75,7 +75,7 @@ export const userCurrent = createAsyncThunk(
       const response = await trackerApi.get("/users/current");
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -87,7 +87,7 @@ export const userInfoUpdate = createAsyncThunk(
       const response = await trackerApi.patch("/users/info", newInfo);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -99,7 +99,7 @@ export const userAvatarChange = createAsyncThunk(
       const response = await trackerApi.patch("/users/avatar", newAvatar);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -112,10 +112,14 @@ export const userAvatarDelete = createAsyncThunk(
       currentAvatar.lastIndexOf("/") + 1,
       currentAvatar.length - 5
     );
+    console.log(currentAvatar);
+
+    console.log(currentAvatarId);
+
     try {
       await trackerApi.delete("/users/avatar/" + currentAvatarId);
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
