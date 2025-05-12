@@ -1,4 +1,4 @@
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import s from "./TransactionsChart.module.css";
 import TransactionChartStatistics from "../TransactionChartStatistics/TransactionChartStatistics";

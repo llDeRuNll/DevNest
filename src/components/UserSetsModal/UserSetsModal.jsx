@@ -24,14 +24,12 @@ function UserSetsModal({ onClose }) {
   const [currency, setCurrency] = useState(currentCurrency || "uah");
   const [isSaving, setIsSaving] = useState(false);
 
-  // Синхронизация с Redux
   useEffect(() => {
     setPreview(avatarUrl || null);
     setName(currentName || "");
     setCurrency(currentCurrency || "uah");
   }, [avatarUrl, currentName, currentCurrency]);
 
-  // Очистка URL.createObjectURL
   useEffect(() => {
     return () => {
       if (preview && preview !== avatarUrl) {

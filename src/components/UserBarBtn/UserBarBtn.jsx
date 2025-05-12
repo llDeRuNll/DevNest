@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-import { LuUser } from "react-icons/lu"; // Импортируем LuUser
+import { LuUser } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import s from "./UserBarBtn.module.css";
 import UserPanel from "../UserPanel/UserPanel";

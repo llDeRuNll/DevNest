@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 186px;
-  margin-top: 126px;
 }
 
 .header {
@@ -18,7 +16,14 @@
   letter-spacing: -0.02em;
   color: rgba(250, 250, 250, 0.4);
 }
+.loaderWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  min-height: 150px;
+}
 @media (min-width: 1440px) {
   .wrapper {
     display: grid;
@@ -64,7 +69,6 @@
   }
 }
 
-/* placeholder */
 .piePlaceholderContainer {
   display: flex;
   flex-direction: column;

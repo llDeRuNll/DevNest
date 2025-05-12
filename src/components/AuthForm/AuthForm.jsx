@@ -3,14 +3,12 @@ import { Formik, Form, useField } from "formik";
 import { Link } from "react-router-dom";
 import s from "./AuthForm.module.css";
 import BgImageWrapper from "../BgImageWrapper/BgImageWrapper";
-
 import {
   AiOutlineCheckCircle,
   AiOutlineCloseCircle,
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
-
 import Loader from "../Loader/Loader";
 
 const CustomInput = ({ type = "text", ...props }) => {
@@ -85,11 +83,18 @@ const AuthForm = ({
 
   return (
     <div className={s.authContainer}>
+      {/* Overlay loader */}
+      {isLoading && (
+        <div className={s.loaderOverlay}>
+          <Loader />
+        </div>
+      )}
+
       <div ref={authBgRef} className={s.authBgWrapper}>
         <BgImageWrapper parentRef={authBgRef} className={s.authBg} />
       </div>
 
-      <div className={s.authFormContainer}>
+      <div className={s.authFormContainer} aria-hidden={isLoading}>
         <h2 className={s.authTitle}>{title}</h2>
         <p className={s.authDescription}>{description}</p>
 
@@ -123,7 +128,7 @@ const AuthForm = ({
                 disabled={isSubmitting || isLoading}
                 className={buttonClass}
               >
-                {isLoading ? <Loader /> : buttonText}
+                {buttonText}
               </button>
             </Form>
           )}
