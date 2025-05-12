@@ -150,7 +150,6 @@ const TransactionForm = ({
             />
           </div>
 
-          {/* Date and time pickers */}
           <div className={s["date-section"]}>
             <div>
               <label className={s["t-label"]}>Date</label>
@@ -188,7 +187,6 @@ const TransactionForm = ({
             </div>
           </div>
 
-          {/* Category field */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Category</label>
             <input
@@ -206,7 +204,6 @@ const TransactionForm = ({
             />
           </div>
 
-          {/* Sum field */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Sum</label>
             <div className={s["t-input-wrapper"]}>
@@ -221,7 +218,6 @@ const TransactionForm = ({
             <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
-          {/* Comment field */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Comment</label>
             <Field
@@ -265,7 +261,7 @@ const TransactionForm = ({
 
   return (
     <div className={s.backdrop} onClick={onClose}>
-      <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
+      <div className={s["modalContent"]} onClick={(e) => e.stopPropagation()}>
         {formContent}
       </div>
     </div>
