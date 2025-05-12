@@ -33,14 +33,8 @@ const userLocalDataUpdate = (state, { name, email, avatarUrl, currency }) => {
 };
 
 const slice = createSlice({
-  name: "authReduser",
+  name: "authReducer",
   initialState,
-
-  reducers: {
-    testAction: () => {
-      console.log("test");
-    },
-  },
 
   extraReducers: (builder) => {
     builder
@@ -59,7 +53,7 @@ const slice = createSlice({
         state.user.avatarUrl = action.payload.user.avatarUrl;
         state.user.currency = action.payload.user.currency;
       })
-      .addCase(userLogout.fulfilled, () => {
+      .addCase(userLogout.pending, () => {
         return initialState;
       })
       .addCase(userRefresh.pending, (state) => {
@@ -95,5 +89,5 @@ const slice = createSlice({
   },
 });
 
-export const authReduser = slice.reducer;
+export const authReducer = slice.reducer;
 export const { testAction } = slice.actions;

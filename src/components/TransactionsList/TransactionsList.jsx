@@ -1,8 +1,9 @@
 import s from './TransactionsList.module.css'
 import TransactionEmpty from '../TransactionEmpty/TransactionEmpty'
-import { searchSelection } from '../../utils/searchSelection'
+import { searchSelection } from '../../utils/Transaction/searchSelection'
 import { useEffect, useState } from 'react'
 import TransactionsItem from '../TransactionsItem/TransactionsItem'
+import ModalConfirm from '../ModalConfirm/ModalConfirm'
 
 const TransactionsList = ({
 	transactions,

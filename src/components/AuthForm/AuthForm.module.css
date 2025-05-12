@@ -167,8 +167,7 @@
 
   .inputWrapper {
     max-width: 399px;
-    
-  } 
+  }
 
   .authInput {
     padding-top: 14px;
@@ -196,7 +195,7 @@
     display: flex;
     width: 100%;
     gap: 54px;
-    margin-top: 132px;
+    margin-top: 76px;
     margin-bottom: 100px;
   }
   .authFormContainer {

@@ -21,6 +21,7 @@
   }
   @media (min-width: 1440px) {
     width: 630px;
+    height: 302px;
   }
 }
 .chartContainer {

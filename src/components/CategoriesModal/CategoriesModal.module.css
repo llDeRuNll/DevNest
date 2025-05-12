@@ -17,6 +17,7 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  max-width: 335px;
 }
 
 .closeButtonContainer {
@@ -24,7 +25,9 @@
   top: 12px;
   right: 12px;
 }
-
+.icons {
+  font-size: 16px;
+}
 .icon {
   font-size: 26px;
   color: var(--white);
@@ -84,19 +87,23 @@
 }
 
 .newCategoryTitle {
+
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: -0.02em;
   color: #0ef387;
   margin-bottom: 8px;
+
 }
 
 .newCategoryForm {
   display: flex;
   flex-direction: row;
 }
-
+.t {
+  color: var(--grey);
+}
 .newCategoryInput {
   flex: 1;
   padding: 12px 14px;
@@ -132,7 +139,9 @@
   .modalContent {
     border-radius: 30px;
     padding: 40px;
+
     width: 500px;
+
   }
 
   .modalTitle {

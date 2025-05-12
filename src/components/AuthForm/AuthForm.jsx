@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Formik, Form, useField } from "formik";
 import { Link } from "react-router-dom";
 import s from "./AuthForm.module.css";
@@ -11,6 +11,7 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 
+// Кастомний інпут із підтримкою валідації та іконок
 const CustomInput = ({ type = "text", ...props }) => {
   const [field, meta] = useField(props);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -60,6 +61,7 @@ const CustomInput = ({ type = "text", ...props }) => {
   );
 };
 
+// Головний компонент форми авторизації/реєстрації
 const AuthForm = ({
   fields = [],
   initialValues,
@@ -74,15 +76,19 @@ const AuthForm = ({
   isLoading,
   variant = "login",
 }) => {
+  const authBgRef = useRef(null);
+
   const buttonClass =
     variant === "register"
       ? `${s.authBtn} ${s.btnRegister}`
       : `${s.authBtn} ${s.btnLogin}`;
+
   return (
     <div className={s.authContainer}>
-      <div className={s.authBgWrapper}>
-        <BgImageWrapper className={s.authBg}/>
+      <div ref={authBgRef} className={s.authBgWrapper}>
+        <BgImageWrapper parentRef={authBgRef} className={s.authBg} />
       </div>
+
       <div className={s.authFormContainer}>
         <h2 className={s.authTitle}>{title}</h2>
         <p className={s.authDescription}>{description}</p>
