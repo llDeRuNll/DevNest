@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlineDown } from "react-icons/ai";
+import { LuUser } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import s from "./UserBarBtn.module.css";
 import UserPanel from "../UserPanel/UserPanel";
@@ -8,11 +9,8 @@ import Loader from "../Loader/Loader";
 
 function UserBarBtn() {
   const { user, isRefreshing } = useSelector((state) => state.auth);
-  const defaultImg = "/assets/default-avatar.png";
   const defaultName = "Guest";
-  const imgSrc = user.avatarUrl
-    ? `${user.avatarUrl}?t=${Date.now()}`
-    : defaultImg;
+  const imgSrc = user.avatarUrl ? `${user.avatarUrl}?t=${Date.now()}` : null;
   const name = user.name || defaultName;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -50,9 +48,17 @@ function UserBarBtn() {
           tabIndex={0}
           onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
         >
-          <img src={imgSrc} alt={name} className={s.userImg} />
-          <p className={s.userName}>{name}</p>
-          <AiOutlineDown className={s.vector} />
+          {imgSrc ? (
+            <img src={imgSrc} alt={name} className={s.userImg} />
+          ) : (
+            <span className={s.avatarIcon}>
+              <LuUser />
+            </span>
+          )}
+          <p className={s.userName} title={name}>
+            {name}
+          </p>
+          <AiOutlineDown className={`${s.vector} ${isOpen ? s.rotated : ""}`} />
         </div>
         {isOpen && <UserPanel onProfileClick={openModal} />}
       </div>

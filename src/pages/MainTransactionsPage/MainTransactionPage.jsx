@@ -4,13 +4,18 @@ import TransactionsChart from "../../components/TransactionsChart/TransactionsCh
 import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
 import { SiDatadog } from "react-icons/si";
 import s from "./MainTransactionsPage.module.css";
-import { selectTransactionsExpenses } from "../../redux/transactions/selectors";
+import {
+  selectIsLoading,
+  selectTransactionsExpenses,
+} from "../../redux/transactions/selectors";
 import { useSelector } from "react-redux";
 import { dataWithPercentage } from "../../utils/expensesOperations";
+import Loader from "../../components/Loader/Loader";
 
 const MainTransactionPage = () => {
   const expencesFromServer = useSelector(selectTransactionsExpenses);
   const expences = dataWithPercentage(expencesFromServer);
+  const isLoading = useSelector(selectIsLoading);
 
   return (
     <div className="container">
@@ -28,7 +33,11 @@ const MainTransactionPage = () => {
         </div>
 
         <div className={s.chartSection}>
-          {expences.length > 0 ? (
+          {isLoading ? (
+            <div className={s.loaderWrapper}>
+              <Loader />
+            </div>
+          ) : expences.length > 0 ? (
             <TransactionsChart expences={expences} />
           ) : (
             <div className={s.piePlaceholderContainer}>

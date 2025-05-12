@@ -1,154 +1,170 @@
 .modalBackdrop {
-	position: fixed;
-	inset: 0;
-	background-color: rgba(12, 13, 13, 0.6);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 16px;
-	z-index: 1000;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(12, 13, 13, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
 }
 
 .modalContent {
-	background-color: var(--color-text-strong);
-	border-radius: 20px;
-	padding: 20px;
-	width: 100%;
-	max-height: 90vh;
-	overflow-y: auto;
-	position: relative;
-	max-width: 335px;
+  background-color: var(--color-text-strong);
+  border-radius: 20px;
+  padding: 40px 16px 39px 20px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  max-width: 335px;
 }
-
 .closeButtonContainer {
-	position: absolute;
-	top: 12px;
-	right: 12px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }
 .icons {
-	font-size: 16px;
+  font-size: 16px;
 }
 .icon {
-	font-size: 20px;
-	color: var(--color-text);
-	cursor: pointer;
+  font-size: 20px;
+  color: var(--color-text);
+  cursor: pointer;
 }
 
 .modalTitle {
-	font-size: 20px;
-	margin-bottom: 16px;
-	color: var(--color-text);
+  font-size: 24px;
+  margin-bottom: 19px;
+  color: var(--color-text);
 }
 
 .categoriesList {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .categoryItem {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px 0;
-	border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+  transition: all 0.3 var(--animation-cubicBezier);
 }
-
+.categoryItem:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.categoryItem:hover .icon {
+  color: var(--green);
+}
 .categoryName {
-	font-size: 16px;
-	color: var(--color-text);
+  font-size: 16px;
+  color: var(--color-text);
 }
 
 .categoryActions {
-	display: flex;
-	gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .categoryActions .icon {
-	color: var(--color-primary);
-	transition: color var(--animation-cubicBezier);
+  color: transparent;
+  transition: color var(--animation-cubicBezier);
 }
 
 .categoryActions .icon:hover {
-	color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .emptyMessage {
-	text-align: center;
-	padding: 20px 0;
-	font-size: 14px;
-	color: var(--color-text-muted);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
 }
 
 .newCategoryContainer {
-	margin-top: 24px;
+  margin-top: 24px;
 }
 
 .newCategoryTitle {
-	font-size: 16px;
-	margin-bottom: 12px;
-	color: var(--color-accent);
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--color-accent);
 }
 
 .newCategoryForm {
-	display: flex;
-	gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 .t {
-	color: var(--color-text-muted);
+  color: var(--color-text-muted);
 }
 .newCategoryInput {
-	flex: 1;
-	padding: 10px 14px;
-	background-color: var(--color-surface);
-	border: none;
-	border-radius: 8px;
-	font-size: 14px;
-	color: var(--color-text);
+  flex: 1;
+  padding: 10px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-text);
 }
 
 .submitButton {
-	padding: 10px 20px;
-	background-color: var(--color-primary);
-	border-radius: 50px;
-	font-size: 14px;
-	color: var(--color-text-strong);
-	transition: background-color var(--animation-cubicBezier);
+  padding: 10px 20px;
+  background-color: var(--green);
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--dark);
+  transition: background-color var(--animation-cubicBezier);
+  width: 115px;
+  height: 43px;
+  transform: translateX(-12%);
 }
 
 .submitButton:hover:enabled {
-	background-color: var(--color-accent);
+  background-color: var(--color-accent);
 }
 
 .error {
-	margin-top: 4px;
-	font-size: 12px;
-	color: var(--color-error);
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--color-error);
+  position: absolute;
+  bottom: 18px;
+  left: 40px;
 }
-
+.icon {
+  width: 20px;
+}
 @media (min-width: 768px) {
-	.modalContent {
-		border-radius: 30px;
-		padding: 40px;
-		max-width: 500px;
-	}
+  .modalContent {
+    border-radius: 30px;
+    padding: 40px 36px 40px 40px;
+    max-width: 500px;
+  }
 
-	.modalTitle {
-		font-size: 24px;
-		margin-bottom: 24px;
-	}
+  .modalTitle {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
 
-	.categoryItem {
-		padding: 12px 0;
-	}
+  .categoryItem {
+    padding: 12px 0;
+  }
 
-	.newCategoryContainer {
-		margin-top: 32px;
-	}
+  .newCategoryContainer {
+    margin-top: 32px;
+  }
+  .icon {
+    width: 24px;
+  }
 }
 
 @media (min-width: 1440px) {
-	.modalContent {
-		padding: 48px;
-	}
+  .modalContent {
+    padding: 38px;
+  }
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import DecorationTab from "../DecorationTab/DecorationTab";
 import s from "./BgImageWrapper.module.css";
 
@@ -8,17 +7,43 @@ const BgImageWrapper = ({ parentRef }) => {
       <div className={s.backgroundImage} ref={parentRef}>
         <picture>
           <source
+            type="image/avif"
             media="(min-width: 1440px)"
-            srcSet="/imgWelcomePage/Rec2xDesktop.jpg"
+            srcSet="
+              /imgWelcomePage/hero-desk.avif ,
+              /imgWelcomePage/hero-desk@2x.avif ,
+              
+            "
+            loading="lazy"
           />
+
           <source
+            type="image/avif"
             media="(min-width: 768px)"
-            srcSet="/imgWelcomePage/Rec2xLopTop.jpg"
+            srcSet="
+              /imgWelcomePage/hero-tab.avif ,
+              /imgWelcomePage/hero-tab@2x.avif ,
+             
+            "
+            loading="lazy"
           />
+
+          <source
+            type="image/avif"
+            srcSet="
+              /imgWelcomePage/hero-mob.avif ,
+              /imgWelcomePage/hero-mob@2x.avif ,
+              
+            "
+            loading="lazy"
+          />
+
           <img
-            src="/imgWelcomePage/Rec2xMob.jpg"
+            src="/imgWelcomePage/hero-mob.avif "
+            srcSet=" /imgWelcomePage/hero-mob@2x.avif "
             alt="Welcome"
             className={s.mainImg}
+            loading="lazy"
           />
         </picture>
 
