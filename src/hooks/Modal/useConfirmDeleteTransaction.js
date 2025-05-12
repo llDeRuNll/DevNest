@@ -7,9 +7,9 @@ export const useConfirmDeleteTransaction = () => {
 	const { closeModal } = useModal()
 	const dispatch = useDispatch()
 
-	const confirmDelete = async (_id, type) => {
+	const confirmDelete = async ({ _id, type, sum }) => {
 		try {
-			await dispatch(transactionDelete({ _id, type })).unwrap()
+			await dispatch(transactionDelete({ _id, type, sum })).unwrap()
 			toast.success('Транзакцію видалено')
 			closeModal()
 		} catch (err) {

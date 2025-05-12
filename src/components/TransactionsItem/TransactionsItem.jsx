@@ -5,27 +5,17 @@ import { croppedComment } from '../../utils/Transaction/croppedComment'
 import { croppedCategory } from '../../utils/Transaction/croppedCategory'
 import { normalizeData } from '../../utils/Transaction/normalizeData'
 import TransactionForm from '../TransactionForm/TransactionForm'
-import ModalConfirm from '../ModalConfirm/ModalConfirm'
-import { useConfirmDeleteTransaction } from '../../hooks/Modal/useConfirmDeleteTransaction'
-import { useModal } from '../../utils/Modal/useModal'
 
 const TransactionsItem = ({
 	transaction: { _id, type, category, comment, date, time, sum },
 	userWindowWidth,
+	openModal,
+	setTransactionToDelete,
 }) => {
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-	const confirmDelete = useConfirmDeleteTransaction()
-	const { isModalOpen, openModal } = useModal()
 
 	return (
 		<>
-			{isModalOpen && (
-				<ModalConfirm
-					title='Are you sure you want to delete this transaction?'
-					confirmButton='Delete'
-					confirmFc={() => confirmDelete(_id, type)}
-				/>
-			)}
 			<div className={s.tableRow}>
 				<p className={s.tableCell} title={category.categoryName}>
 					{croppedCategory(category.categoryName, userWindowWidth)}
@@ -47,7 +37,14 @@ const TransactionsItem = ({
 						<FiEdit2 className={s.buttonIcon} color='#0c0d0d' />
 						<span>Edit</span>
 					</button>
-					<button className={s.deleteButton} type='button' onClick={openModal}>
+					<button
+						className={s.deleteButton}
+						type='button'
+						onClick={() => {
+							setTransactionToDelete({ _id, type, sum })
+							openModal()
+						}}
+					>
 						<FiTrash2 className={s.buttonIcon} color=' #fafafa' />
 						<span>Delete</span>
 					</button>
