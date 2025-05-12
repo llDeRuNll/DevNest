@@ -197,9 +197,7 @@
 .close-icon:hover {
   color: var(--green-light);
 }
-.modalContent {
-  max-width: 335px;
-}
+
 @media screen and (min-width: 768px) {
   .add-form {
     max-width: 704px;
