@@ -110,7 +110,7 @@ export const userAvatarDelete = createAsyncThunk(
     const currentAvatar = thunkAPI.getState().auth.user.avatarUrl;
     const currentAvatarId = currentAvatar.slice(
       currentAvatar.lastIndexOf("/") + 1,
-      currentAvatar.length - 4
+      currentAvatar.length - 5
     );
     console.log(currentAvatar);
 

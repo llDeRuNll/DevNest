@@ -54,7 +54,6 @@ const TransactionsItem = ({
         </div>
       </div>
 
-      {/* модалка з формою */}
       {isEditModalOpen && (
         <div className={s.backdrop} onClick={() => setIsEditModalOpen(false)}>
           <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>

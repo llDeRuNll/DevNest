@@ -10,10 +10,10 @@ export const useConfirmDeleteTransaction = () => {
   const confirmDelete = async (_id, type, sum) => {
     try {
       await dispatch(transactionDelete({ _id, type, sum })).unwrap();
-      toast.success("Транзакцію видалено");
+      toast.success("Transaction syccesful");
       closeModal();
     } catch (err) {
-      toast.error(err.message || "Помилка при видаленні");
+      toast.error(err.message || "deleted is not successful");
     }
   };
 
