@@ -34,7 +34,7 @@ const CategoryForm = ({ initialValue, isEditing, onSubmit }) => (
         <ErrorMessage
           name="categoryName"
           component="div"
-          className={styles.error1}
+          className={styles.error}
         />
 
         <button type="submit" className={styles.submitButton}>
