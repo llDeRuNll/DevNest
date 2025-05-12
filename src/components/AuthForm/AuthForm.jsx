@@ -11,7 +11,6 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 
-// Кастомний інпут із підтримкою валідації та іконок
 const CustomInput = ({ type = "text", ...props }) => {
   const [field, meta] = useField(props);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -61,7 +60,6 @@ const CustomInput = ({ type = "text", ...props }) => {
   );
 };
 
-// Головний компонент форми авторизації/реєстрації
 const AuthForm = ({
   fields = [],
   initialValues,
