@@ -1,7 +1,7 @@
-import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {
-  userCurrent,
   userLogin,
+  userCurrent,
   userLogout,
   userRefresh,
 } from "../auth/operations";
@@ -23,17 +23,29 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
       .addCase(userLogout.fulfilled, () => initialState)
       .addCase(userRefresh.rejected, () => initialState)
 
+      .addCase(userLogin.fulfilled, (state, action) => {
+        const cats = action.payload.user?.categories;
+        if (!cats) return;
+        const { incomes = [], expenses = [] } = cats;
+        state.incomes = incomes.map((cat) => ({ ...cat, type: "incomes" }));
+        state.expenses = expenses.map((cat) => ({ ...cat, type: "expenses" }));
+      })
+
+      .addCase(userCurrent.fulfilled, (state, action) => {
+        const cats = action.payload.categories;
+        if (!cats) return;
+        const { incomes = [], expenses = [] } = cats;
+        state.incomes = incomes.map((cat) => ({ ...cat, type: "incomes" }));
+        state.expenses = expenses.map((cat) => ({ ...cat, type: "expenses" }));
+      })
+
       .addCase(categoryPost.fulfilled, (state, action) => {
         const newCat = action.payload;
-        if (newCat.type === "incomes") {
-          state.incomes.push(newCat);
-        } else if (newCat.type === "expenses") {
-          state.expenses.push(newCat);
-        }
+        if (newCat.type === "incomes") state.incomes.push(newCat);
+        else if (newCat.type === "expenses") state.expenses.push(newCat);
       })
 
       .addCase(categoryGetAll.fulfilled, (state, action) => {
@@ -52,8 +64,7 @@ const categorySlice = createSlice({
 
       .addCase(categoryDelete.fulfilled, (state, action) => {
         const payload = action.payload;
-        let id;
-        let type;
+        let id, type;
         if (typeof payload === "string") {
           id = payload;
         } else {
@@ -68,27 +79,9 @@ const categorySlice = createSlice({
           state.incomes = state.incomes.filter((c) => c._id !== id);
           state.expenses = state.expenses.filter((c) => c._id !== id);
         }
-      })
-
-      .addMatcher(
-        isAnyOf(userLogin.fulfilled, userCurrent.fulfilled),
-        (state, action) => {
-          const { categories } = action.payload;
-          if (categories.incomes)
-            state.incomes = categories.incomes.map((cat) => ({
-              ...cat,
-              type: "incomes",
-            }));
-          if (categories.expenses)
-            state.expenses = categories.expenses.map((cat) => ({
-              ...cat,
-              type: "expenses",
-            }));
-        }
-      );
+      });
   },
 });
 
-const categoryReducer = categorySlice.reducer;
-export { categoryReducer };
+export const categoryReducer = categorySlice.reducer;
 export default categorySlice.reducer;
