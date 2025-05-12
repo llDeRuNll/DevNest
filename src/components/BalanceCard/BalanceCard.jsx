@@ -1,4 +1,4 @@
-import React from "react";
+
 import s from "./BalanceCard.module.css";
 import { HiMiniArrowUpRight } from "react-icons/hi2";
 

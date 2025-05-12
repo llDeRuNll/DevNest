@@ -1,18 +1,25 @@
+import React from "react";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import TransactionsChart from "../../components/TransactionsChart/TransactionsChart";
 import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
 import s from "./MainTransactionsPage.module.css";
+import { selectTransactionsExpenses } from "../../redux/transactions/selectors";
+import { useSelector } from "react-redux";
+import { dataWithPercentage } from "../../utils/expensesOperations";
 
 const MainTransactionPage = () => {
+  const dataFromServer = useSelector(selectTransactionsExpenses);
+  const data = dataWithPercentage(dataFromServer);
+
   return (
     <div className="container">
       <div className={s.wrapper}>
         <div className={s.headerSection}>
-          <p className={s.header}>Expense Log</p>
-          <h1 className={s.text}>
+          <h1 className={s.header}>Expense Log</h1>
+          <p className={s.text}>
             Capture and organize every penny spent with ease! A clear view of
             your financial habits at your fingertips.
-          </h1>
+          </p>
         </div>
 
         <div className={s.totalsSection}>
@@ -20,7 +27,7 @@ const MainTransactionPage = () => {
         </div>
 
         <div className={s.chartSection}>
-          <TransactionsChart />
+          <TransactionsChart data={data} />
         </div>
 
         <div className={s.formSection}>

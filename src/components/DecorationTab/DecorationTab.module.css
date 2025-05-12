@@ -5,18 +5,15 @@
   top: 0;
   left: 0;
   z-index: 2;
-
-  overflow: visible; 
-  pointer-events: none; 
-
+  overflow: visible;
+  pointer-events: none;
 }
 
 .cardWrapper {
   position: absolute;
-
   top: 0;
   left: 0;
-  transform: none;
+  transform: translate(0, 0);
   transition: transform 0.1s linear;
 }
 
@@ -26,7 +23,7 @@
   width: 248px;
   height: 81px;
   left: -10px;
-  position: absolute
+  position: absolute;
 }
 
 @media (max-width: 767px) {
@@ -42,6 +39,7 @@
 }
 @media (min-width: 1440px) {
   .wrapper {
+    position: absolute;
     overflow: hidden;
   }
 }

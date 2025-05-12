@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import s from "./UserBarBtn.module.css";
 import UserPanel from "../UserPanel/UserPanel";
 import UserSetsModal from "../UserSetsModal/UserSetsModal";
+import Loader from "../Loader/Loader";
 
 function UserBarBtn() {
   const { user, isRefreshing } = useSelector((state) => state.auth);
@@ -36,7 +37,7 @@ function UserBarBtn() {
   }, []);
 
   if (isRefreshing) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

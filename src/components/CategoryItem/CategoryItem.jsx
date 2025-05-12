@@ -1,18 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "../CategoriesModal/CategoriesModal.module.css";
+import { FaCheck } from "react-icons/fa";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 const CategoryItem = React.memo(({ cat, onSelect, onEdit, onDelete }) => (
   <li className={styles.categoryItem}>
     <span className={styles.categoryName}>{cat.categoryName}</span>
     <div className={styles.categoryActions}>
       <button onClick={() => onSelect(cat)} className={styles.icon}>
-        Select
+        <FaCheck />
       </button>
       <button onClick={() => onEdit(cat)} className={styles.icon}>
-        Edit
+        <MdOutlineModeEdit />
       </button>
       <button onClick={() => onDelete(cat._id)} className={styles.icon}>
-        Delete
+        <MdDeleteOutline />
       </button>
     </div>
   </li>

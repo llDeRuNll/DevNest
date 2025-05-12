@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-top: 24px;
+  padding: 50px 0;
 }
 
 .header {
@@ -11,34 +11,47 @@
 }
 
 .text {
+  font-family: var(--font-family);
+  font-weight: 400;
   font-size: 14px;
+  letter-spacing: -0.02em;
+  color: rgba(250, 250, 250, 0.4);
 }
 
 @media (min-width: 1440px) {
   .wrapper {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr minmax(335px, 1fr);
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
       "header form"
       "totals form"
       "chart  form";
-    column-gap: 64px;
-    row-gap: 32px;
+    column-gap: 40px;
+    row-gap: 44px;
     padding-top: 60px;
+    align-items: flex-start;
   }
 
   .headerSection {
     grid-area: header;
   }
+
   .totalsSection {
     grid-area: totals;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
+
   .chartSection {
     grid-area: chart;
   }
+
   .formSection {
     grid-area: form;
+    min-width: 335px;
+    align-self: start;
   }
 
   .header {
