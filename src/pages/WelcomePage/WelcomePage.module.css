@@ -82,7 +82,7 @@
     display: inline;
   }
   .noBreak {
-    white-space: normal; /* ❗️важливо: дозволити перенос всередині */
+    white-space: normal;
   }
 
   .description {

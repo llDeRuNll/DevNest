@@ -12,7 +12,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  z-index: 10;
+  z-index: 2;
 }
 
 .iconCircle {
@@ -80,4 +80,11 @@
 height: 43px;
   }
 }
-
+@media (min-width: 1440px){
+  .balanceCard {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+  }
+}

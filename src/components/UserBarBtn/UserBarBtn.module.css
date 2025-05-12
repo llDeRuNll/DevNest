@@ -1,3 +1,4 @@
+
 .userContainer {
   position: relative;
   display: flex;
@@ -16,8 +17,10 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
+
   width: 100%;
   justify-content: space-between;
+
 }
 
 .userImg {
@@ -29,6 +32,7 @@
   margin-bottom: 6px;
   object-fit: cover;
 }
+
 
 .userName {
   color: #fafafa66;
