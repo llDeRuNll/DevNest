@@ -23,6 +23,7 @@ const initialState = {
   sid: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isLoading: false,
 };
 
 const userLocalDataUpdate = (state, { name, email, avatarUrl, currency }) => {
@@ -41,6 +42,14 @@ const slice = createSlice({
       .addCase(userRegister.fulfilled, (state, action) => {
         state.user.name = action.payload.name;
         state.user.email = action.payload.email;
+        state.isLoading = false;
+      })
+
+      .addCase(userRegister.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userRegister.rejected, (state) => {
+        state.isLoading = false;
       })
 
       .addCase(userLogin.fulfilled, (state, action) => {
@@ -52,8 +61,19 @@ const slice = createSlice({
         state.user.email = action.payload.user.email;
         state.user.avatarUrl = action.payload.user.avatarUrl;
         state.user.currency = action.payload.user.currency;
+        state.isLoading = false;
       })
-      .addCase(userLogout.pending, () => {
+
+
+      .addCase(userLogin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userLogin.rejected, (state) => {
+        state.isLoading = false;
+      })
+
+      .addCase(userLogout.fulfilled, () => {
+
         return initialState;
       })
       .addCase(userRefresh.pending, (state) => {
