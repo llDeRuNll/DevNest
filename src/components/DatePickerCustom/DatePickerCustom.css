@@ -17,7 +17,7 @@
 
 .react-datepicker__navigation-icon::before {
 	border-width: 1.5px 1.5px 0 0;
-	border-color: var(--background);
+	border-color: var(--color-bg);
 	top: 14px;
 	height: 7px;
 	width: 7px;
@@ -48,7 +48,7 @@
 	font-weight: 400;
 	font-size: 16px;
 	letter-spacing: -0.02em;
-	color: var(--background);
+	color: var(--color-bg);
 	&::after {
 		position: absolute;
 		content: '';
@@ -71,10 +71,10 @@
 	font-size: 14px;
 	line-height: 1.29;
 	letter-spacing: -0.02em;
-	color: var(--background);
+	color: var(--color-bg);
 	&:not([aria-disabled='true']):hover {
 		border-radius: 50%;
-		background-color: var(--green);
+		background-color: var(--color-primary);
 		transition: background-color 250ms linear;
 	}
 }
@@ -87,10 +87,10 @@
 	border-radius: 50%;
 	width: 24px;
 	height: 24px;
-	color: var(--white);
-	background-color: var(--background);
+	color: var(--color-text);
+	background-color: var(--color-bg);
 	&:not([aria-disabled='true']):hover {
-		background-color: var(--green);
+		background-color: var(--color-primary);
 	}
 }
 

@@ -2,26 +2,26 @@
 	width: 100%;
 	height: 50px;
 	padding: 0 55px 0 30px;
-	border: 1px solid var(--grey);
+	border: 1px solid var(--color-text-muted);
 	border-radius: 30px;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 1.5;
-	color: var(--white);
+	color: var(--color-text);
 	background-color: transparent;
 	transition: border 250ms linear;
 	&::placeholder {
 		font-weight: 400;
 		font-size: 16px;
 		letter-spacing: -0.02em;
-		color: var(--grey);
+		color: var(--color-text-muted);
 	}
 	&:hover {
-		border: 1px solid var(--green-light);
+		border: 1px solid var(--color-accent);
 	}
 	&:focus {
 		outline: transparent;
-		border: 1px solid var(--green-light);
+		border: 1px solid var(--color-accent);
 	}
 }
 

@@ -4,8 +4,8 @@ import { searchSelection } from '../../utils/Transaction/searchSelection'
 import { useEffect, useState } from 'react'
 import TransactionsItem from '../TransactionsItem/TransactionsItem'
 import ModalConfirm from '../ModalConfirm/ModalConfirm'
-import { useModal } from '../../utils/Modal/useModal'
 import { useConfirmDeleteTransaction } from '../../hooks/Modal/useConfirmDeleteTransaction'
+import { useUserContext } from '../../utils/UserContext/useUserContext'
 
 const TransactionsList = ({
 	transactions,
@@ -13,9 +13,10 @@ const TransactionsList = ({
 	selectedDate,
 	searchQuery,
 	hasUserPickedDate,
+	transactionsType,
 }) => {
 	const [filteredTransactions, setFilteredTransactions] = useState([])
-	const { isModalOpen, openModal } = useModal()
+	const { isModalOpen, openModal } = useUserContext()
 	const confirmDelete = useConfirmDeleteTransaction()
 	const [transactionToDelete, setTransactionToDelete] = useState(null)
 
@@ -40,7 +41,7 @@ const TransactionsList = ({
 				/>
 			)}
 			{filteredTransactions?.length === 0 ? (
-				<TransactionEmpty />
+				<TransactionEmpty transactionsType={transactionsType} />
 			) : (
 				<div className={s.tableWrapper}>
 					<div className={s.tableHeaderWrapper}>

@@ -21,21 +21,21 @@
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 1.5;
-	color: var(--white);
-	background-color: var(--background);
+	color: var(--color-text);
+	background-color: var(--color-bg);
 	transition: border 250ms var(--animation-cubicBezier);
 	&::placeholder {
 		font-weight: 400;
 		font-size: 16px;
 		letter-spacing: -0.02em;
-		color: var(--grey);
+		color: var(--color-text-muted);
 	}
 	&:hover {
-		border: 1px solid var(--green-light);
+		border: 1px solid var(--color-accent);
 	}
 	&:focus {
 		outline: transparent;
-		border: 1px solid var(--green-light);
+		border: 1px solid var(--color-accent);
 	}
 }
 

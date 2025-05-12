@@ -46,6 +46,7 @@ const TransactionHistoryPage = () => {
 							selectedDate={selectedDate}
 							transactions={transactions}
 							hasUserPickedDate={hasUserPickedDate}
+							transactionsType={transactionsType}
 						/>
 					</div>
 				</div>

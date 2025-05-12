@@ -9,7 +9,7 @@
 	align-items: center;
 	font-weight: 400;
 	font-size: 14px;
-	color: var(--white);
+	color: var(--color-text);
 }
 
 .actionButtonsWrapper {
@@ -31,18 +31,18 @@
 }
 
 .editButton {
-	background-color: var(--green-light);
+	background-color: var(--color-accent);
 	transition: background-color 250ms var(--animation-cubicBezier);
 	&:hover {
-		background-color: var(--green);
+		background-color: var(--color-primary);
 	}
 }
 .deleteButton {
 	border: 1px solid transparent;
-	background-color: var(--background);
+	background-color: var(--color-bg);
 	transition: border 250ms var(--animation-cubicBezier);
 	&:hover {
-		border: 1px solid var(--green-light);
+		border: 1px solid var(--color-accent);
 	}
 }
 
@@ -93,11 +93,11 @@
 	}
 	.editButton {
 		min-width: 118px;
-		color: var(--background);
+		color: var(--color-bg);
 	}
 	.deleteButton {
 		min-width: 133px;
-		color: var(--white);
+		color: var(--color-text);
 	}
 }
 /* TransactionsItem.module.css */
@@ -113,7 +113,7 @@
 }
 
 .modalContent {
-	background-color: var(--dark);
+	background-color: var(--color-text-strong);
 	border-radius: 20px;
 	padding: 24px;
 	width: 90%;
