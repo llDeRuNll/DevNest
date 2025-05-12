@@ -34,14 +34,8 @@ const userLocalDataUpdate = (state, { name, email, avatarUrl, currency }) => {
 };
 
 const slice = createSlice({
-  name: "authReduser",
+  name: "authReducer",
   initialState,
-
-  reducers: {
-    testAction: () => {
-      console.log("test");
-    },
-  },
 
   extraReducers: (builder) => {
     builder
@@ -70,6 +64,7 @@ const slice = createSlice({
         state.isLoading = false;
       })
 
+
       .addCase(userLogin.pending, (state) => {
         state.isLoading = true;
       })
@@ -78,6 +73,7 @@ const slice = createSlice({
       })
 
       .addCase(userLogout.fulfilled, () => {
+
         return initialState;
       })
       .addCase(userRefresh.pending, (state) => {

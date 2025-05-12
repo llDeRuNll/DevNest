@@ -8,7 +8,7 @@ export const transactionPost = createAsyncThunk(
       const response = await trackerApi.post("/transactions", transaction);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -28,7 +28,7 @@ export const transactionsGetByType = createAsyncThunk(
       );
       return { items: response.data, type: params.type };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -41,7 +41,7 @@ export const transactionDelete = createAsyncThunk(
       await trackerApi.delete("/transactions/" + _id);
       return { _id, type, sum };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );
@@ -56,7 +56,7 @@ export const transactionChangeInfo = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.message);
     }
   }
 );

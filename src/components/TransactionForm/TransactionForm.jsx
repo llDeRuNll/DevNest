@@ -4,7 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
+import { MdOutlineDateRange } from "react-icons/md";
+import { LuClock4 } from "react-icons/lu";
 
 import s from "./TransactionForm.module.css";
 import {
@@ -37,6 +40,9 @@ const TransactionForm = ({
   defaultType = "expenses",
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
+
   const userCurrency =
     useSelector((state) => state.auth.user.currency) || "uah";
   const displayCurrency = userCurrency.toUpperCase();
@@ -46,6 +52,11 @@ const TransactionForm = ({
 
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
+
+  // Determine initial type from URL param or fallback
+  const initialType = transaction
+    ? transaction.type
+    : params.type || defaultType;
 
   const initialValues = transaction
     ? {
@@ -57,7 +68,7 @@ const TransactionForm = ({
         comment: transaction.comment,
       }
     : {
-        type: defaultType,
+        type: initialType,
         date: null,
         time: null,
         category: "",
@@ -115,15 +126,23 @@ const TransactionForm = ({
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
           <div className={s["t-radio-group"]}>
-            {["expenses", "incomes"].map((t) => (
-              <label key={t} className={s["t-radio-label"]}>
-                <Field
+            {[
+              { key: "expenses", label: "Expense" },
+              { key: "incomes", label: "Income" },
+            ].map(({ key, label }) => (
+              <label key={key} className={s["t-radio-label"]}>
+                <input
                   type="radio"
                   name="type"
-                  value={t}
+                  value={key}
+                  checked={values.type === key}
+                  onChange={() => {
+                    setFieldValue("type", key);
+                    navigate(`/transactions/${key}`);
+                  }}
                   className={s["t-radio-btn"]}
                 />
-                {t === "expenses" ? "Expense" : "Income"}
+                {label}
               </label>
             ))}
             <ErrorMessage
@@ -149,8 +168,11 @@ const TransactionForm = ({
                 className={s["t-error"]}
               />
             </div>
-            <div>
-              <label className={s["t-label"]}>Time</label>
+
+            <div className={s.dateSectionWrappTime}>
+              <LuClock4 className={s.icon} color="#fafafa" />
+              <label className={s.tLabel}>Time</label>
+
               <DatePicker
                 selected={values.time}
                 onChange={(v) => setFieldValue("time", v)}
@@ -244,7 +266,7 @@ const TransactionForm = ({
 
   return (
     <div className={s.backdrop} onClick={onClose}>
-      <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
+      <div className={s["modalContent"]} onClick={(e) => e.stopPropagation()}>
         {formContent}
       </div>
     </div>
