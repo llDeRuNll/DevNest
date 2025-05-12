@@ -95,5 +95,5 @@ const slice = createSlice({
   },
 });
 
-export const authReduser = slice.reducer;
+export const authReducer = slice.reducer;
 export const { testAction } = slice.actions;

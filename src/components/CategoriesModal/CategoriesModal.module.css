@@ -17,6 +17,7 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  max-width: 335px;
 }
 
 .closeButtonContainer {
@@ -24,7 +25,9 @@
   top: 12px;
   right: 12px;
 }
-
+.icons {
+  font-size: 16px;
+}
 .icon {
   font-size: 20px;
   color: var(--white);
@@ -84,14 +87,16 @@
 .newCategoryTitle {
   font-size: 16px;
   margin-bottom: 12px;
-  color: var(--white);
+  color: var(--green-light);
 }
 
 .newCategoryForm {
   display: flex;
   gap: 8px;
 }
-
+.t {
+  color: var(--grey);
+}
 .newCategoryInput {
   flex: 1;
   padding: 10px 14px;
@@ -125,7 +130,7 @@
   .modalContent {
     border-radius: 30px;
     padding: 40px;
-    max-width: 520px;
+    max-width: 500px;
   }
 
   .modalTitle {
