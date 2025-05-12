@@ -1,4 +1,4 @@
-export const normalizeData = (date, windowWidth) => {
+export const normalizeData = (date, windowWidth = 1440) => {
 	const dateInstance = new Date(date)
 
 	const dayShortNames = {

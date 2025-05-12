@@ -33,7 +33,7 @@ const TransactionsItem = ({
 				<p className={s.tableCell} title={comment}>
 					{croppedComment(comment, userWindowWidth)}
 				</p>
-				<p className={s.tableCell} title={date}>
+				<p className={s.tableCell} title={normalizeData(date)}>
 					{normalizeData(date, userWindowWidth)}
 				</p>
 				<p className={s.tableCell}>{time}</p>

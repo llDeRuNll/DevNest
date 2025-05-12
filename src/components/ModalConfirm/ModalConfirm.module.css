@@ -36,7 +36,7 @@
 	width: 20px;
 	height: 20px;
 	color: #fafafa;
-	transition: color 250ms var(----animation-cubicBezier);
+	transition: color 250ms var(--animation-cubicBezier);
 	&:hover {
 		color: var(--grey);
 	}
@@ -68,7 +68,7 @@
 }
 
 .logoutButton {
-	transition: background-color 250ms var(----animation-cubicBezier);
+	transition: background-color 250ms var(--animation-cubicBezier);
 	&:hover {
 		background-color: #0ebb69;
 	}
@@ -78,7 +78,7 @@
 	min-width: 133px;
 	color: #fafafa;
 	background-color: #29292b;
-	transition: color 250ms var(----animation-cubicBezier);
+	transition: color 250ms var(--animation-cubicBezier);
 	&:hover {
 		color: rgba(250, 250, 250, 0.5);
 	}
