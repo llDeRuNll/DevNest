@@ -48,16 +48,18 @@ function UserBarBtn() {
           tabIndex={0}
           onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
         >
-          {imgSrc ? (
-            <img src={imgSrc} alt={name} className={s.userImg} />
-          ) : (
-            <span className={s.avatarIcon}>
-              <LuUser />
-            </span>
-          )}
-          <p className={s.userName} title={name}>
-            {name}
-          </p>
+          <div className={s.usersBlock}>
+            {imgSrc ? (
+              <img src={imgSrc} alt={name} className={s.userImg} />
+            ) : (
+              <span className={s.avatarIcon}>
+                <LuUser />
+              </span>
+            )}
+            <p className={s.userName} title={name}>
+              {name}
+            </p>
+          </div>
           <AiOutlineDown className={`${s.vector} ${isOpen ? s.rotated : ""}`} />
         </div>
         {isOpen && <UserPanel onProfileClick={openModal} />}
