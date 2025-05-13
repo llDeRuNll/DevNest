@@ -20,12 +20,15 @@ const authPersistConfig = {
   whitelist: ["accessToken", "refreshToken", "sid", "user", "isLoggedIn"],
 };
 
+const isDevelopment = import.meta.env.MODE !== "production";
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     category: categoryReducer,
     transactions: transactionsReduser,
   },
+  devTools: isDevelopment,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

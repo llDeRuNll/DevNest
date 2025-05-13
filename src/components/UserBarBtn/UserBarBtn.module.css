@@ -9,7 +9,7 @@
   background: #1a1a1a;
   padding: 5px 10px;
   border-radius: 20px;
-  max-width: 100%;
+  max-width: 197px;
 }
 
 .userImg {
@@ -33,6 +33,7 @@
 .vector {
   font-size: 16px;
   color: #0ef387;
+  margin-left: 65px;
 }
 
 .rotated {
@@ -50,4 +51,9 @@
   font-size: 24px;
   color: #666;
   margin-right: 10px;
+}
+@media screen and (min-width: 1440px) {
+  .userBar {
+    min-width: 220px;
+  }
 }
