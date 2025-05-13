@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import enGB from "date-fns/locale/en-GB";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +16,8 @@ import {
   transactionPost,
 } from "../../redux/transactions/operations";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
+
+registerLocale("en-GB", enGB);
 
 const validationSchema = Yup.object({
   type: Yup.string()
@@ -53,7 +56,6 @@ const TransactionForm = ({
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
 
-  // Determine initial type from URL param or fallback
   const initialType = transaction
     ? transaction.type
     : params.type || defaultType;
@@ -116,7 +118,7 @@ const TransactionForm = ({
     }
   };
 
-  const formContent = (
+  return (
     <Formik
       initialValues={initialValues}
       enableReinitialize
@@ -125,6 +127,7 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
+          {/* Radio buttons disabled when in modal */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -141,6 +144,7 @@ const TransactionForm = ({
                     navigate(`/transactions/${key}`);
                   }}
                   className={s["t-radio-btn"]}
+                  disabled={isModal}
                 />
                 {label}
               </label>
@@ -152,20 +156,20 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Date & Time pickers */}
           <div className={s["date-section"]}>
             <div className={s.dateSectionWrappDate}>
-              <MdOutlineDateRange
-                className={s.icon}
-                color="#fafafa"
-                size="16"
-              />
+              <MdOutlineDateRange className={s.icon} size={16} />
               <label className={s["t-label"]}>Date</label>
               <DatePicker
+                locale="en-GB"
                 selected={values.date}
                 onChange={(v) => setFieldValue("date", v)}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="YYYY-MM-DD"
                 className={s["t-input"]}
+                calendarClassName={s["greenCalendar"]}
+                disabled={isModal}
               />
               <ErrorMessage
                 name="date"
@@ -173,21 +177,20 @@ const TransactionForm = ({
                 className={s["t-error"]}
               />
             </div>
-
             <div className={s.dateSectionWrappTime}>
-              <LuClock4 className={s.icon} color="#fafafa" size="16" />
+              <LuClock4 className={s.icon} size={16} />
               <label className={s["t-label"]}>Time</label>
-
               <DatePicker
-                selected={values.time}
-                onChange={(v) => setFieldValue("time", v)}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={15}
-                timeCaption="Time"
+                selected={values.time}
+                onChange={(v) => setFieldValue("time", v)}
                 dateFormat="HH:mm"
-                placeholderText="00:00:00"
+                placeholderText="00:00"
                 className={s["t-input"]}
+                calendarClassName={s["greenCalendar"]}
+                disabled={isModal}
               />
               <ErrorMessage
                 name="time"
@@ -197,6 +200,7 @@ const TransactionForm = ({
             </div>
           </div>
 
+          {/* Category selector */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Category</label>
             <input
@@ -205,7 +209,8 @@ const TransactionForm = ({
               placeholder="Select category"
               value={selectedCategoryName}
               className={s["t-input"]}
-              onClick={() => setIsCategoryModalOpen(true)}
+              onClick={() => !isModal && setIsCategoryModalOpen(true)}
+              disabled={isModal}
             />
             <ErrorMessage
               name="category"
@@ -214,6 +219,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Sum input */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Sum</label>
             <div className={s["t-input-wrapper"]}>
@@ -222,12 +228,14 @@ const TransactionForm = ({
                 name="sum"
                 placeholder="Enter sum"
                 className={s["t-input"]}
+                disabled={isModal}
               />
               <span className={s["t-currency"]}>{displayCurrency}</span>
             </div>
             <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
+          {/* Comment textarea */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Comment</label>
             <Field
@@ -235,6 +243,7 @@ const TransactionForm = ({
               name="comment"
               placeholder="Enter comment"
               className={s["t-textarea"]}
+              disabled={isModal}
             />
             <ErrorMessage
               name="comment"
@@ -243,6 +252,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Submit button */}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -251,13 +261,20 @@ const TransactionForm = ({
             {transaction ? "Edit" : "Add"}
           </button>
 
+          {/* Categories modal */}
           {isCategoryModalOpen && (
             <CategoriesModal
               type={values.type}
+              selectedCategoryId={values.category}
               onClose={() => setIsCategoryModalOpen(false)}
               onSelectCategory={(cat) => {
-                setFieldValue("category", cat._id);
-                setSelectedCategoryName(cat.categoryName);
+                if (cat) {
+                  setFieldValue("category", cat._id);
+                  setSelectedCategoryName(cat.categoryName);
+                } else {
+                  setFieldValue("category", "");
+                  setSelectedCategoryName("");
+                }
                 setIsCategoryModalOpen(false);
               }}
             />
@@ -265,16 +282,6 @@ const TransactionForm = ({
         </Form>
       )}
     </Formik>
-  );
-
-  if (!isModal) return formContent;
-
-  return (
-    <div className={s.backdrop} onClick={onClose}>
-      <div className={s["modalContent"]} onClick={(e) => e.stopPropagation()}>
-        {formContent}
-      </div>
-    </div>
   );
 };
 

@@ -57,7 +57,7 @@
 .authBtn {
   border-radius: 40px;
   padding: 14px 44px;
-  max-width: 138px;
+  max-width: 139px;
   margin-top: 60px;
   background: var(--color-accent);
   font-weight: 400;
@@ -191,7 +191,7 @@
   }
 
   .authBtn {
-    max-width: 145px;
+    max-width: 146px;
     margin-top: 36px;
     font-size: 16px;
   }

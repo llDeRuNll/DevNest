@@ -1,4 +1,3 @@
-// redux/store.js
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
@@ -26,6 +25,7 @@ export const store = configureStore({
     category: categoryReducer,
     transactions: transactionsReduser,
   },
+  devTools: false,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
