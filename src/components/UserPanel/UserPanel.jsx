@@ -41,14 +41,6 @@ function UserPanel({ onProfileClick }) {
           </button>
         </div>
       </div>
-
-      {isModalOpen && (
-        <ModalConfirm
-          title="Are you sure you want to log out?"
-          confirmButton="Yes, log out"
-          confirmFc={handleConfirmLogout}
-        />
-      )}
     </>
   );
 }
