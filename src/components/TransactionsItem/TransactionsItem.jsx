@@ -1,29 +1,35 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import s from "./TransactionsItem.module.css";
 import { croppedComment } from "../../utils/Transaction/croppedComment";
 import { normalizeData } from "../../utils/Transaction/normalizeData";
 import TransactionForm from "../TransactionForm/TransactionForm";
 
-const truncate = (str, maxChars = 10) =>
+const truncate = (str, maxChars = 8) =>
   str.length > maxChars ? `${str.slice(0, maxChars)}...` : str;
 
 const TransactionsItem = ({
-  transaction: { _id, type, category, comment, date, time, sum },
+  transaction: {
+    _id,
+    type,
+    category,
+    comment,
+    date,
+    time,
+    sum,
+    currency = "UAH",
+  },
   userWindowWidth,
   openModal,
   setTransactionToDelete,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const userCurrencyCode =
-    useSelector((state) => state.auth.user.currency)?.toUpperCase() || "UAH";
 
   return (
     <>
       <div className={s.tableRow}>
         <p className={s.tableCell} title={category.categoryName}>
-          {truncate(category.categoryName, userWindowWidth)}
+          {truncate(category.categoryName)}
         </p>
 
         <p className={s.tableCell} title={comment}>
@@ -36,9 +42,7 @@ const TransactionsItem = ({
 
         <p className={s.tableCell}>{time}</p>
 
-        <p className={s.tableCell}>
-          {`${(sum || 0).toFixed(2)} / ${userCurrencyCode}`}
-        </p>
+        <p className={s.tableCell}>{`${sum} / ${currency}`}</p>
 
         <div className={s.actionButtonsWrapper}>
           <button
@@ -46,7 +50,7 @@ const TransactionsItem = ({
             type="button"
             onClick={() => setIsEditModalOpen(true)}
           >
-            <FiEdit2 className={s.buttonIcon} />
+            <FiEdit2 className={s.buttonIcon} color="#0c0d0d" />
             <span>Edit</span>
           </button>
           <button
@@ -57,7 +61,7 @@ const TransactionsItem = ({
               openModal();
             }}
           >
-            <FiTrash2 className={s.buttonIcon} />
+            <FiTrash2 className={s.buttonIcon} color="#fafafa" />
             <span>Delete</span>
           </button>
         </div>
@@ -75,6 +79,7 @@ const TransactionsItem = ({
                 time,
                 sum,
                 comment,
+                currency,
               }}
               isModal={true}
               onClose={() => setIsEditModalOpen(false)}

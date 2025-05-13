@@ -1,34 +1,31 @@
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { LuUser } from "react-icons/lu";
 import { CiLogout } from "react-icons/ci";
-
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { TfiArrowCircleDown } from "react-icons/tfi";
-import s from "./UserPanel.module.css";
-import { userLogout } from "../../redux/auth/operations";
-import { useDispatch, useSelector } from "react-redux";
-
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import ModalConfirm from "../ModalConfirm/ModalConfirm";
+import s from "./UserPanel.module.css";
+import { userLogout } from "../../redux/auth/operations";
 import Loader from "../Loader/Loader";
-
+import ModalConfirm from "../ModalConfirm/ModalConfirm";
 import { useUserContext } from "../../utils/UserContext/useUserContext";
-
 import { selectIsLoading } from "../../redux/transactions/selectors";
 
-function UserPanel({ onProfileClick }) {
+const UserPanel = ({ onProfileClick }) => {
   const { userSelect, setTheme } = useUserContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isModalOpen, openModal, closeModal } = useUserContext();
-
   const isLoggingOut = useSelector(selectIsLoading);
+
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const handleConfirmLogout = async () => {
     try {
       await dispatch(userLogout()).unwrap();
-      closeModal();
+      setIsLogoutModalOpen(false);
       navigate("/");
       toast.success("You have successfully logged out!");
     } catch {
@@ -61,39 +58,39 @@ function UserPanel({ onProfileClick }) {
             <IoColorPaletteOutline className={s.icon} size={18} />
           </label>
           <select
-            className={s.selector}
-            name="themeSwitcher"
             id="theme-switcher"
-            onChange={(e) => handleThemeChange(e.target.value)}
+            className={s.selector}
             value={userSelect}
+            onChange={(e) => handleThemeChange(e.target.value)}
             disabled={isLoggingOut}
           >
-            <option className={s.selectorItem} value="dark">
-              Dark
-            </option>
-            <option className={s.selectorItem} value="blue">
-              Blue
-            </option>
+            <option value="dark">Dark</option>
+            <option value="blue">Blue</option>
           </select>
           <TfiArrowCircleDown className={s.selectorIcon} />
         </div>
         <div>
-          <button className={s.bthnIcon} onClick={openModal}>
+          <button
+            className={s.bthnIcon}
+            onClick={() => setIsLogoutModalOpen(true)}
+            disabled={isLoggingOut}
+          >
             <CiLogout className={s.icon} />
             Log out
           </button>
         </div>
       </div>
 
-      {isModalOpen && (
+      {isLogoutModalOpen && (
         <ModalConfirm
           title="Are you sure you want to log out?"
           confirmButton="Yes, log out"
           confirmFc={handleConfirmLogout}
+          cancelFc={() => setIsLogoutModalOpen(false)}
         />
       )}
     </>
   );
-}
+};
 
 export default UserPanel;
