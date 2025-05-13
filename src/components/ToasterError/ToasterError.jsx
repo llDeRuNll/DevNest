@@ -12,7 +12,7 @@ const ToasterError = () => {
     draggable: true,
     progress: undefined,
     className: s.customToastDelete,
-    theme: "light",
+    theme: "red",
     transition: Slide,
     icon: <GiTerror className={s.icon} />,
   });

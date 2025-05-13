@@ -35,7 +35,18 @@
   background-color: inherit;
   color: #fafafa;
 }
-
+.loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
 .authInput::placeholder {
   font-weight: 400;
   font-size: 14px;
@@ -46,7 +57,7 @@
 .authBtn {
   border-radius: 40px;
   padding: 14px 44px;
-  max-width: 138px;
+  max-width: 139px;
   margin-top: 60px;
   background: #0ef387;
   font-weight: 400;
@@ -180,7 +191,7 @@
   }
 
   .authBtn {
-    max-width: 145px;
+    max-width: 146px;
     margin-top: 36px;
     font-size: 16px;
   }

@@ -68,7 +68,7 @@ function UserSetsModal({ onClose }) {
       fileInputRef.current.value = "";
       toast.success("Avatar successfully deleted!");
     } catch (error) {
-      toast.error("Error deleting avatar.");
+      toast.error(error, "Error deleting avatar.");
     }
   };
 
@@ -115,8 +115,7 @@ function UserSetsModal({ onClose }) {
       onClose();
       toast.success("Profile successfully updated!");
     } catch (error) {
-      console.error("Profile update error:", error);
-      toast.error("Failed to update profile.");
+      toast.error(error, "Failed to update profile.");
     } finally {
       setIsSaving(false);
     }

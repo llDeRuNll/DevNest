@@ -33,8 +33,11 @@
 .vector {
   font-size: 16px;
   color: #0ef387;
+
   margin-left: auto;
   width: 40px;
+
+
 }
 
 .rotated {
@@ -53,4 +56,9 @@
   font-size: 24px;
   color: #666;
   margin-right: 10px;
+}
+@media screen and (min-width: 1440px) {
+  .userBar {
+    min-width: 220px;
+  }
 }
