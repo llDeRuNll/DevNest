@@ -9,9 +9,9 @@
   background: #1a1a1a;
   padding: 5px 10px;
   border-radius: 20px;
-  max-width: 100%;
+  width: 216px;
+  /* justify-content: space-between; */
 }
-
 .userImg {
   width: 40px;
   height: 40px;
@@ -33,9 +33,12 @@
 .vector {
   font-size: 16px;
   color: #0ef387;
+  margin-left: auto;
+  width: 40px;
 }
 
 .rotated {
+  transition: 500ms;
   transform: rotate(180deg);
 }
 

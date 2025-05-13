@@ -169,7 +169,14 @@ function UserSetsModal({ onClose }) {
             type="text"
             className={s.input}
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              const newName = e.target.value;
+              if (newName.length > 32) {
+                toast.error("Doesn't your passport burst?");
+                return;
+              }
+              setName(newName);
+            }}
             placeholder="Your name"
             aria-label="Your name"
           />
