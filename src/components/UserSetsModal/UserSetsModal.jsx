@@ -172,7 +172,7 @@ function UserSetsModal({ onClose }) {
             onChange={(e) => {
               const newName = e.target.value;
               if (newName.length > 32) {
-                toast.error("Doesn't your passport burst?");
+                toast.error("Doesn't your passport burst???");
                 return;
               }
               setName(newName);
