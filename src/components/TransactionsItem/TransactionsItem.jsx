@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import s from "./TransactionsItem.module.css";
 import { croppedComment } from "../../utils/Transaction/croppedComment";
@@ -15,12 +16,14 @@ const TransactionsItem = ({
   setTransactionToDelete,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const userCurrencyCode =
+    useSelector((state) => state.auth.user.currency)?.toUpperCase() || "UAH";
 
   return (
     <>
       <div className={s.tableRow}>
         <p className={s.tableCell} title={category.categoryName}>
-          {truncate(category.categoryName)}
+          {truncate(category.categoryName, userWindowWidth)}
         </p>
 
         <p className={s.tableCell} title={comment}>
@@ -33,7 +36,9 @@ const TransactionsItem = ({
 
         <p className={s.tableCell}>{time}</p>
 
-        <p className={s.tableCell}>{`${sum} / UAH`}</p>
+        <p className={s.tableCell}>
+          {`${(sum || 0).toFixed(2)} / ${userCurrencyCode}`}
+        </p>
 
         <div className={s.actionButtonsWrapper}>
           <button
@@ -41,7 +46,7 @@ const TransactionsItem = ({
             type="button"
             onClick={() => setIsEditModalOpen(true)}
           >
-            <FiEdit2 className={s.buttonIcon} color="#0c0d0d" />
+            <FiEdit2 className={s.buttonIcon} />
             <span>Edit</span>
           </button>
           <button
@@ -52,7 +57,7 @@ const TransactionsItem = ({
               openModal();
             }}
           >
-            <FiTrash2 className={s.buttonIcon} color="#fafafa" />
+            <FiTrash2 className={s.buttonIcon} />
             <span>Delete</span>
           </button>
         </div>
