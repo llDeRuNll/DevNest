@@ -34,7 +34,7 @@
 
 .dropdownItem {
   padding: 10px 15px;
-  color: white;
+  color: var(--white);
   cursor: pointer;
   transition: background 0.2s;
 }
