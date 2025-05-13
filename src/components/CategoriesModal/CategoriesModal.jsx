@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import "react-toastify/dist/ReactToastify.css";
 import { IoMdClose } from "react-icons/io";
+
 import {
   selectExpensesCategories,
   selectIncomesCategories,
@@ -14,26 +14,33 @@ import {
   categoryChangeInfo,
   categoryDelete,
 } from "../../redux/category/operations";
+
 import CategoryForm from "../CategoryForm/CategoryForm";
 import CategoryList from "../CategoryList/CategoryList";
 import ToasterError from "../ToasterError/ToasterError";
 import ToasterSuccess from "../ToasterSuccess/ToasterSuccess";
 import styles from "./CategoriesModal.module.css";
 
-const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
+const CategoriesModal = ({
+  onClose,
+  type = "expenses",
+  onSelectCategory,
+  selectedCategoryId,
+}) => {
   const dispatch = useDispatch();
   const rawCategories =
     useSelector(
       type === "expenses" ? selectExpensesCategories : selectIncomesCategories
     ) ?? [];
+
   const [editingCategory, setEditingCategory] = useState(null);
 
-  // Fetch categories on mount
+  // Завантажити всі категорії при монтуванні
   useEffect(() => {
     dispatch(categoryGetAll());
   }, [dispatch]);
 
-  // Close on Escape key
+  // Закрити модалку по Escape
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -42,7 +49,7 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
-  // Add or edit category
+  // Додавання або редагування категорії
   const handleAddOrEdit = useCallback(
     async (values, { resetForm }) => {
       const name = values.categoryName.trim();
@@ -51,37 +58,48 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
           await dispatch(
             categoryChangeInfo({ _id: editingCategory._id, name })
           ).unwrap();
-          ToasterSuccess();
         } else {
           await dispatch(categoryPost({ categoryName: name, type })).unwrap();
-          ToasterSuccess();
         }
+        ToasterSuccess();
         resetForm();
         setEditingCategory(null);
-      } catch (err) {
-        ToasterError(err);
+        // Поновити список категорій
+        dispatch(categoryGetAll());
+      } catch {
+        ToasterError();
       }
     },
     [dispatch, editingCategory, type]
   );
 
-  // Delete category
+  // Видалення категорії
   const handleDelete = useCallback(
     async (_id) => {
       try {
         await dispatch(categoryDelete(_id)).unwrap();
         ToasterSuccess();
+
+        // Якщо видалена категорія була вибраною в батьківській формі — очищаємо вибір
+        if (_id === selectedCategoryId) {
+          onSelectCategory(null);
+        }
+
+        // Якщо видалена категорія була у стані редагування — скидаємо форму редагування
+        if (editingCategory?._id === _id) {
+          setEditingCategory(null);
+        }
+
+        // Поновити список категорій у UI без перезавантаження сторінки
+        dispatch(categoryGetAll());
       } catch {
         ToasterError();
       }
     },
-    [dispatch]
+    [dispatch, selectedCategoryId, onSelectCategory, editingCategory]
   );
 
-  // Start editing
   const handleEdit = useCallback((cat) => setEditingCategory(cat), []);
-
-  // Select category and close modal
   const handleSelect = useCallback(
     (cat) => {
       onSelectCategory(cat);
@@ -97,17 +115,16 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
     >
       <div className={styles.modalContent}>
         <div className={styles.closeButtonContainer}>
-          <button onClick={onClose}>
-            <div className={styles.icon}>
-              <IoMdClose />
-            </div>
+          <button onClick={onClose} aria-label="Close">
+            <IoMdClose size={24} />
           </button>
         </div>
 
         <h2 className={styles.modalTitle}>
           {type === "expenses" ? "Expenses" : "Incomes"}
         </h2>
-        <p className={styles.t}>All Categories</p>
+        <p className={styles.subtitle}>All Categories</p>
+
         <CategoryList
           categories={rawCategories}
           onSelect={handleSelect}
@@ -116,8 +133,9 @@ const CategoriesModal = ({ onClose, type = "expenses", onSelectCategory }) => {
         />
 
         <CategoryForm
+          key={editingCategory?._id ?? "new"}
           initialValue={editingCategory?.categoryName || ""}
-          isEditing={!!editingCategory}
+          isEditing={Boolean(editingCategory)}
           onSubmit={handleAddOrEdit}
         />
       </div>

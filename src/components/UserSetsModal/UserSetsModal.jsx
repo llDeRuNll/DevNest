@@ -68,7 +68,7 @@ function UserSetsModal({ onClose }) {
       fileInputRef.current.value = "";
       toast.success("Avatar successfully deleted!");
     } catch (error) {
-      toast.error("Error deleting avatar.");
+      toast.error(error, "Error deleting avatar.");
     }
   };
 

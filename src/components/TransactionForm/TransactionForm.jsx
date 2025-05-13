@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import enGB from "date-fns/locale/en-GB";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +16,8 @@ import {
   transactionPost,
 } from "../../redux/transactions/operations";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
+
+registerLocale("en-GB", enGB);
 
 const validationSchema = Yup.object({
   type: Yup.string()
@@ -53,7 +56,6 @@ const TransactionForm = ({
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
 
-  // Determine initial type from URL param or fallback
   const initialType = transaction
     ? transaction.type
     : params.type || defaultType;
@@ -116,7 +118,7 @@ const TransactionForm = ({
     }
   };
 
-  const formContent = (
+  return (
     <Formik
       initialValues={initialValues}
       enableReinitialize
@@ -153,14 +155,21 @@ const TransactionForm = ({
           </div>
 
           <div className={s["date-section"]}>
-            <div>
+            <div className={s.dateSectionWrappDate}>
+              <MdOutlineDateRange
+                className={s.icon}
+                color="#fafafa"
+                size="16"
+              />
               <label className={s["t-label"]}>Date</label>
               <DatePicker
+                locale="en-GB"
                 selected={values.date}
                 onChange={(v) => setFieldValue("date", v)}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="YYYY-MM-DD"
                 className={s["t-input"]}
+                calendarClassName={s["greenCalendar"]}
               />
               <ErrorMessage
                 name="date"
@@ -170,19 +179,18 @@ const TransactionForm = ({
             </div>
 
             <div className={s.dateSectionWrappTime}>
-              <LuClock4 className={s.icon} color="#fafafa" />
-              <label className={s.tLabel}>Time</label>
-
+              <LuClock4 className={s.icon} size="16" />
+              <label className={s["t-label"]}>Time</label>
               <DatePicker
-                selected={values.time}
-                onChange={(v) => setFieldValue("time", v)}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="HH:mm"
-                placeholderText="hh:mm"
+                selected={values.time}
+                onChange={(v) => setFieldValue("time", v)}
+                dateFormat="hh:mm"
+                placeholderText="00:00"
                 className={s["t-input"]}
+                calendarClassName={s["greenCalendar"]}
               />
               <ErrorMessage
                 name="time"
@@ -249,10 +257,16 @@ const TransactionForm = ({
           {isCategoryModalOpen && (
             <CategoriesModal
               type={values.type}
+              selectedCategoryId={values.category}
               onClose={() => setIsCategoryModalOpen(false)}
               onSelectCategory={(cat) => {
-                setFieldValue("category", cat._id);
-                setSelectedCategoryName(cat.categoryName);
+                if (cat) {
+                  setFieldValue("category", cat._id);
+                  setSelectedCategoryName(cat.categoryName);
+                } else {
+                  setFieldValue("category", "");
+                  setSelectedCategoryName("");
+                }
                 setIsCategoryModalOpen(false);
               }}
             />
@@ -260,16 +274,6 @@ const TransactionForm = ({
         </Form>
       )}
     </Formik>
-  );
-
-  if (!isModal) return formContent;
-
-  return (
-    <div className={s.backdrop} onClick={onClose}>
-      <div className={s["modalContent"]} onClick={(e) => e.stopPropagation()}>
-        {formContent}
-      </div>
-    </div>
   );
 };
 
