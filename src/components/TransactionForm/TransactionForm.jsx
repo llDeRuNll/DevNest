@@ -53,7 +53,7 @@ const TransactionForm = ({
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
 
-  // Determine initial type from URL param or fallback
+  // Determine initial type and values
   const initialType = transaction
     ? transaction.type
     : params.type || defaultType;
@@ -76,6 +76,7 @@ const TransactionForm = ({
         comment: "",
       };
 
+  // Sync selectedCategoryName when editing existing transaction
   useEffect(() => {
     if (transaction?.category) {
       const list =
@@ -125,6 +126,7 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
+          {/* Тип транзакції */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -152,6 +154,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Дата і час */}
           <div className={s["date-section"]}>
             <div className={s.dateSectionWrappDate}>
               <MdOutlineDateRange
@@ -177,14 +180,12 @@ const TransactionForm = ({
             <div className={s.dateSectionWrappTime}>
               <LuClock4 className={s.icon} color="#fafafa" size="16" />
               <label className={s["t-label"]}>Time</label>
-
               <DatePicker
                 selected={values.time}
                 onChange={(v) => setFieldValue("time", v)}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={15}
-                timeCaption="Time"
                 dateFormat="HH:mm"
                 placeholderText="00:00:00"
                 className={s["t-input"]}
@@ -197,6 +198,7 @@ const TransactionForm = ({
             </div>
           </div>
 
+          {/* Категорія */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Category</label>
             <input
@@ -214,6 +216,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Сума */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Sum</label>
             <div className={s["t-input-wrapper"]}>
@@ -228,6 +231,7 @@ const TransactionForm = ({
             <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
+          {/* Коментар */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Comment</label>
             <Field
@@ -251,13 +255,20 @@ const TransactionForm = ({
             {transaction ? "Edit" : "Add"}
           </button>
 
+          {/* Модалка категорій */}
           {isCategoryModalOpen && (
             <CategoriesModal
               type={values.type}
+              selectedCategoryId={values.category}
               onClose={() => setIsCategoryModalOpen(false)}
               onSelectCategory={(cat) => {
-                setFieldValue("category", cat._id);
-                setSelectedCategoryName(cat.categoryName);
+                if (cat) {
+                  setFieldValue("category", cat._id);
+                  setSelectedCategoryName(cat.categoryName);
+                } else {
+                  setFieldValue("category", "");
+                  setSelectedCategoryName("");
+                }
                 setIsCategoryModalOpen(false);
               }}
             />
