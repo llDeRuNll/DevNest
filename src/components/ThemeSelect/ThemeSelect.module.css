@@ -1,0 +1,54 @@
+.selectorWrapper {
+	position: relative;
+	width: 30%;
+}
+
+.selectorSelected {
+	color: white;
+	border-radius: 12px;
+	font-size: 14px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 70px;
+	background-color: transparent;
+}
+
+.selectorDisabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.selectorArrow {
+	margin-left: 8px;
+}
+
+.selectorList {
+	position: absolute;
+	top: 110%;
+	left: 0;
+	right: 0;
+	width: 70px;
+	background-color: #000;
+	border-radius: 12px;
+	padding: 5px 0;
+	z-index: 100;
+	box-shadow: 0 0 8px rgba(0, 255, 128, 0.3);
+}
+
+.selectorItem {
+	padding: 10px 15px;
+	color: var(--white);
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.selectorItem:hover {
+	background-color: #1a1a1a;
+}
+
+.selectorActive {
+	font-weight: bold;
+	color: #00ff85;
+}
