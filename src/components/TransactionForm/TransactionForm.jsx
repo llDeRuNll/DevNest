@@ -114,8 +114,8 @@ const TransactionForm = ({
     }
   };
 
-  // Disable fields only for view-only mode
-  const isReadOnlyView = isModal && !transaction;
+  // Блокуємо лише радіокнопки у режимі перегляду без transaction
+  const disableRadios = isModal && !transaction;
 
   return (
     <Formik
@@ -126,7 +126,7 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
-          {/* Radio buttons disabled only in read-only view */}
+          {/* Radio buttons */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -143,7 +143,7 @@ const TransactionForm = ({
                     navigate(`/transactions/${key}`);
                   }}
                   className={s["t-radio-btn"]}
-                  disabled={isReadOnlyView}
+                  disabled={disableRadios}
                 />
                 {label}
               </label>
@@ -168,7 +168,6 @@ const TransactionForm = ({
                 placeholderText="YYYY-MM-DD"
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
-                disabled={isReadOnlyView}
               />
               <ErrorMessage
                 name="date"
@@ -189,7 +188,6 @@ const TransactionForm = ({
                 placeholderText="00:00"
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
-                disabled={isReadOnlyView}
               />
               <ErrorMessage
                 name="time"
@@ -208,8 +206,7 @@ const TransactionForm = ({
               placeholder="Select category"
               value={selectedCategoryName}
               className={s["t-input"]}
-              onClick={() => !isReadOnlyView && setIsCategoryModalOpen(true)}
-              disabled={isReadOnlyView}
+              onClick={() => setIsCategoryModalOpen(true)}
             />
             <ErrorMessage
               name="category"
@@ -227,7 +224,6 @@ const TransactionForm = ({
                 name="sum"
                 placeholder="Enter sum"
                 className={s["t-input"]}
-                disabled={isReadOnlyView}
               />
               <span className={s["t-currency"]}>{displayCurrency}</span>
             </div>
@@ -242,7 +238,6 @@ const TransactionForm = ({
               name="comment"
               placeholder="Enter comment"
               className={s["t-textarea"]}
-              disabled={isReadOnlyView}
             />
             <ErrorMessage
               name="comment"
