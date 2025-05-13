@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import enGB from "date-fns/locale/en-GB";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +16,8 @@ import {
   transactionPost,
 } from "../../redux/transactions/operations";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
+
+registerLocale("en-GB", enGB);
 
 const validationSchema = Yup.object({
   type: Yup.string()
@@ -53,7 +56,6 @@ const TransactionForm = ({
   const incomeCategories = useSelector((state) => state.category.incomes);
   const expenseCategories = useSelector((state) => state.category.expenses);
 
-  // Determine initial type and values
   const initialType = transaction
     ? transaction.type
     : params.type || defaultType;
@@ -76,7 +78,6 @@ const TransactionForm = ({
         comment: "",
       };
 
-  // Sync selectedCategoryName when editing existing transaction
   useEffect(() => {
     if (transaction?.category) {
       const list =
@@ -117,7 +118,7 @@ const TransactionForm = ({
     }
   };
 
-  const formContent = (
+  return (
     <Formik
       initialValues={initialValues}
       enableReinitialize
@@ -126,7 +127,6 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
-          {/* Тип транзакції */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -154,7 +154,6 @@ const TransactionForm = ({
             />
           </div>
 
-          {/* Дата і час */}
           <div className={s["date-section"]}>
             <div className={s.dateSectionWrappDate}>
               <MdOutlineDateRange
@@ -164,11 +163,13 @@ const TransactionForm = ({
               />
               <label className={s["t-label"]}>Date</label>
               <DatePicker
+                locale="en-GB"
                 selected={values.date}
                 onChange={(v) => setFieldValue("date", v)}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="YYYY-MM-DD"
                 className={s["t-input"]}
+                calendarClassName={s["greenCalendar"]}
               />
               <ErrorMessage
                 name="date"
@@ -178,17 +179,18 @@ const TransactionForm = ({
             </div>
 
             <div className={s.dateSectionWrappTime}>
-              <LuClock4 className={s.icon} color="#fafafa" size="16" />
+              <LuClock4 className={s.icon} size="16" />
               <label className={s["t-label"]}>Time</label>
               <DatePicker
-                selected={values.time}
-                onChange={(v) => setFieldValue("time", v)}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={15}
-                dateFormat="HH:mm"
-                placeholderText="00:00:00"
+                selected={values.time}
+                onChange={(v) => setFieldValue("time", v)}
+                dateFormat="hh:mm"
+                placeholderText="00:00"
                 className={s["t-input"]}
+                calendarClassName={s["greenCalendar"]}
               />
               <ErrorMessage
                 name="time"
@@ -198,7 +200,6 @@ const TransactionForm = ({
             </div>
           </div>
 
-          {/* Категорія */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Category</label>
             <input
@@ -216,7 +217,6 @@ const TransactionForm = ({
             />
           </div>
 
-          {/* Сума */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Sum</label>
             <div className={s["t-input-wrapper"]}>
@@ -231,7 +231,6 @@ const TransactionForm = ({
             <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
-          {/* Коментар */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Comment</label>
             <Field
@@ -255,7 +254,6 @@ const TransactionForm = ({
             {transaction ? "Edit" : "Add"}
           </button>
 
-          {/* Модалка категорій */}
           {isCategoryModalOpen && (
             <CategoriesModal
               type={values.type}
@@ -276,16 +274,6 @@ const TransactionForm = ({
         </Form>
       )}
     </Formik>
-  );
-
-  if (!isModal) return formContent;
-
-  return (
-    <div className={s.backdrop} onClick={onClose}>
-      <div className={s["modalContent"]} onClick={(e) => e.stopPropagation()}>
-        {formContent}
-      </div>
-    </div>
   );
 };
 
