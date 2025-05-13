@@ -13,7 +13,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--color-input);
+  color: black;
 }
 .tRadioGroup {
   display: flex;
@@ -312,19 +312,19 @@
 }
 
 .greenCalendar :global(.react-datepicker) {
-  background-color: var(--green-light) !important;
-  border: 1px solid var(--green-light) !important;
+  background-color: var(--color-accent) !important;
+  border: 1px solid var(--color-accent) !important;
 }
 
 .greenCalendar {
-  background-color: var(--green-light) !important;
+  background-color: var(--color-accent) !important;
 }
 
 .greenCalendar :global(.react-datepicker__header),
 .greenCalendar :global(.react-datepicker__navigation--previous),
 .greenCalendar :global(.react-datepicker__navigation--next) {
-  background-color: var(--green-light) !important;
-  border-color: var(--green-light) !important;
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .greenCalendar :global(.react-datepicker__day),
@@ -335,15 +335,17 @@
 
 .greenCalendar :global(.react-datepicker__day--selected),
 .greenCalendar :global(.react-datepicker__day--keyboard-selected) {
-  background-color: var(--green-light) !important;
+  background-color: var(--color-accent) !important;
 }
 
 .greenCalendar :global(.react-datepicker__time-container),
 .greenCalendar :global(.react-datepicker__time-list-item),
 .greenCalendar :global(.react-datepicker__time-list-item--selected) {
-  background-color: var(--green-light) !important;
-  color: var(--green) !important;
+  background-color: var(--color-accent) !important;
 }
 .greenCalendar :global(.react-datepicker__time-list::-webkit-scrollbar) {
   display: none;
+}
+._greenCalendar_c3nvw_314 .react-datepicker__time-list-item {
+  color: black;
 }

@@ -74,15 +74,6 @@ function UserPanel({ onProfileClick }) {
             <option className={s.selectorItem} value="blue">
               Blue
             </option>
-            <option className={s.selectorItem} value="red">
-              Red
-            </option>
-            <option className={s.selectorItem} value="orange">
-              Orange
-            </option>
-            <option className={s.selectorItem} value="green">
-              Green
-            </option>
           </select>
           <TfiArrowCircleDown className={s.selectorIcon} />
         </div>

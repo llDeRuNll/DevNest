@@ -191,6 +191,7 @@ const TransactionForm = ({
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
                 disabled={isModal}
+                style={{ color: "#ffffff" }}
               />
               <ErrorMessage
                 name="time"

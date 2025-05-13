@@ -30,7 +30,7 @@ const TransactionHistoryPage = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {isLoading}
       <section className={s.section}>
         <div className="container">
           <TransactionsSummary transactionsType={transactionsType} />
