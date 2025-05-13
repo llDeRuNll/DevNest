@@ -1,18 +1,23 @@
 .selectorWrapper {
 	position: relative;
 	width: 30%;
+	&:hover .selectorSelected {
+		color: var(--color-text);
+	}
 }
 
 .selectorSelected {
-	color: white;
-	border-radius: 12px;
-	font-size: 14px;
 	cursor: pointer;
+	border-radius: 12px;
+	font-weight: 400;
+	font-size: 16px;
+	color: var(--color-text-muted);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 70px;
 	background-color: transparent;
+	transition: color 250ms var(--animation-cubicBezier);
 }
 
 .selectorDisabled {
@@ -30,25 +35,25 @@
 	left: 0;
 	right: 0;
 	width: 70px;
-	background-color: #000;
+	background-color: var(--color-bg);
 	border-radius: 12px;
 	padding: 5px 0;
 	z-index: 100;
-	box-shadow: 0 0 8px rgba(0, 255, 128, 0.3);
+	box-shadow: 0 0 8px var(--color-success);
 }
 
 .selectorItem {
 	padding: 10px 15px;
 	color: var(--white);
 	cursor: pointer;
-	transition: background 0.2s;
+	transition: background-color 0.2s var(--animation-cubicBezier);
 }
 
 .selectorItem:hover {
-	background-color: #1a1a1a;
+	background-color: var(--color-text-strong);
 }
 
 .selectorActive {
 	font-weight: bold;
-	color: #00ff85;
+	color: var(--color-accent);
 }

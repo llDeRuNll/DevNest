@@ -58,7 +58,7 @@ function UserPanel({ onProfileClick }) {
 					</button>
 				</div>
 				<div className={s.selectorWrapper}>
-					<label className={s.selectorTitle} htmlFor='theme-switcher'>
+					<label htmlFor='theme-switcher'>
 						<IoColorPaletteOutline className={s.icon} size={18} />
 					</label>
 					<ThemeSelect
