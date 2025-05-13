@@ -114,6 +114,9 @@ const TransactionForm = ({
     }
   };
 
+  // Блокуємо лише радіокнопки у режимі перегляду без transaction
+  const disableRadios = isModal && !transaction;
+
   return (
     <Formik
       initialValues={initialValues}
@@ -123,7 +126,7 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
-          {/* Radio buttons always disabled */}
+          {/* Radio buttons */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -140,7 +143,7 @@ const TransactionForm = ({
                     navigate(`/transactions/${key}`);
                   }}
                   className={s["t-radio-btn"]}
-                  disabled
+                  disabled={disableRadios}
                 />
                 {label}
               </label>
@@ -224,7 +227,7 @@ const TransactionForm = ({
               />
               <span className={s["t-currency"]}>{displayCurrency}</span>
             </div>
-            <ErrorMessage name="sum" component="div" className={s["т-error"]} />
+            <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
           {/* Comment textarea */}
