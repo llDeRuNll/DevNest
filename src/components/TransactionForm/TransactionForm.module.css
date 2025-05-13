@@ -344,3 +344,6 @@
   background-color: var(--green-light) !important;
   color: var(--green) !important;
 }
+.greenCalendar :global(.react-datepicker__time-list::-webkit-scrollbar) {
+  display: none;
+}
