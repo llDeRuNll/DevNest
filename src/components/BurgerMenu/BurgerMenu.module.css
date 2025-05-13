@@ -1,71 +1,71 @@
 .container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
 }
 
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .burgerMenu {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #0ef387;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: var(--color-accent);
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
 }
 
 .closeBtn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
 }
 
 .closeBtn svg {
-  width: 27px;
-  height: 27px;
+	width: 27px;
+	height: 27px;
 }
 
 .buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
 }
 
 .profile {
-  display: flex;
+	display: flex;
 }
 .butttonnnn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30vh;
 }
 @media screen and (min-width: 768px) and (max-width: 1439px) {
-  .burgerMenu {
-    width: 50%;
-  }
-  .backdrop {
-    justify-content: flex-end;
-  }
+	.burgerMenu {
+		width: 50%;
+	}
+	.backdrop {
+		justify-content: flex-end;
+	}
 }

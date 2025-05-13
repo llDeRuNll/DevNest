@@ -42,13 +42,13 @@ const TransactionHistoryPage = () => {
               setHasUserPickedDate={setHasUserPickedDate}
               hasUserPickedDate={hasUserPickedDate}
             />
-            {isLoading}
             <TransactionsList
               userWindowWidth={userWindowWidth}
               searchQuery={searchQuery}
               selectedDate={selectedDate}
               transactions={transactions}
               hasUserPickedDate={hasUserPickedDate}
+              transactionsType={transactionsType}
             />
           </div>
         </div>
