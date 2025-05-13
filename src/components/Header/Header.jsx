@@ -18,9 +18,7 @@ const Header = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
 
-  const handleOpenModal = () => {
-    // Profile settings modal
-  };
+  const handleOpenModal = () => {};
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -41,7 +39,11 @@ const Header = () => {
         )}
       >
         <div className={s.logo}>
-          <NavLink to={isLoggedIn ? "/transactions/expenses" : "/"}>
+          <NavLink
+            to={isLoggedIn ? "/transactions/expenses" : "/"}
+            alt="transfer "
+            aria-labelledby="logoTitle"
+          >
             <svg
               width="218"
               height="24"
