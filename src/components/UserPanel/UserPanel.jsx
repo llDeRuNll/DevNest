@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useModal } from "../../utils/Modal/useModal";
+
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
 import Loader from "../Loader/Loader";
 
@@ -21,7 +21,7 @@ function UserPanel({ onProfileClick }) {
   const { userSelect, setTheme } = useUserContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useUserContext();
 
   const isLoggingOut = useSelector(selectIsLoading);
 
