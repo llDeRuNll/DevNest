@@ -115,8 +115,7 @@ function UserSetsModal({ onClose }) {
       onClose();
       toast.success("Profile successfully updated!");
     } catch (error) {
-      console.error("Profile update error:", error);
-      toast.error("Failed to update profile.");
+      toast.error(error, "Failed to update profile.");
     } finally {
       setIsSaving(false);
     }

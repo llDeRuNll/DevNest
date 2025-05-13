@@ -112,10 +112,6 @@ export const userAvatarDelete = createAsyncThunk(
       currentAvatar.lastIndexOf("/") + 1,
       currentAvatar.length - 5
     );
-    console.log(currentAvatar);
-
-    console.log(currentAvatarId);
-
     try {
       await trackerApi.delete("/users/avatar/" + currentAvatarId);
     } catch (e) {
