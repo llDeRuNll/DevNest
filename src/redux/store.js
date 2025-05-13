@@ -25,7 +25,7 @@ export const store = configureStore({
     category: categoryReducer,
     transactions: transactionsReduser,
   },
-  devTools: import.meta.env.MODE !== "production",
+  devTools: false,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

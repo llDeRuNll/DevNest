@@ -37,17 +37,16 @@ const TransactionsChart = ({ expences }) => {
       colorIndex++;
     }
   });
+
   const pieChartData = Object.entries(
     expences.reduce((acc, item) => {
       const category = item.category.categoryName;
       acc[category] = (acc[category] || 0) + item.sum;
       return acc;
     }, {})
-  ).map(([category, value]) => ({
-    name: category,
-    value,
-    fill: categoryColorMap[category],
-  }));
+  )
+    .map(([name, value]) => ({ name, value, fill: categoryColorMap[name] }))
+    .sort((a, b) => b.value - a.value);
 
   return (
     <div className={s.expensesWrapper}>
@@ -55,7 +54,7 @@ const TransactionsChart = ({ expences }) => {
         <h3 className={s.expensesTitle}>Expenses categories</h3>
         <div className={s.chartContainer}>
           <ResponsiveContainer width="100%" height={150}>
-            <PieChart height={20}>
+            <PieChart>
               <Pie
                 data={pieChartData}
                 cx="50%"
@@ -71,7 +70,7 @@ const TransactionsChart = ({ expences }) => {
                 className={s.pie}
               >
                 {pieChartData.map((entry, index) => (
-                  <Cell key={`cell-2-${index}`} fill={entry.fill} />
+                  <Cell key={`cell-${index}`} fill={entry.fill} />
                 ))}
               </Pie>
             </PieChart>
@@ -79,8 +78,9 @@ const TransactionsChart = ({ expences }) => {
         </div>
         <div className={s.percentage}>100%</div>
       </div>
+
       <TransactionChartStatistics
-        expences={expences}
+        data={pieChartData}
         colorMap={categoryColorMap}
       />
     </div>

@@ -127,6 +127,7 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
+          {/* Radio buttons disabled when in modal */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -143,6 +144,7 @@ const TransactionForm = ({
                     navigate(`/transactions/${key}`);
                   }}
                   className={s["t-radio-btn"]}
+                  disabled={isModal}
                 />
                 {label}
               </label>
@@ -154,13 +156,10 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Date & Time pickers */}
           <div className={s["date-section"]}>
             <div className={s.dateSectionWrappDate}>
-              <MdOutlineDateRange
-                className={s.icon}
-                color="#fafafa"
-                size="16"
-              />
+              <MdOutlineDateRange className={s.icon} size={16} />
               <label className={s["t-label"]}>Date</label>
               <DatePicker
                 locale="en-GB"
@@ -170,6 +169,7 @@ const TransactionForm = ({
                 placeholderText="YYYY-MM-DD"
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
+                disabled={isModal}
               />
               <ErrorMessage
                 name="date"
@@ -177,9 +177,8 @@ const TransactionForm = ({
                 className={s["t-error"]}
               />
             </div>
-
             <div className={s.dateSectionWrappTime}>
-              <LuClock4 className={s.icon} size="16" />
+              <LuClock4 className={s.icon} size={16} />
               <label className={s["t-label"]}>Time</label>
               <DatePicker
                 showTimeSelect
@@ -187,10 +186,11 @@ const TransactionForm = ({
                 timeIntervals={15}
                 selected={values.time}
                 onChange={(v) => setFieldValue("time", v)}
-                dateFormat="hh:mm"
+                dateFormat="HH:mm"
                 placeholderText="00:00"
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
+                disabled={isModal}
               />
               <ErrorMessage
                 name="time"
@@ -200,6 +200,7 @@ const TransactionForm = ({
             </div>
           </div>
 
+          {/* Category selector */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Category</label>
             <input
@@ -208,7 +209,8 @@ const TransactionForm = ({
               placeholder="Select category"
               value={selectedCategoryName}
               className={s["t-input"]}
-              onClick={() => setIsCategoryModalOpen(true)}
+              onClick={() => !isModal && setIsCategoryModalOpen(true)}
+              disabled={isModal}
             />
             <ErrorMessage
               name="category"
@@ -217,6 +219,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Sum input */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Sum</label>
             <div className={s["t-input-wrapper"]}>
@@ -225,12 +228,14 @@ const TransactionForm = ({
                 name="sum"
                 placeholder="Enter sum"
                 className={s["t-input"]}
+                disabled={isModal}
               />
               <span className={s["t-currency"]}>{displayCurrency}</span>
             </div>
             <ErrorMessage name="sum" component="div" className={s["t-error"]} />
           </div>
 
+          {/* Comment textarea */}
           <div className={s["t-input-group"]}>
             <label className={s["t-label"]}>Comment</label>
             <Field
@@ -238,6 +243,7 @@ const TransactionForm = ({
               name="comment"
               placeholder="Enter comment"
               className={s["t-textarea"]}
+              disabled={isModal}
             />
             <ErrorMessage
               name="comment"
@@ -246,6 +252,7 @@ const TransactionForm = ({
             />
           </div>
 
+          {/* Submit button */}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -254,6 +261,7 @@ const TransactionForm = ({
             {transaction ? "Edit" : "Add"}
           </button>
 
+          {/* Categories modal */}
           {isCategoryModalOpen && (
             <CategoriesModal
               type={values.type}

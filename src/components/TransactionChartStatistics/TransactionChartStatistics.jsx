@@ -5,19 +5,26 @@ import { FaCircle } from "react-icons/fa";
 const truncate = (str, maxChars = 10) =>
   str.length > maxChars ? `${str.slice(0, maxChars)}...` : str;
 
-const TransactionChartStatistics = ({ expences, colorMap }) => {
+const TransactionChartStatistics = ({ data = [], colorMap }) => {
+  if (data.length === 0) {
+    return <p className={s.empty}>Немає витрат для відображення</p>;
+  }
+
+  // Сортуємо дані за спаданням значення
+  const sortedData = [...data].sort((a, b) => b.value - a.value);
+  const total = sortedData.reduce((sum, entry) => sum + entry.value, 0);
+
   return (
     <ul className={s.statisticsList}>
-      {expences.map((transaction) => {
-        const name = transaction.category.categoryName;
+      {sortedData.map((entry) => {
+        const percent = ((entry.value / total) * 100).toFixed(0);
         return (
-          <li key={transaction.category._id} className={s.statisticsListItem}>
+          <li key={entry.name} className={s.statisticsListItem}>
             <div className={s.iconTextWrapper}>
-              <FaCircle style={{ color: colorMap[name] }} />
-
-              <p title={name}>{truncate(name)}</p>
+              <FaCircle style={{ color: colorMap[entry.name] }} />
+              <p title={entry.name}>{truncate(entry.name)}</p>
             </div>
-            <span>{transaction.percentage}%</span>
+            <span>{percent}%</span>
           </li>
         );
       })}
