@@ -1,4 +1,3 @@
-// redux/store.js
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
@@ -20,15 +19,13 @@ const authPersistConfig = {
   whitelist: ["accessToken", "refreshToken", "sid", "user", "isLoggedIn"],
 };
 
-const isDevelopment = import.meta.env.MODE !== "production";
-
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     category: categoryReducer,
     transactions: transactionsReduser,
   },
-  devTools: isDevelopment,
+  devTools: import.meta.env.MODE !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
