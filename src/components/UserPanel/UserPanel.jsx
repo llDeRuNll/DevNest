@@ -5,8 +5,7 @@ import { IoColorPaletteOutline } from "react-icons/io5";
 import { TfiArrowCircleDown } from "react-icons/tfi";
 import s from "./UserPanel.module.css";
 import { userLogout } from "../../redux/auth/operations";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -17,7 +16,6 @@ import Loader from "../Loader/Loader";
 import { useUserContext } from "../../utils/UserContext/useUserContext";
 
 import { selectIsLoading } from "../../redux/transactions/selectors";
-
 
 function UserPanel({ onProfileClick }) {
   const { userSelect, setTheme } = useUserContext();
