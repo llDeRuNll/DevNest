@@ -1,55 +1,55 @@
 .statisticsList {
-  display: flex;
-  flex-direction: column;
-  row-gap: 14px;
-  margin-top: 40px;
-  padding-right: 21px;
-  max-height: 126px;
-  overflow-y: auto;
-  @media (min-width: 768px) {
-    width: 196px;
-    margin-top: 0px;
-  }
+	display: flex;
+	flex-direction: column;
+	row-gap: 14px;
+	margin-top: 40px;
+	padding-right: 21px;
+	max-height: 126px;
+	overflow-y: auto;
+	@media (min-width: 768px) {
+		width: 196px;
+		margin-top: 0px;
+	}
 }
 .statisticsListItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 .percentage {
-  font-weight: 700;
-  font-size: 24px;
-  color: #fafafa;
+	font-weight: 700;
+	font-size: 24px;
+	color: var(--color-text);
 }
 .iconTextWrapper {
-  display: flex;
-  column-gap: 8px;
+	display: flex;
+	column-gap: 8px;
 }
 .icon0 {
-  color: #0ebb69;
+	color: var(----color-primary);
 }
 .icon1 {
-  color: #0ef387;
+	color: var(--color-accent);
 }
 .icon2 {
-  color: #fafafa;
+	color: var(--color-text);
 }
 .icon3 {
-  color: #fafafa33;
+	color: #fafafa33;
 }
 .icon4 {
-  color: #278559;
+	color: #278559;
 }
 .icon5 {
-  color: #9ab4a8;
+	color: #9ab4a8;
 }
 .icon6 {
-  color: #286a4b;
+	color: #286a4b;
 }
 
 .icon7 {
-  color: #3a6b54;
+	color: #3a6b54;
 }
 .icon8 {
-  color: #6deab0;
+	color: #6deab0;
 }

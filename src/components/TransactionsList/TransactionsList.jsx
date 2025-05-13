@@ -4,21 +4,22 @@ import { searchSelection } from "../../utils/Transaction/searchSelection";
 import { useEffect, useState } from "react";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
-import { useModal } from "../../utils/Modal/useModal";
 import { useConfirmDeleteTransaction } from "../../hooks/Modal/useConfirmDeleteTransaction";
+import { useUserContext } from "../../utils/UserContext/useUserContext";
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "../../redux/transactions/selectors";
 import Loader from "../Loader/Loader";
 
 const TransactionsList = ({
   transactions,
+  transactionsType,
   userWindowWidth,
   selectedDate,
   searchQuery,
   hasUserPickedDate,
 }) => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
-  const { isModalOpen, openModal } = useModal();
+  const { isModalOpen, openModal } = useUserContext();
   const confirmDelete = useConfirmDeleteTransaction();
   const [transactionToDelete, setTransactionToDelete] = useState(null);
   const isLoading = useSelector(selectIsLoading);
@@ -34,11 +35,15 @@ const TransactionsList = ({
     );
   }, [transactions, searchQuery, selectedDate, hasUserPickedDate]);
 
-  return isLoading ? (
-    <div className={s.loaderWrapper}>
-      <Loader />
-    </div>
-  ) : (
+  if (isLoading) {
+    return (
+      <div className={s.loaderWrapper}>
+        <Loader />
+      </div>
+    );
+  }
+
+  return (
     <>
       {isModalOpen && (
         <ModalConfirm
@@ -47,9 +52,8 @@ const TransactionsList = ({
           confirmFc={() => confirmDelete(transactionToDelete)}
         />
       )}
-
       {filteredTransactions.length === 0 ? (
-        <TransactionEmpty />
+        <TransactionEmpty transactionsType={transactionsType} />
       ) : (
         <div className={s.tableWrapper}>
           <div className={s.tableHeaderWrapper}>

@@ -6,7 +6,7 @@
   border-radius: 30px;
   width: 100%;
   height: auto;
-  background-color: #171719;
+  background-color: var(--color-text-strong);
   align-self: center;
   /* margin: 20px 0; */
   padding-bottom: 40px;
@@ -47,5 +47,5 @@
 .percentage {
   font-weight: 700;
   font-size: 24px;
-  color: #fafafa;
+  color: var(--color-text);
 }

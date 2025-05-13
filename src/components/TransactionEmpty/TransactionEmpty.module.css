@@ -7,8 +7,19 @@
 	min-height: 80%;
 }
 
+.emptyIcon {
+	color: var(--color-svg);
+}
+
 .text {
 	font-weight: 500;
 	font-size: 18px;
-	color: rgba(197, 197, 197, 0.2);
+	color: var(--color-svg);
+}
+
+.link {
+	font-weight: 600;
+	font-weight: 16px;
+	color: var(--color-accent);
+	text-decoration: underline;
 }

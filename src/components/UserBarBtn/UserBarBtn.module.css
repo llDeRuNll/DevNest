@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  background: #1a1a1a;
+  background: var(--color-text-strong);
   padding: 5px 10px;
   border-radius: 20px;
   width: 216px;
@@ -32,10 +32,14 @@
 
 .vector {
   font-size: 16px;
-  color: #0ef387;
+
 
   margin-left: auto;
   width: 40px;
+
+
+  color: var(--color-accent);
+
 
 
 }

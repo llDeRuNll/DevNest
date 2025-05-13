@@ -1,9 +1,9 @@
-import { useModal } from '../../utils/Modal/useModal'
+import { useUserContext } from '../../utils/UserContext/useUserContext'
 import s from './ModalConfirm.module.css'
 import { IoMdClose } from 'react-icons/io'
 
 const ModalConfirm = ({ title, confirmButton, confirmFc }) => {
-	const { closeModal } = useModal()
+	const { closeModal } = useUserContext()
 
 	const handleOverlayClick = event => {
 		if (event.target === event.currentTarget) {

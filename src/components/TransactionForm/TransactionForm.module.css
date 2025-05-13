@@ -2,7 +2,7 @@
 .edit-form {
   border-radius: 30px;
   max-width: 335px;
-  background-color: var(--dark);
+  background-color: var(--color-text-strong);
   border-radius: 20px;
   padding: 27px 20px;
   display: flex;
@@ -13,7 +13,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
-  color: rgba(250, 250, 250, 0.4);
+  color: black;
 }
 .tRadioGroup {
   display: flex;
@@ -53,15 +53,15 @@
 }
 
 .t-radio-btn:checked {
-  border-color: var(--green-light);
+  border-color: var(--color-accent);
 }
 
 .tSendBtn {
   padding: 14px 44px;
-  background-color: var(--green);
+  background-color: var(--color-primary);
   border-radius: 50px;
   font-size: 16px;
-  color: var(--dark);
+  color: var(--color-text-strong);
   text-align: center;
   width: 115px;
   height: 45px;
@@ -75,7 +75,7 @@
   transform: translate(-50%, -50%);
   width: 10px;
   height: 10px;
-  background-color: var(--green-light);
+  background-color: var(--color-accent);
   border-radius: 50%;
 }
 
@@ -90,7 +90,7 @@
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(250, 250, 250, 0.4);
+  color: var(--color-input);
   pointer-events: none;
   transition: color 0.3s ease;
 }
@@ -104,7 +104,7 @@
   position: absolute;
   bottom: -22px;
   right: 6px;
-  color: var(--error);
+  color: var(--color-error);
   font-size: 12px;
   margin-top: 4px;
 }
@@ -126,8 +126,8 @@
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid rgba(250, 250, 250, 0.2);
-  color: var(--white);
-  background-color: var(--dark);
+  color: var(--color-text);
+  background-color: var(--color-text-strong);
   transition: border-color 0.3s ease;
   font-size: 14px;
 }
@@ -138,7 +138,7 @@
 .t-input:focus,
 .t-textarea:hover,
 .t-textarea:focus {
-  border-color: var(--green-light);
+  border-color: var(--color-accent);
   outline: none;
 }
 
@@ -156,7 +156,7 @@
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(250, 250, 250, 0.4);
+  color: var(--color-input);
   pointer-events: none;
 }
 
@@ -168,7 +168,7 @@
 .t-textarea {
   min-height: 91px;
   resize: none;
-  scrollbar-color: var(--green) transparent;
+  scrollbar-color: var(--color-primary) transparent;
   scrollbar-width: thin;
 }
 
@@ -181,12 +181,12 @@
 }
 
 .t-textarea::-webkit-scrollbar-thumb {
-  background-color: var(--green);
+  background-color: var(--color-primary);
   border-radius: 4px;
 }
 
 .t-textarea::-webkit-scrollbar-thumb:hover {
-  background-color: var(--green-light);
+  background-color: var(--color-accent);
 }
 
 .t-send-btn {
@@ -194,14 +194,14 @@
   color: var(--black);
   border-radius: 40px;
   padding: 14px 44px;
-  background-color: var(--green);
+  background-color: var(--color-primary);
   transition: background-color 0.3s ease;
   width: 115px;
   height: 45px;
 }
 
 .t-send-btn:hover {
-  background-color: var(--green-light);
+  background-color: var(--color-accent);
 }
 
 .close-btn-container {
@@ -224,7 +224,7 @@
 }
 
 .close-icon:hover {
-  color: var(--green-light);
+  color: var(--color-accent);
 }
 .dateSectionWrappTime {
   position: relative;
@@ -312,19 +312,19 @@
 }
 
 .greenCalendar :global(.react-datepicker) {
-  background-color: var(--green-light) !important;
-  border: 1px solid var(--green-light) !important;
+  background-color: var(--color-accent) !important;
+  border: 1px solid var(--color-accent) !important;
 }
 
 .greenCalendar {
-  background-color: var(--green-light) !important;
+  background-color: var(--color-accent) !important;
 }
 
 .greenCalendar :global(.react-datepicker__header),
 .greenCalendar :global(.react-datepicker__navigation--previous),
 .greenCalendar :global(.react-datepicker__navigation--next) {
-  background-color: var(--green-light) !important;
-  border-color: var(--green-light) !important;
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .greenCalendar :global(.react-datepicker__day),
@@ -335,15 +335,17 @@
 
 .greenCalendar :global(.react-datepicker__day--selected),
 .greenCalendar :global(.react-datepicker__day--keyboard-selected) {
-  background-color: var(--green-light) !important;
+  background-color: var(--color-accent) !important;
 }
 
 .greenCalendar :global(.react-datepicker__time-container),
 .greenCalendar :global(.react-datepicker__time-list-item),
 .greenCalendar :global(.react-datepicker__time-list-item--selected) {
-  background-color: var(--green-light) !important;
-  color: var(--green) !important;
+  background-color: var(--color-accent) !important;
 }
 .greenCalendar :global(.react-datepicker__time-list::-webkit-scrollbar) {
   display: none;
+}
+._greenCalendar_c3nvw_314 .react-datepicker__time-list-item {
+  color: black;
 }
