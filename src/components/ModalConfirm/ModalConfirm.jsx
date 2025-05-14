@@ -1,13 +1,10 @@
-import { useUserContext } from '../../utils/UserContext/useUserContext'
 import s from './ModalConfirm.module.css'
 import { IoMdClose } from 'react-icons/io'
 
-const ModalConfirm = ({ title, confirmButton, confirmFc }) => {
-	const { closeModal } = useUserContext()
-
+const ModalConfirm = ({ title, confirmButton, confirmFc, setIsModalOpen }) => {
 	const handleOverlayClick = event => {
 		if (event.target === event.currentTarget) {
-			closeModal()
+			setIsModalOpen(false)
 		}
 	}
 
@@ -15,7 +12,10 @@ const ModalConfirm = ({ title, confirmButton, confirmFc }) => {
 		<div className={s.modalOverlay} onClick={handleOverlayClick}>
 			<div className='container'>
 				<div className={s.modal}>
-					<button className={s.closeButton} onClick={() => closeModal()}>
+					<button
+						className={s.closeButton}
+						onClick={() => setIsModalOpen(false)}
+					>
 						<IoMdClose className={s.closeIcon} />
 					</button>
 					<p className={s.modalTitle}>{title}</p>
@@ -23,14 +23,17 @@ const ModalConfirm = ({ title, confirmButton, confirmFc }) => {
 						<button
 							className={s.logoutButton}
 							type='button'
-							onClick={confirmFc}
+							onClick={() => {
+								confirmFc()
+								setIsModalOpen(false)
+							}}
 						>
 							{confirmButton}
 						</button>
 						<button
 							className={s.cancelButton}
 							type='button'
-							onClick={() => closeModal()}
+							onClick={() => setIsModalOpen(false)}
 						>
 							Cancel
 						</button>
