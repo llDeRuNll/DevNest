@@ -10,6 +10,8 @@
   padding: 5px 10px;
   border-radius: 20px;
   max-width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .userImg {
@@ -19,7 +21,11 @@
   object-fit: cover;
   margin-right: 10px;
 }
-
+.usersBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .userName {
   margin: 0 10px;
   font-size: 16px;
@@ -32,10 +38,7 @@
 
 .vector {
   font-size: 16px;
-
   color: var(--color-accent);
-
-
 }
 
 .rotated {

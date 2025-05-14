@@ -1,3 +1,4 @@
+
 import { LuUser } from 'react-icons/lu'
 import { CiLogout } from 'react-icons/ci'
 
@@ -37,6 +38,7 @@ function UserPanel({ onProfileClick }) {
 		}
 	}
 
+
 	const handleThemeChange = theme => {
 		setTheme(theme)
 		document.body.setAttribute('data-theme', theme)
@@ -49,6 +51,7 @@ function UserPanel({ onProfileClick }) {
 					<Loader />
 				</div>
 			)}
+
 
 			<div className={s.dropdownMenu}>
 				<div>
@@ -85,5 +88,7 @@ function UserPanel({ onProfileClick }) {
 		</>
 	)
 }
+
+            
 
 export default UserPanel

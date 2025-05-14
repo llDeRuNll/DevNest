@@ -99,11 +99,7 @@ const TransactionForm = ({
     try {
       if (transaction) {
         await dispatch(
-          transactionChangeInfo({
-            _id: transaction._id,
-            type: values.type,
-            ...data,
-          })
+          transactionChangeInfo({ _id: transaction._id, ...data })
         ).unwrap();
         toast.success("Transaction successfully updated!");
       } else {
@@ -127,7 +123,7 @@ const TransactionForm = ({
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form className={isModal ? s["edit-form"] : s["add-form"]}>
-          {/* Radio buttons disabled when in modal */}
+          {/* Radio buttons disabled only in modal mode */}
           <div className={s["t-radio-group"]}>
             {[
               { key: "expenses", label: "Expense" },
@@ -169,7 +165,6 @@ const TransactionForm = ({
                 placeholderText="YYYY-MM-DD"
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
-                disabled={isModal}
               />
               <ErrorMessage
                 name="date"
@@ -190,8 +185,6 @@ const TransactionForm = ({
                 placeholderText="00:00"
                 className={s["t-input"]}
                 calendarClassName={s["greenCalendar"]}
-                disabled={isModal}
-                style={{ color: "#ffffff" }}
               />
               <ErrorMessage
                 name="time"
@@ -210,8 +203,7 @@ const TransactionForm = ({
               placeholder="Select category"
               value={selectedCategoryName}
               className={s["t-input"]}
-              onClick={() => !isModal && setIsCategoryModalOpen(true)}
-              disabled={isModal}
+              onClick={() => setIsCategoryModalOpen(true)}
             />
             <ErrorMessage
               name="category"
@@ -229,7 +221,6 @@ const TransactionForm = ({
                 name="sum"
                 placeholder="Enter sum"
                 className={s["t-input"]}
-                disabled={isModal}
               />
               <span className={s["t-currency"]}>{displayCurrency}</span>
             </div>
@@ -244,7 +235,6 @@ const TransactionForm = ({
               name="comment"
               placeholder="Enter comment"
               className={s["t-textarea"]}
-              disabled={isModal}
             />
             <ErrorMessage
               name="comment"

@@ -5,11 +5,20 @@ import { croppedComment } from "../../utils/Transaction/croppedComment";
 import { normalizeData } from "../../utils/Transaction/normalizeData";
 import TransactionForm from "../TransactionForm/TransactionForm";
 
-const truncate = (str, maxChars = 10) =>
+const truncate = (str, maxChars = 8) =>
   str.length > maxChars ? `${str.slice(0, maxChars)}...` : str;
 
 const TransactionsItem = ({
-  transaction: { _id, type, category, comment, date, time, sum },
+  transaction: {
+    _id,
+    type,
+    category,
+    comment,
+    date,
+    time,
+    sum,
+    currency = "UAH",
+  },
   userWindowWidth,
   openModal,
   setTransactionToDelete,
@@ -33,7 +42,7 @@ const TransactionsItem = ({
 
         <p className={s.tableCell}>{time}</p>
 
-        <p className={s.tableCell}>{`${sum} / UAH`}</p>
+        <p className={s.tableCell}>{`${sum} / ${currency}`}</p>
 
         <div className={s.actionButtonsWrapper}>
           <button
@@ -70,6 +79,7 @@ const TransactionsItem = ({
                 time,
                 sum,
                 comment,
+                currency,
               }}
               isModal={true}
               onClose={() => setIsEditModalOpen(false)}
