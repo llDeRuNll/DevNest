@@ -78,8 +78,9 @@ const slice = createSlice({
         return initialState;
       })
       .addCase(transactionPost.fulfilled, (state, action) => {
-        state[action.payload.type].push(action.payload);
-        state.transactionsTotal[action.payload.type] += action.payload.sum;
+        state[action.payload.transaction.type].push(action.payload.transaction);
+        state.transactionsTotal[action.payload.transaction.type] +=
+          action.payload.transaction.sum;
       })
       .addCase(transactionsGetByType.fulfilled, (state, action) => {
         state[action.payload.type] = action.payload.items;
